@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     private float attackTime;
     private float inputLockout;
 
+//Other
+    [SerializeField] BarController stunTimer;
+
 
     bool grounded;
 
@@ -99,7 +102,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnHit() {
         Debug.Log("Yeouch!");
+        rbody.velocity = Vector3.zero;
         InputLockout(2);
+        stunTimer.StartTimer(2);
     }
 
     public void InputLockout(float duration) {
