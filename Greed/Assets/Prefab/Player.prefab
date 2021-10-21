@@ -344,7 +344,7 @@ MonoBehaviour:
   rbody: {fileID: 1334132685708576628}
   input: {fileID: 6726847065005748498}
   speed: 10
-  jumpVelocity: 30
+  jumpVelocity: 40
   jumps: 0
   JUMPS_MAX: 0
   groundCheck: {fileID: 5668875503306398112}
