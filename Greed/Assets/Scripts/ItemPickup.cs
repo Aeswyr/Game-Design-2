@@ -13,7 +13,7 @@ public class ItemPickup : MonoBehaviour
     }
 
     public bool CanPickup() {
-        return (groundCheck == null || groundCheck.CheckGrounded()) 
-        && (pickupLockout == 0 || Time.time >= startTime + pickupLockout);
+        return /*(groundCheck == null || groundCheck.CheckGrounded()) 
+        &&*/ (pickupLockout == 0 || Time.time >= startTime + pickupLockout);
     }
 }

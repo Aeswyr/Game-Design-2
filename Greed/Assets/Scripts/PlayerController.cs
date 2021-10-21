@@ -36,6 +36,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMeshPro gemCounter;
     private int gems;
 
+
+    [SerializeField] private GameObject hurtbox;
+    [SerializeField] private GameObject pickupbox;
+
+    private bool collidersLocked = false;
+    private float colliderLockout;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +57,8 @@ public class PlayerController : MonoBehaviour
             ManageInputs();
         
         CheckAttack();
+
+        CheckColliderLockout();
     }
 
     public void ManageInputs() {
@@ -111,10 +120,12 @@ public class PlayerController : MonoBehaviour
         InputLockout(2);
         stunTimer.StartTimer(2);
 
+        ColliderLockout(3);
+
         if (gems != 0) {
             for (int i = 0; i < gems / 2 + gems % 2; i++) {
                 GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
-                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(0.5f, 20f)), ForceMode2D.Impulse);
+                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
             }
             gems -= gems / 2 + gems % 2;
             gemCounter.text = gems.ToString();
@@ -128,6 +139,23 @@ public class PlayerController : MonoBehaviour
     public void AddGem() {
         gems++;
         gemCounter.text = gems.ToString();
+    }
+
+    public void ColliderLockout(float duration) {
+        collidersLocked = true;
+        colliderLockout = Time.time + duration;
+
+        hurtbox.SetActive(false);
+        pickupbox.SetActive(false);
+    }
+
+    private void CheckColliderLockout() {
+        if (collidersLocked && Time.time >= colliderLockout) {
+            collidersLocked = false;
+
+            hurtbox.SetActive(true);
+            pickupbox.SetActive(true);
+        }
     }
 
 

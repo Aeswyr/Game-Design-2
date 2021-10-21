@@ -355,6 +355,8 @@ MonoBehaviour:
   stunTimer: {fileID: 905305120166137709}
   gem: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
   gemCounter: {fileID: 6464896614621929109}
+  hurtbox: {fileID: 1389062172473238063}
+  pickupbox: {fileID: 2763464506975792920}
 --- !u!114 &6726847065005748498
 MonoBehaviour:
   m_ObjectHideFlags: 0

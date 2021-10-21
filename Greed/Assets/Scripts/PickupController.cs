@@ -8,12 +8,14 @@ public class PickupController : MonoBehaviour
     [SerializeField] private PlayerController player;
     private void OnTriggerEnter2D(Collider2D other) {
         if (((1 << other.gameObject.layer) & mask) != 0) {
-            if (TryGetComponent<ItemPickup>(out ItemPickup pickup)) {
-                if (!pickup.CanPickup())
+            if (other.transform.parent.gameObject.TryGetComponent(out ItemPickup pickup)) {
+                if (!pickup.CanPickup()){
+                    Debug.Log("Simply too slippery");
                     return;
+                }  
             }
             player.AddGem();
-            Destroy(other.gameObject);
+            Destroy(other.transform.parent.gameObject);
         }
     }
 }
