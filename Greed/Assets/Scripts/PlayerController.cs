@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D rbody;
-
+    [SerializeField] private InputManager input;
 
 //movement
     [SerializeField] private float speed;
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         grounded = CheckGrounded();
         if (Time.time > inputLockout)
@@ -53,29 +53,29 @@ public class PlayerController : MonoBehaviour
 
     public void ManageInputs() {
         
-        rbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, rbody.velocity.y, 0);
+        rbody.velocity = new Vector3(input.Dir.x * speed, rbody.velocity.y, 0);
 
-        SetFacing(Input.GetAxis("Horizontal"));
+        SetFacing(input.Dir.x);
 
         if (grounded) {
             jumps = JUMPS_MAX;
         }
-        if (Input.GetButtonDown("Jump") && (grounded || jumps > 0)) {
+        if (input.X && (grounded || jumps > 0)) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             if (!grounded)
                 jumps--;
         }
-        if (Input.GetButtonDown("Fire1")) {
+        if (input.A) {
             if (Time.time > attackTime)
                 StartAttack();
         }
-        if (Input.GetButtonDown("Fire2")) {
+        if (input.B) {
 
         }
     }
 
     private void StartAttack() {
-        rbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed * 4, rbody.velocity.y, 0);
+        rbody.velocity = 0.75f * rbody.velocity;
         rbody.drag = attackDrag;
         attackBox.SetActive(true);
         attackTime = Time.time + attackDuration;
