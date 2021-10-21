@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,11 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int jumps = 1;
     [SerializeField] private int JUMPS_MAX = 1;
 
-//Grounded Raycast
-    [SerializeField] private float floorDetectDistance = 1f;
-    [SerializeField] private Vector2 floorDetectOffset;
-    [SerializeField] private Vector2 footOffset;
-    [SerializeField] private LayerMask floorDetectMask;
+    [SerializeField] GroundedCheck groundCheck;
 
 //Attacking
     [SerializeField] private GameObject attackBox;
@@ -30,10 +27,14 @@ public class PlayerController : MonoBehaviour
     private float inputLockout;
 
 //Other
-    [SerializeField] BarController stunTimer;
+    [SerializeField] private BarController stunTimer;
 
 
     bool grounded;
+
+    [SerializeField] private GameObject gem;
+    [SerializeField] private TextMeshPro gemCounter;
+    private int gems;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        grounded = CheckGrounded();
+        grounded = groundCheck.CheckGrounded();
         if (Time.time > inputLockout)
             ManageInputs();
         
@@ -75,8 +76,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void StartAttack() {
-        rbody.velocity = 0.75f * rbody.velocity;
-        rbody.drag = attackDrag;
+        if (grounded) {
+            rbody.velocity = 0.75f * rbody.velocity;
+            rbody.drag = attackDrag;
+        }
         attackBox.SetActive(true);
         attackTime = Time.time + attackDuration;
         InputLockout(attackRecovery);
@@ -97,7 +100,9 @@ public class PlayerController : MonoBehaviour
         if (dir == 0)
             return;
 
-        transform.localScale = new Vector3(dir / Mathf.Abs(dir), transform.localScale.y, transform.localScale.z);
+        Vector3 newScale = new Vector3(dir / Mathf.Abs(dir), transform.localScale.y, transform.localScale.z);
+        transform.localScale = newScale;
+        gemCounter.transform.localScale = newScale;
     }
 
     public void OnHit() {
@@ -105,24 +110,27 @@ public class PlayerController : MonoBehaviour
         rbody.velocity = Vector3.zero;
         InputLockout(2);
         stunTimer.StartTimer(2);
+
+        if (gems != 0) {
+            for (int i = 0; i < gems / 2 + gems % 2; i++) {
+                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
+                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(0.5f, 20f)), ForceMode2D.Impulse);
+            }
+            gems -= gems / 2 + gems % 2;
+            gemCounter.text = gems.ToString();
+        }
     }
 
     public void InputLockout(float duration) {
         inputLockout = Time.time + duration;
     }
 
-    private bool CheckGrounded() {
-
-        RaycastHit2D left = Raycast(transform.position + (Vector3)(floorDetectOffset + footOffset), Vector2.down, floorDetectDistance, floorDetectMask);
-        RaycastHit2D right = Raycast(transform.position + (Vector3)(floorDetectOffset - footOffset), Vector2.down, floorDetectDistance, floorDetectMask);
-        return left || right;
+    public void AddGem() {
+        gems++;
+        gemCounter.text = gems.ToString();
     }
 
-    private RaycastHit2D Raycast(Vector3 start, Vector2 dir, float dist, LayerMask mask) {
-        RaycastHit2D hit = Physics2D.Raycast(start, dir, dist, mask);
-        Debug.DrawRay(start, dir * dist, Color.green);
-        return hit;
-    }
+
 
 
 }
