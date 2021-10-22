@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Hitbox
   - Item
-  - 
-  - 
-  - 
+  - Hurtbox
+  - Pickup
+  - Entity
   - 
   - 
   - 
