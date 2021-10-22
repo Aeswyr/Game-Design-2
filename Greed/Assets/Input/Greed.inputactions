@@ -214,6 +214,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b8b4a379-6a6f-4d02-ad38-b47aaa0e6bd7",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6eeddefa-580a-4f8e-ad38-e3a3f099506a",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -227,6 +238,17 @@
                     "name": "",
                     "id": "1e17c2e2-af9d-42d0-8494-78fc51e4070a",
                     "path": "<HID::Logitech Logitech Dual Action>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dec3c670-69ae-4ff6-a276-5a424ccda626",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -258,6 +280,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b6478b14-06fa-4662-a88c-7ae75970d97b",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "B",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d41b2487-6e04-4860-bf01-c087ac55ad6e",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -271,6 +304,17 @@
                     "name": "",
                     "id": "3663040f-a45f-47de-8605-eb68713dec9c",
                     "path": "<HID::Logitech Logitech Dual Action>/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Y",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82ac2ce5-f9c4-470f-a03d-3098b50fadc0",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

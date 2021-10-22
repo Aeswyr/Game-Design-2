@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3948755570650296352}
   - component: {fileID: 687836928852901765}
   - component: {fileID: 2257034079379469183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b11fabf99e34a9640a316bf606ed31ed, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7ac7b4b3268bcc499a9d831600e10cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 1686471579237088575}
   - component: {fileID: 4132038318596445793}
   - component: {fileID: 1331325354881746277}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PickupBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5614726080861498168}
   - component: {fileID: 513022410295313689}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PhysicsBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

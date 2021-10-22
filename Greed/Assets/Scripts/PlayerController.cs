@@ -70,12 +70,12 @@ public class PlayerController : MonoBehaviour
         if (grounded) {
             jumps = JUMPS_MAX;
         }
-        if (input.X && (grounded || jumps > 0)) {
+        if (input.A && (grounded || jumps > 0)) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             if (!grounded)
                 jumps--;
         }
-        if (input.A) {
+        if (input.X) {
             if (Time.time > attackTime)
                 StartAttack();
         }
