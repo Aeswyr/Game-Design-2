@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rbody;
     [SerializeField] private InputManager input;
 
+    [SerializeField] private Animator animator;
+
 //movement
     [SerializeField] private float speed;
     [SerializeField] private float jumpVelocity;
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackDrag;
     private float attackTime;
     private float inputLockout;
+    private bool inputToggle;
 
 //Other
     [SerializeField] private BarController stunTimer;
@@ -53,7 +56,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         grounded = groundCheck.CheckGrounded();
-        if (Time.time > inputLockout)
+        if (!InputLocked())
             ManageInputs();
         
         CheckAttack();
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
         }
         if (input.X) {
             if (Time.time > attackTime)
-                StartAttack();
+                animator.SetTrigger("Attack");
         }
         if (input.B) {
 
@@ -89,14 +92,23 @@ public class PlayerController : MonoBehaviour
             rbody.velocity = 0.75f * rbody.velocity;
             rbody.drag = attackDrag;
         }
-        attackBox.SetActive(true);
+        
         attackTime = Time.time + attackDuration;
+        InputLockout(true);
         InputLockout(attackRecovery);
+    }
+
+    private void StartHit() {
+        attackBox.SetActive(true);
+    }
+
+    private void EndHit() {
+        attackBox.SetActive(false);
     }
 
     private void EndAttack() {
         rbody.drag = 0;
-        attackBox.SetActive(false);
+        InputLockout(false);
         attackTime = default;
     }
 
@@ -134,6 +146,14 @@ public class PlayerController : MonoBehaviour
 
     public void InputLockout(float duration) {
         inputLockout = Time.time + duration;
+    }
+
+    public void InputLockout(bool toggle) {
+        inputToggle = toggle;
+    }
+
+    private bool InputLocked() {
+        return inputToggle || Time.time <= inputLockout;
     }
 
     public void AddGem() {

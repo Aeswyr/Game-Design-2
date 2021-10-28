@@ -163,7 +163,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 559528148043632797}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 22f83b6b3db70c34b978b27b7ee8aa94, type: 2}
+  m_Material: {fileID: 6200000, guid: ff83384e41618d04d9c99365d2d91667, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
