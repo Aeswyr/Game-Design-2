@@ -5,9 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelAtlas", menuName = "Greed/LevelAtlas", order = 0)]
 public class LevelAtlas : ScriptableObject {
     [SerializeField] private List<GameObject> levels;
+    private static int index = -1;
 
     public GameObject GetRandom() {
-        return levels[Random.Range(0, levels.Count)];
+        int newIndex = Random.Range(0, levels.Count);
+        while (newIndex == index) {
+            newIndex = Random.Range(0, levels.Count);
+        }
+        index = newIndex;
+        return levels[index];
     }
 }
 

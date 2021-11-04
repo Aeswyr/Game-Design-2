@@ -325,6 +325,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 915183bb-3dfb-4dbb-a06f-34bf73f400ae
     m_ActionName: Player/Y
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c6ac3031-2516-40e4-881c-3805a99f1d9a
+    m_ActionName: UI/Back[/Keyboard/backspace]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -345,6 +349,7 @@ MonoBehaviour:
   rbody: {fileID: 1334132685708576628}
   input: {fileID: 6726847065005748498}
   animator: {fileID: 8573805891363180013}
+  animationAtlas: {fileID: 11400000, guid: 6c8056a5be05783468690274e566e5b9, type: 2}
   speed: 10
   jumpVelocity: 40
   jumps: 0

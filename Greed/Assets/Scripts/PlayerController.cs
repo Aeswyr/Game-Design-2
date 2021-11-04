@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputManager input;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerAnimationAtlas animationAtlas;
 
 //movement
     [SerializeField] private float speed;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         FindObjectsOfType<PlayerManager>()[0].RegisterPlayer(gameObject);
+        animator.runtimeAnimatorController = animationAtlas.NextAnimator();
     }
 
     // Update is called once per frame
