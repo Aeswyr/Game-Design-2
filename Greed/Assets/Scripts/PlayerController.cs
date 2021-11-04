@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        FindObjectsOfType<PlayerManager>()[0].RegisterPlayer(gameObject);
     }
 
     // Update is called once per frame
