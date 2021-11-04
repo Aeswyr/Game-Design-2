@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f1a2252024bdc42ae1aa2bdb79b564, type: 3}
   m_Name: LevelAtlas
   m_EditorClassIdentifier: 
-  levels: []
+  levels:
+  - {fileID: 4635548937276640887, guid: e87fc7ce6d5211e47b0dfe13daaef5c7, type: 3}
+  - {fileID: 4635548937276640887, guid: f4155e767e91bb44b9ece6690ed5f809, type: 3}
+  - {fileID: 4635548937276640887, guid: 2f54879181e59cb49b33ed30cbe17f67, type: 3}
