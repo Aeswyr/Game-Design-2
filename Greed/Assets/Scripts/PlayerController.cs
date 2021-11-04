@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int jumps = 1;
     [SerializeField] private int JUMPS_MAX = 1;
 
+    private int facingModifier = 1;
+
     [SerializeField] GroundedCheck groundCheck;
 
 //Attacking
@@ -30,19 +32,28 @@ public class PlayerController : MonoBehaviour
     private float inputLockout;
     private bool inputToggle;
 
+//Inventory
+    [SerializeField] private InventoryManager inventoryManager;
+    private List<PickupType> inventory = new List<PickupType>();
+
+//Gems
+    [SerializeField] private GameObject gem;
+    [SerializeField] private TextMeshPro gemCounter;
+    private int gems;
+
+//Attacks
+    [SerializeField] private GameObject crystalDart;
+
 //Other
     [SerializeField] private BarController stunTimer;
 
 
     bool grounded;
 
-    [SerializeField] private GameObject gem;
-    [SerializeField] private TextMeshPro gemCounter;
-    private int gems;
-
-
     [SerializeField] private GameObject hurtbox;
     [SerializeField] private GameObject pickupbox;
+
+    [SerializeField] private GameObject crown;
 
     private bool collidersLocked = false;
     private float colliderLockout;
@@ -52,6 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         FindObjectsOfType<PlayerManager>()[0].RegisterPlayer(gameObject);
         animator.runtimeAnimatorController = animationAtlas.NextAnimator();
+        inventoryManager.Display(inventory);
     }
 
     // Update is called once per frame
@@ -84,8 +96,27 @@ public class PlayerController : MonoBehaviour
             if (Time.time > attackTime)
                 animator.SetTrigger("Attack");
         }
+        if (input.Y) {
+            TryUseItem();
+        }
         if (input.B) {
+            
+        }
+    }
 
+    private void TryUseItem() {
+        if (inventory.Count > 0) {
+                switch (inventory[0]) {
+                    case PickupType.DART:
+                        GameObject dart = Instantiate(crystalDart);
+                        dart.GetComponent<CrystalDart>().Init(facingModifier, hurtbox);
+                        dart.transform.position = transform.position;
+                        break;
+                    default:
+                        break;
+                }
+            inventory.RemoveAt(0);
+            inventoryManager.Display(inventory);
         }
     }
 
@@ -122,10 +153,23 @@ public class PlayerController : MonoBehaviour
     private void SetFacing(float dir) {
         if (dir == 0)
             return;
-
-        Vector3 newScale = new Vector3(dir / Mathf.Abs(dir), transform.localScale.y, transform.localScale.z);
+        facingModifier = (int)(dir / Mathf.Abs(dir));
+        Vector3 newScale = new Vector3(facingModifier, transform.localScale.y, transform.localScale.z);
         transform.localScale = newScale;
         gemCounter.transform.localScale = newScale;
+        inventoryManager.transform.localScale = newScale;
+    }
+
+    public void EnableDoubleJump() {
+        crown.SetActive(true);
+        jumps = 1;
+        JUMPS_MAX = 1;
+    }
+
+    public void DisableDoubleJump() {
+        crown.SetActive(false);
+        jumps = 0;
+        JUMPS_MAX = 0;
     }
 
     public void OnHit() {
@@ -158,9 +202,22 @@ public class PlayerController : MonoBehaviour
         return inputToggle || Time.time <= inputLockout;
     }
 
-    public void AddGem() {
-        gems++;
-        gemCounter.text = gems.ToString();
+    public bool AddItem(PickupType type) {
+        if (type == PickupType.GEM) {
+            gems++;
+            gemCounter.text = gems.ToString();
+            return true;
+        } else {
+            if (inventory.Count >= 3)
+                return false;
+            inventory.Add(type);
+            inventoryManager.Display(inventory);
+            return true;
+        }
+    }
+
+    public int GetGems() {
+        return gems;
     }
 
     public void ColliderLockout(float duration) {

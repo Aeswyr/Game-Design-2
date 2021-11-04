@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
+    [SerializeField] private PickupType type;
     [SerializeField] private GroundedCheck groundCheck;
     [SerializeField] private float pickupLockout;
     private float startTime;
@@ -16,4 +17,12 @@ public class ItemPickup : MonoBehaviour
         return /*(groundCheck == null || groundCheck.CheckGrounded()) 
         &&*/ (pickupLockout == 0 || Time.time >= startTime + pickupLockout);
     }
+
+    public PickupType GetPickup() {
+        return type;
+    }
+}
+
+public enum PickupType {
+    DEFAULT, GEM, DART,
 }
