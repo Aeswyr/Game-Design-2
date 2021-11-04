@@ -7,6 +7,14 @@ public class PickupController : MonoBehaviour
     [SerializeField] private LayerMask mask;
     [SerializeField] private PlayerController player;
     private void OnTriggerEnter2D(Collider2D other) {
+        AttemptPickup(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        AttemptPickup(other);
+    }
+
+    private void AttemptPickup(Collider2D other) {
         if (((1 << other.gameObject.layer) & mask) != 0) {
             if (other.transform.parent.gameObject.TryGetComponent(out ItemPickup pickup)) {
                 if (!pickup.CanPickup()){

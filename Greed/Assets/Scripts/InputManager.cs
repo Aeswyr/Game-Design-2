@@ -26,15 +26,14 @@ public class InputManager : MonoBehaviour
         B = false;
     }
 
-    public void PressA() {A = true;Debug.Log("A");}
-    public void PressB() {B = true;Debug.Log("B");}
-    public void PressX() {X = true;Debug.Log("X");}
-    public void PressY() {Y = true;Debug.Log("Y");}
+    public void PressA() {A = true;}
+    public void PressB() {B = true;}
+    public void PressX() {X = true;}
+    public void PressY() {Y = true;}
 
     public void PressMove(InputAction.CallbackContext context) {
         Dir = context.ReadValue<Vector2>();
         moveCTX = context;
-        Debug.Log("Move");
     }
 
 }

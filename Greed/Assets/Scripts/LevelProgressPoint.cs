@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class LevelProgressPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private LevelAtlas levelAtlas;
+    private int hp = 3;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("Impact!");
+        hp--;
+        if (hp == 0) {
+            GameObject old = FindObjectsOfType<LevelData>()[0].gameObject;
+            Destroy(old);
+            Instantiate(levelAtlas.GetRandom());
+            FindObjectsOfType<PlayerManager>()[0].SpawnPlayers();
+            
+        }
     }
 }
