@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a961e2cc9ef001048847f1cdf11c91ff, type: 3}
   m_Name: PlayerAnimationAtlas
   m_EditorClassIdentifier: 
+  animationControllers:
+  - {fileID: 22100000, guid: 29dab7b9024799f4390d1272a3d52497, type: 2}
+  - {fileID: 22100000, guid: 2317feb88c79c7e4d9b487407a0fda8e, type: 2}
+  - {fileID: 22100000, guid: 858fe44f1ffe6044880f6a2fc23f9a83, type: 2}
+  - {fileID: 22100000, guid: a10bdb2608e7dfe43b4cfa85982510dd, type: 2}

@@ -16,14 +16,16 @@ public class PickupController : MonoBehaviour
 
     private void AttemptPickup(Collider2D other) {
         if (((1 << other.gameObject.layer) & mask) != 0) {
+            PickupType type = PickupType.DEFAULT;
             if (other.transform.parent.gameObject.TryGetComponent(out ItemPickup pickup)) {
                 if (!pickup.CanPickup()){
                     Debug.Log("Simply too slippery");
                     return;
-                }  
+                } 
+                type = pickup.GetPickup();
             }
-            player.AddGem();
-            Destroy(other.transform.parent.gameObject);
+            if (player.AddItem(type))
+                Destroy(other.transform.parent.gameObject);
         }
     }
 }
