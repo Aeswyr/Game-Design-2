@@ -10,8 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77bb504a4cf78f345920a66cc6fba3c5, type: 3}
-  m_Name: ItemIconAtlas
+  m_Name: ItemPickupAtlas
   m_EditorClassIdentifier: 
   atlas:
+  - type: 1
+    sprite: {fileID: 21300000, guid: ab15ee19114099744b03cd6ee9285ac4, type: 3}
+  - type: 2
+    sprite: {fileID: 21300000, guid: b2b87792d22a72b4d933350ca15cb8eb, type: 3}
+  - type: 3
+    sprite: {fileID: 21300000, guid: 7aa84dd30af8aad4984673e03606d2a1, type: 3}
   - type: 4
-    sprite: {fileID: 21300000, guid: a231134e354313944980d1c0851ed2a1, type: 3}
+    sprite: {fileID: 21300000, guid: ee718b63fe0679e419d54b4e454f123c, type: 3}

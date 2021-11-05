@@ -11,6 +11,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerAnimationAtlas animationAtlas;
+    [SerializeField] private SpriteAtlas portraitAtlas;
+    
+// Info Card  
+    [SerializeField] private GameObject infoCardPrefab;
+
+    private PlayerInfoManager infoCard;
 
 //movement
     [SerializeField] private float speed;
@@ -23,7 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GroundedCheck groundCheck;
 
 //Attacking
-    [SerializeField] private GameObject attackBox;
+    [SerializeField] private GameObject attackBoxPrefab;
+    private GameObject attackBox;
     [SerializeField] private float attackDuration;
     [SerializeField] private float attackRecovery;
 
@@ -38,8 +45,7 @@ public class PlayerController : MonoBehaviour
 
 //Gems
     [SerializeField] private GameObject gem;
-    [SerializeField] private TextMeshPro gemCounter;
-    private int gems;
+    private int gems_blue, gems_green, gems_red;
 
 //Attacks
     [SerializeField] private GameObject crystalDart;
@@ -50,20 +56,39 @@ public class PlayerController : MonoBehaviour
 
     bool grounded;
 
-    [SerializeField] private GameObject hurtbox;
-    [SerializeField] private GameObject pickupbox;
+    [SerializeField] private Collider2D hurtbox;
+    [SerializeField] private Collider2D pickupbox;
 
     [SerializeField] private GameObject crown;
 
     private bool collidersLocked = false;
     private float colliderLockout;
 
+// ID
+    static int id_source = 0;
+    int id;
+
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectsOfType<PlayerManager>()[0].RegisterPlayer(gameObject);
-        animator.runtimeAnimatorController = animationAtlas.NextAnimator();
+        id = id_source;
+        id_source++;
+
+        PlayerManager pmanager = FindObjectsOfType<PlayerManager>()[0];
+
+        pmanager.RegisterPlayer(gameObject);
+
+        animator.runtimeAnimatorController = animationAtlas.GetAnimator(id);
         inventoryManager.Display(inventory);
+
+        GameObject ic = Instantiate(infoCardPrefab, pmanager.GetInfoHolder().transform);
+        infoCard = ic.GetComponent<PlayerInfoManager>();
+
+        infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+        infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+        infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+
+        infoCard.PushPortraitSprite(portraitAtlas.GetSprite(id));
     }
 
     // Update is called once per frame
@@ -132,11 +157,12 @@ public class PlayerController : MonoBehaviour
     }
 
     private void StartHit() {
-        attackBox.SetActive(true);
+        attackBox = Instantiate(attackBoxPrefab, transform);
+        attackBox.transform.localPosition = new Vector3(2, 0.5f, 0);
     }
 
     private void EndHit() {
-        attackBox.SetActive(false);
+        Destroy(attackBox);
     }
 
     private void EndAttack() {
@@ -156,7 +182,6 @@ public class PlayerController : MonoBehaviour
         facingModifier = (int)(dir / Mathf.Abs(dir));
         Vector3 newScale = new Vector3(facingModifier, transform.localScale.y, transform.localScale.z);
         transform.localScale = newScale;
-        gemCounter.transform.localScale = newScale;
         inventoryManager.transform.localScale = newScale;
     }
 
@@ -180,15 +205,33 @@ public class PlayerController : MonoBehaviour
 
         ColliderLockout(3);
 
-        if (gems != 0) {
-            for (int i = 0; i < gems / 2 + gems % 2; i++) {
+        if (gems_red != 0) {
+            for (int i = 0; i < gems_red / 2 + gems_red % 2; i++) {
                 GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
                 newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
             }
-            gems -= gems / 2 + gems % 2;
-            gemCounter.text = gems.ToString();
+            gems_red -= gems_red / 2 + gems_red % 2;
+            infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+        }
+        if (gems_blue != 0) {
+            for (int i = 0; i < gems_blue / 2 + gems_blue % 2; i++) {
+                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
+                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+            }
+            gems_blue -= gems_blue / 2 + gems_blue % 2;
+            infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+        }
+        if (gems_green != 0) {
+            for (int i = 0; i < gems_green / 2 + gems_green % 2; i++) {
+                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
+                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+            }
+            gems_green -= gems_green / 2 + gems_green % 2;
+            infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
         }
     }
+
+
 
     public void InputLockout(float duration) {
         inputLockout = Time.time + duration;
@@ -202,38 +245,52 @@ public class PlayerController : MonoBehaviour
         return inputToggle || Time.time <= inputLockout;
     }
 
-    public bool AddItem(PickupType type) {
-        if (type == PickupType.GEM) {
-            gems++;
-            gemCounter.text = gems.ToString();
+    public bool AddItem(PickupType type, int amount = 1) {
+        if (type == PickupType.GEM_BLUE || type == PickupType.GEM_RED || type == PickupType.GEM_GREEN) {
+            switch(type) {
+                case PickupType.GEM_RED:
+                    gems_red += amount;
+                    infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+                    break;
+                case PickupType.GEM_BLUE:
+                    gems_blue += amount;
+                    infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+                    break;
+                case PickupType.GEM_GREEN:
+                    gems_green += amount;
+                    infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+                    break;
+                default:
+                break;
+            }
             return true;
         } else {
-            if (inventory.Count >= 3)
+            if (inventory.Count >= InventoryManager.INVENTORY_SIZE)
                 return false;
-            inventory.Add(type);
+            for (int i = 0; i < amount; i++){
+                    inventory.Add(type);
+                    if (inventory.Count >= InventoryManager.INVENTORY_SIZE)
+                        break;
+            }
             inventoryManager.Display(inventory);
             return true;
         }
-    }
-
-    public int GetGems() {
-        return gems;
     }
 
     public void ColliderLockout(float duration) {
         collidersLocked = true;
         colliderLockout = Time.time + duration;
 
-        hurtbox.SetActive(false);
-        pickupbox.SetActive(false);
+        hurtbox.enabled = false;
+        pickupbox.enabled = false;
     }
 
     private void CheckColliderLockout() {
         if (collidersLocked && Time.time >= colliderLockout) {
             collidersLocked = false;
 
-            hurtbox.SetActive(true);
-            pickupbox.SetActive(true);
+            hurtbox.enabled = true;
+            pickupbox.enabled =true;
         }
     }
 

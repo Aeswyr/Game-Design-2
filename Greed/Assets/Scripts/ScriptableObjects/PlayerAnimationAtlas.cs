@@ -12,4 +12,10 @@ public class PlayerAnimationAtlas : ScriptableObject {
         index = (index + 1) % animationControllers.Count;
         return animationControllers[i];
     }
+
+    public AnimatorOverrideController GetAnimator(int index) {
+        if (index >= animationControllers.Count)
+            return null;
+        return animationControllers[index];
+    }
 }

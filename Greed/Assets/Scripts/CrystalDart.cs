@@ -10,9 +10,10 @@ public class CrystalDart : MonoBehaviour
     [SerializeField] Rigidbody2D rbody;
     [SerializeField] float lifetime;
     private float start;
-    public void Init(int dir, GameObject parentHurtbox) {
+    
+    public void Init(int dir, Collider2D parentHurtbox) {
         rbody.velocity = new Vector3(speed * dir, 0, 0);
-        parent = parentHurtbox;
+        parent = parentHurtbox.gameObject;
     }
 
     public bool IsValidTarget(GameObject other) {

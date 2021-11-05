@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b2c26e876218f4ab996728cee2ef3e, type: 3}
+  m_Name: PlayerPortraitAtlas
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: c7ac7b4b3268bcc499a9d831600e10cd, type: 3}
+  - {fileID: 21300000, guid: 6a495e745587d6243ab62feabe088626, type: 3}
+  - {fileID: 21300000, guid: c5d4f714e110c4e4ba3a8f0f0ee7222f, type: 3}
+  - {fileID: 21300000, guid: b0442b826c98ee74a9f9729532dbecba, type: 3}
