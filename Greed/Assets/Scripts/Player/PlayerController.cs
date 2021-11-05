@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour
 //Attacks
     [SerializeField] private GameObject crystalDart;
 
+//Stamina
+    public readonly static int STAMINA_COST = 25;
+    public readonly static int MAX_STAMINA = 100;
+    private int stamina = 100;
+
 //Other
     [SerializeField] private BarController stunTimer;
 
@@ -103,6 +108,10 @@ public class PlayerController : MonoBehaviour
             ManageInputs();
 
         CheckColliderLockout();
+
+        if (grounded && stamina <= MAX_STAMINA)
+            stamina++;
+        infoCard.PushStamina(stamina);
     }
 
     public void ManageInputs() {
@@ -114,21 +123,25 @@ public class PlayerController : MonoBehaviour
         if (grounded) {
             jumps = JUMPS_MAX;
         }
-        if (input.A && (grounded || jumps > 0)) {
+        if (input.A && (grounded || jumps > 0) && stamina >= STAMINA_COST) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             if (!grounded)
                 jumps--;
+            stamina -= STAMINA_COST;
+            infoCard.PushStamina(stamina);
         }
-        if (input.X) {
-            if (!attacking)
-                animator.SetTrigger("Attack");
+        if (input.X && !attacking && stamina >= STAMINA_COST) {
+            animator.SetTrigger("Attack");
+            stamina -= STAMINA_COST;
+            infoCard.PushStamina(stamina);
         }
         if (input.Y) {
             TryUseItem();
         }
-        if (input.B) {
-            if (!sliding && grounded)
-                animator.SetTrigger("Slide");
+        if (input.B && !sliding && grounded && stamina >= MAX_STAMINA) {
+            animator.SetTrigger("Slide");
+            stamina -= MAX_STAMINA;
+            infoCard.PushStamina(stamina);
         }
     }
 
@@ -191,10 +204,13 @@ public class PlayerController : MonoBehaviour
     private void SetFacing(float dir) {
         if (dir == 0)
             return;
-        facingModifier = (int)(dir / Mathf.Abs(dir));
-        Vector3 newScale = new Vector3(facingModifier, transform.localScale.y, transform.localScale.z);
-        transform.localScale = newScale;
-        inventoryManager.transform.localScale = newScale;
+        if (facingModifier != (int)(dir / Mathf.Abs(dir))) {
+            facingModifier = (int)(dir / Mathf.Abs(dir));
+            Vector3 newScale = new Vector3(facingModifier, transform.localScale.y, transform.localScale.z);
+            transform.localScale = newScale;
+            inventoryManager.transform.localScale = newScale;
+            inventoryManager.transform.localPosition = new Vector3(inventoryManager.transform.localPosition.x * -1, inventoryManager.transform.localPosition.y, 0);
+        }
     }
 
     public void EnableDoubleJump() {

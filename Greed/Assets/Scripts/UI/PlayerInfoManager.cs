@@ -6,9 +6,17 @@ using TMPro;
 
 public class PlayerInfoManager : MonoBehaviour
 {
+//GemCount
     [SerializeField] private TextMeshProUGUI blueText;
     [SerializeField] private TextMeshProUGUI greenText;
     [SerializeField] private TextMeshProUGUI redText;
+
+//Stamina
+    private Image active;
+    [SerializeField] private Image barOn;
+    [SerializeField] private Image barOff;
+
+//Display
     [SerializeField] private Image Portrait;
 
     
@@ -31,5 +39,19 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void PushPortraitSprite(Sprite sprite) {
         Portrait.sprite = sprite;
+    }
+
+    public void PushStamina(int currentStamina) {
+        if (currentStamina >= PlayerController.STAMINA_COST) {
+            barOn.enabled = true;
+            barOff.enabled = false;
+            active = barOn;
+        } else {
+            barOn.enabled = false;
+            barOff.enabled = true;
+            active = barOff;
+        }
+
+        active.fillAmount = 1f * currentStamina / PlayerController.MAX_STAMINA;
     }
 }
