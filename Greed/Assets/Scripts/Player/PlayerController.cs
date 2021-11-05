@@ -206,27 +206,48 @@ public class PlayerController : MonoBehaviour
         ColliderLockout(3);
 
         if (gems_red != 0) {
-            for (int i = 0; i < gems_red / 2 + gems_red % 2; i++) {
+            int drop = gems_red / 2 + gems_red % 2;
+            for (int i = 0; i < drop / 10; i++) {
                 GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
                 newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_RED_LARGE);
             }
-            gems_red -= gems_red / 2 + gems_red % 2;
+                for (int i = 0; i < drop % 10; i++) {
+                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
+                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_RED);
+            }
+            gems_red -= drop;
             infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
         }
         if (gems_blue != 0) {
-            for (int i = 0; i < gems_blue / 2 + gems_blue % 2; i++) {
+            int drop = gems_blue / 2 + gems_blue % 2;
+            for (int i = 0; i < drop / 10; i++) {
                 GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
                 newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_BLUE_LARGE);
             }
-            gems_blue -= gems_blue / 2 + gems_blue % 2;
+                for (int i = 0; i < drop % 10; i++) {
+                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
+                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_BLUE);
+            }
+            gems_blue -= drop;
             infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
         }
         if (gems_green != 0) {
-            for (int i = 0; i < gems_green / 2 + gems_green % 2; i++) {
+            int drop = gems_green / 2 + gems_green % 2;
+            for (int i = 0; i < drop / 10; i++) {
                 GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
                 newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_GREEN_LARGE);
             }
-            gems_green -= gems_green / 2 + gems_green % 2;
+                for (int i = 0; i < drop % 10; i++) {
+                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
+                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_GREEN);
+            }
+            gems_green -= drop;
             infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
         }
     }
@@ -246,17 +267,21 @@ public class PlayerController : MonoBehaviour
     }
 
     public bool AddItem(PickupType type, int amount = 1) {
-        if (type == PickupType.GEM_BLUE || type == PickupType.GEM_RED || type == PickupType.GEM_GREEN) {
+        if (type == PickupType.GEM_BLUE || type == PickupType.GEM_RED || type == PickupType.GEM_GREEN
+        || type == PickupType.GEM_RED_LARGE || type == PickupType.GEM_BLUE_LARGE || type == PickupType.GEM_GREEN_LARGE) {
             switch(type) {
                 case PickupType.GEM_RED:
+                case PickupType.GEM_RED_LARGE:
                     gems_red += amount;
                     infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
                     break;
                 case PickupType.GEM_BLUE:
+                case PickupType.GEM_BLUE_LARGE:
                     gems_blue += amount;
                     infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
                     break;
                 case PickupType.GEM_GREEN:
+                case PickupType.GEM_GREEN_LARGE:
                     gems_green += amount;
                     infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
                     break;

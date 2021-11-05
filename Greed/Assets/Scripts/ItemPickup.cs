@@ -15,7 +15,7 @@ public class ItemPickup : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
-        spriteRenderer.sprite = pickupSprite.GetSprite(type);
+        SetType(type);
     }
 
     public bool CanPickup() {
@@ -33,16 +33,12 @@ public class ItemPickup : MonoBehaviour
 
     public void SetType(PickupType type) {
         this.type = type;
-        spriteRenderer.sprite = pickupSprite.GetSprite(type);
-    }
-
-    public void SetType(PickupType type, int amount) {
-        this.amount = amount;
-        this.type = type;
+        if (type == PickupType.GEM_RED_LARGE || type == PickupType.GEM_BLUE_LARGE || type == PickupType.GEM_GREEN_LARGE)
+            amount = 10;
         spriteRenderer.sprite = pickupSprite.GetSprite(type);
     }
 }
 
 public enum PickupType {
-    DEFAULT, GEM_BLUE, GEM_RED, GEM_GREEN, DART,
+    DEFAULT, GEM_BLUE, GEM_RED, GEM_GREEN, GEM_BLUE_LARGE, GEM_GREEN_LARGE, GEM_RED_LARGE, DART,
 }

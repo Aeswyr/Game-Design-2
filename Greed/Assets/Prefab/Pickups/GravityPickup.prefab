@@ -222,7 +222,7 @@ MonoBehaviour:
   amount: 1
   groundCheck: {fileID: 3664948569685089831}
   pickupLockout: 0.5
-  renderer: {fileID: 1992769513170811722}
+  spriteRenderer: {fileID: 1992769513170811722}
   pickupSprite: {fileID: 11400000, guid: 8cb0ce1e84d018a438f2558fa92f26f7, type: 2}
 --- !u!50 &1142484521127690776
 Rigidbody2D:

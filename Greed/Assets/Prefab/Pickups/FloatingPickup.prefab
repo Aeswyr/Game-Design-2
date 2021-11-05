@@ -218,11 +218,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba853fe5eab5d14381ae73a02dc7f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
+  type: 7
   amount: 1
   groundCheck: {fileID: 3664948569685089831}
   pickupLockout: 0.5
-  renderer: {fileID: 1992769513170811722}
+  spriteRenderer: {fileID: 1992769513170811722}
   pickupSprite: {fileID: 11400000, guid: 8cb0ce1e84d018a438f2558fa92f26f7, type: 2}
 --- !u!50 &1142484521127690776
 Rigidbody2D:
