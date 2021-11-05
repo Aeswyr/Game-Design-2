@@ -35,9 +35,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackRecovery;
 
     [SerializeField] private float attackDrag;
-    private float attackTime;
+    private bool attacking = false;
     private float inputLockout;
     private bool inputToggle;
+
+//Slide
+    private bool sliding = false;
+    [SerializeField] private float slideSpeed;
 
 //Inventory
     [SerializeField] private InventoryManager inventoryManager;
@@ -97,8 +101,6 @@ public class PlayerController : MonoBehaviour
         grounded = groundCheck.CheckGrounded();
         if (!InputLocked())
             ManageInputs();
-        
-        CheckAttack();
 
         CheckColliderLockout();
     }
@@ -118,14 +120,15 @@ public class PlayerController : MonoBehaviour
                 jumps--;
         }
         if (input.X) {
-            if (Time.time > attackTime)
+            if (!attacking)
                 animator.SetTrigger("Attack");
         }
         if (input.Y) {
             TryUseItem();
         }
         if (input.B) {
-            
+            if (!sliding && grounded)
+                animator.SetTrigger("Slide");
         }
     }
 
@@ -151,7 +154,7 @@ public class PlayerController : MonoBehaviour
             rbody.drag = attackDrag;
         }
         
-        attackTime = Time.time + attackDuration;
+        attacking = true;
         InputLockout(true);
         InputLockout(attackRecovery);
     }
@@ -168,12 +171,21 @@ public class PlayerController : MonoBehaviour
     private void EndAttack() {
         rbody.drag = 0;
         InputLockout(false);
-        attackTime = default;
+        attacking = false;
     }
 
-    private void CheckAttack() {
-        if (Time.time >= attackTime)
-        EndAttack();
+    private void StartSlide() {
+        sliding = true;
+        hurtbox.enabled = false;
+        rbody.velocity = facingModifier * new Vector2(slideSpeed, 0);
+        InputLockout(true);
+    }
+
+    private void EndSlide() {
+        sliding = false;
+        hurtbox.enabled = true;
+        rbody.velocity = Vector2.zero;
+        InputLockout(false);
     }
 
     private void SetFacing(float dir) {

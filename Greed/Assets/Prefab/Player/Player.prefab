@@ -361,6 +361,7 @@ MonoBehaviour:
   attackDuration: 0.1
   attackRecovery: 0.3
   attackDrag: 7
+  slideSpeed: 30
   inventoryManager: {fileID: 2709725142892486814}
   gem: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
   crystalDart: {fileID: 5406201513829590667, guid: dbb5dfd570c5a5e40ba87254eb819ea5, type: 3}
