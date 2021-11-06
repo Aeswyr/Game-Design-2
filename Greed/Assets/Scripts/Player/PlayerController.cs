@@ -28,6 +28,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] GroundedCheck groundCheck;
 
+//Wall cling/climb
+    [SerializeField] private Vector2 clingCastOffset;
+    [SerializeField] private float clingCastDistance;
+    [SerializeField] private LayerMask wallDetectMask;
+    [SerializeField] private float wallJumpTime;
+    [SerializeField] private float regrabTime;
+    [SerializeField] private float wallSlideMod;
+    private float wallHangTime;
+    private float regrab;
+    bool clinging;
+
 //Attacking
     [SerializeField] private GameObject attackBoxPrefab;
     private GameObject attackBox;
@@ -73,6 +84,8 @@ public class PlayerController : MonoBehaviour
     private bool collidersLocked = false;
     private float colliderLockout;
 
+    private float gravity;
+
 // ID
     static int id_source = 0;
     int id;
@@ -82,6 +95,8 @@ public class PlayerController : MonoBehaviour
     {
         id = id_source;
         id_source++;
+
+        gravity = rbody.gravityScale;
 
         PlayerManager pmanager = FindObjectsOfType<PlayerManager>()[0];
 
@@ -104,6 +119,17 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         grounded = groundCheck.CheckGrounded();
+
+        clinging = Utils.Raycast(   transform.position + 
+                                    new Vector3(facingModifier * clingCastOffset.x, clingCastOffset.y, 0),
+                                    new Vector2(facingModifier, 0),
+                                    clingCastDistance,
+                                    wallDetectMask) &&
+                                    input.Dir.x != 0 &&
+                                    stamina > 0;
+
+        rbody.gravityScale = gravity;
+
         if (!InputLocked())
             ManageInputs();
 
@@ -120,13 +146,28 @@ public class PlayerController : MonoBehaviour
 
         SetFacing(input.Dir.x);
 
-        if (grounded) {
+        if (clinging && Time.time >= regrab) {
+            rbody.gravityScale = 0;
+            if (input.Dir.y > 0)
+                stamina--;
+            float climbSpeed = input.Dir.y * speed;
+            if (input.Dir.y < 0)
+                climbSpeed *= wallSlideMod;
+            if (Time.time < regrab)
+                climbSpeed = rbody.velocity.y;
+            rbody.velocity = new Vector3(rbody.velocity.x, climbSpeed, 0);
+            wallHangTime = Time.time + wallJumpTime;
+        }
+
+        if (grounded || clinging) {
             jumps = JUMPS_MAX;
         }
-        if (input.A && (grounded || jumps > 0) && stamina >= STAMINA_COST) {
+        if (input.A && (grounded || wallHangTime > Time.time || jumps > 0) && stamina >= STAMINA_COST) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
-            if (!grounded)
+            if (!grounded || wallHangTime <= Time.time)
                 jumps--;
+            if (wallHangTime > Time.time)
+                regrab = Time.time + regrabTime;
             stamina -= STAMINA_COST;
             infoCard.PushStamina(stamina);
         }
