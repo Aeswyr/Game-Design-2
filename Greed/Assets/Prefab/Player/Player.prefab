@@ -357,6 +357,14 @@ MonoBehaviour:
   jumps: 0
   JUMPS_MAX: 0
   groundCheck: {fileID: 5668875503306398112}
+  clingCastOffset: {x: 1, y: 1.5}
+  clingCastDistance: 0.1
+  wallDetectMask:
+    serializedVersion: 2
+    m_Bits: 8
+  wallJumpTime: 0.1
+  regrabTime: 0.3
+  wallSlideMod: 1.75
   attackBoxPrefab: {fileID: 516636277180493578, guid: 77a0ef410e215c4458307e82d74928ce, type: 3}
   attackDuration: 0.1
   attackRecovery: 0.3
