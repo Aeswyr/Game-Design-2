@@ -357,7 +357,7 @@ MonoBehaviour:
   jumps: 0
   JUMPS_MAX: 0
   groundCheck: {fileID: 5668875503306398112}
-  clingCastOffset: {x: 1, y: 1.5}
+  clingCastOffset: {x: 1, y: 1.25}
   clingCastDistance: 0.1
   wallDetectMask:
     serializedVersion: 2

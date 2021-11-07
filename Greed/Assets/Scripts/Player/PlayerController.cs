@@ -66,9 +66,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject crystalDart;
 
 //Stamina
-    public readonly static int STAMINA_COST = 25;
-    public readonly static int MAX_STAMINA = 100;
-    private int stamina = 100;
+    public readonly static int STAMINA_COST = 100;
+    public readonly static int MAX_STAMINA = 200;
+    private int stamina = MAX_STAMINA;
 
 //Other
     [SerializeField] private BarController stunTimer;
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         CheckColliderLockout();
 
         if (grounded && stamina <= MAX_STAMINA)
-            stamina++;
+            stamina += 2;
         infoCard.PushStamina(stamina);
     }
 
@@ -162,18 +162,18 @@ public class PlayerController : MonoBehaviour
         if (grounded || clinging) {
             jumps = JUMPS_MAX;
         }
-        if (input.A && (grounded || wallHangTime > Time.time || jumps > 0) && stamina >= STAMINA_COST) {
+        if (input.A && (grounded || (wallHangTime > Time.time  && stamina >= STAMINA_COST) || jumps > 0)) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             if (!grounded || wallHangTime <= Time.time)
                 jumps--;
-            if (wallHangTime > Time.time)
+            if (wallHangTime > Time.time) {
                 regrab = Time.time + regrabTime;
-            stamina -= STAMINA_COST;
-            infoCard.PushStamina(stamina);
+                stamina -= STAMINA_COST;
+                infoCard.PushStamina(stamina);
+            }
         }
-        if (input.X && !attacking && stamina >= STAMINA_COST) {
+        if (input.X && !attacking) {
             animator.SetTrigger("Attack");
-            stamina -= STAMINA_COST;
             infoCard.PushStamina(stamina);
         }
         if (input.Y) {
