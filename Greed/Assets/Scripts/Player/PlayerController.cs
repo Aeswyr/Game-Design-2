@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
                                     new Vector2(facingModifier, 0),
                                     clingCastDistance,
                                     wallDetectMask) &&
-                                    input.Dir.x != 0 &&
+                                    input.B_Held &&
                                     stamina > 0;
 
         rbody.gravityScale = gravity;
