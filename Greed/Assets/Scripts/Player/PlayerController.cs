@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InventoryManager inventoryManager;
     private List<PickupType> inventory = new List<PickupType>();
 
+//Crown Inventory
+    [SerializeField] private CrownInventoryManager crownInventoryManager;
+    [SerializeField] private int crownDropThreshold;
+    private List<PickupType> crownInventory = new List<PickupType>();
+    private int battleCrownHits = 3;
+
 //Gems
     [SerializeField] private GameObject gem;
     private int gems_blue, gems_green, gems_red;
@@ -104,6 +110,7 @@ public class PlayerController : MonoBehaviour
 
         animator.runtimeAnimatorController = animationAtlas.GetAnimator(id);
         inventoryManager.Display(inventory);
+        crownInventoryManager.Display(crownInventory);
 
         GameObject ic = Instantiate(infoCardPrefab, pmanager.GetInfoHolder().transform);
         infoCard = ic.GetComponent<PlayerInfoManager>();
@@ -251,6 +258,9 @@ public class PlayerController : MonoBehaviour
             transform.localScale = newScale;
             inventoryManager.transform.localScale = newScale;
             inventoryManager.transform.localPosition = new Vector3(inventoryManager.transform.localPosition.x * -1, inventoryManager.transform.localPosition.y, 0);
+            crownInventoryManager.transform.localScale = newScale;
+            crownInventoryManager.transform.localPosition = new Vector3(crownInventoryManager.transform.localPosition.x * -1, crownInventoryManager.transform.localPosition.y, 0);
+
         }
     }
 
@@ -274,6 +284,11 @@ public class PlayerController : MonoBehaviour
 
         ColliderLockout(3);
 
+        TryDropCrowns();
+        TryDropGems();
+    }
+
+    private void TryDropGems() {
         if (gems_red != 0) {
             int drop = gems_red / 2 + gems_red % 2;
             for (int i = 0; i < drop / 10; i++) {
@@ -321,6 +336,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void TryDropCrowns() {
+        if (crownInventory.Contains(PickupType.CROWN_BATTLE)) {
+            battleCrownHits--;
+            if (battleCrownHits == 0) {
+                battleCrownHits = 3;
+                
+                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
+                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_BATTLE);
+                
+                crownInventory.Remove(PickupType.CROWN_BATTLE);
+                crownInventoryManager.Display(crownInventory);
+            }
+        }
+
+        if (crownInventory.Contains(PickupType.CROWN_RED) && gems_red < crownDropThreshold) {
+                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
+                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_RED);
+
+                crownInventory.Remove(PickupType.CROWN_RED);
+                crownInventoryManager.Display(crownInventory);
+        }
+
+                if (crownInventory.Contains(PickupType.CROWN_GREEN) && gems_green < crownDropThreshold) {
+                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
+                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_GREEN);
+
+                crownInventory.Remove(PickupType.CROWN_GREEN);
+                crownInventoryManager.Display(crownInventory);
+        }
+
+        if (crownInventory.Contains(PickupType.CROWN_BLUE) && gems_blue < crownDropThreshold) {
+                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
+                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_BLUE);
+
+                crownInventory.Remove(PickupType.CROWN_BLUE);
+                crownInventoryManager.Display(crownInventory);
+        }
+
+
+    }
 
 
     public void InputLockout(float duration) {
@@ -358,6 +417,13 @@ public class PlayerController : MonoBehaviour
                 break;
             }
             return true;
+        } else if (type == PickupType.CROWN_BLUE || type == PickupType.CROWN_GREEN || type == PickupType.CROWN_BATTLE
+                || type == PickupType.CROWN_RED) {
+                    if (crownInventory.Count >= CrownInventoryManager.INVENTORY_SIZE)
+                        return false;
+                    crownInventory.Add(type);
+                    crownInventoryManager.Display(crownInventory);
+                    return true;
         } else {
             if (inventory.Count >= InventoryManager.INVENTORY_SIZE)
                 return false;

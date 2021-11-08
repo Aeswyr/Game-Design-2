@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba853fe5eab5d14381ae73a02dc7f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 7
+  type: 12
   amount: 1
   groundCheck: {fileID: 3664948569685089831}
   pickupLockout: 0.5
