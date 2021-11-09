@@ -151,6 +151,8 @@ public class PlayerController : MonoBehaviour
         
         rbody.velocity = new Vector3(input.Dir.x * speed, rbody.velocity.y, 0);
 
+        animator.SetBool("running", grounded && Mathf.Abs(input.Dir.x) > 0);
+
         SetFacing(input.Dir.x);
 
         if (clinging && Time.time >= regrab) {
@@ -165,6 +167,7 @@ public class PlayerController : MonoBehaviour
             rbody.velocity = new Vector3(rbody.velocity.x, climbSpeed, 0);
             wallHangTime = Time.time + wallJumpTime;
         }
+        animator.SetBool("clinging", clinging);
 
         if (grounded || clinging) {
             jumps = JUMPS_MAX;
@@ -180,14 +183,14 @@ public class PlayerController : MonoBehaviour
             }
         }
         if (input.X && !attacking) {
-            animator.SetTrigger("Attack");
+            animator.SetTrigger("attack");
             infoCard.PushStamina(stamina);
         }
         if (input.Y) {
             TryUseItem();
         }
         if (input.B && !sliding && grounded && stamina >= MAX_STAMINA) {
-            animator.SetTrigger("Slide");
+            animator.SetTrigger("slide");
             stamina -= MAX_STAMINA;
             infoCard.PushStamina(stamina);
         }
@@ -288,6 +291,30 @@ public class PlayerController : MonoBehaviour
         TryDropGems();
     }
 
+    private void TryEnableCrown(PickupType type) {
+        if (type == PickupType.CROWN_BLUE) {
+
+        } else if (type == PickupType.CROWN_RED) {
+
+        } else if (type == PickupType.CROWN_GREEN) {
+
+        } else if (type == PickupType.CROWN_BATTLE) {
+
+        }
+    }
+
+    private void TryDisableCrown(PickupType type) {
+        if (type == PickupType.CROWN_BLUE) {
+
+        } else if (type == PickupType.CROWN_RED) {
+
+        } else if (type == PickupType.CROWN_GREEN) {
+
+        } else if (type == PickupType.CROWN_BATTLE) {
+
+        }
+    }
+
     private void TryDropGems() {
         if (gems_red != 0) {
             int drop = gems_red / 2 + gems_red % 2;
@@ -348,6 +375,7 @@ public class PlayerController : MonoBehaviour
                 
                 crownInventory.Remove(PickupType.CROWN_BATTLE);
                 crownInventoryManager.Display(crownInventory);
+                TryDisableCrown(PickupType.CROWN_BATTLE);
             }
         }
 
@@ -358,15 +386,17 @@ public class PlayerController : MonoBehaviour
 
                 crownInventory.Remove(PickupType.CROWN_RED);
                 crownInventoryManager.Display(crownInventory);
+                TryDisableCrown(PickupType.CROWN_RED);
         }
 
-                if (crownInventory.Contains(PickupType.CROWN_GREEN) && gems_green < crownDropThreshold) {
+        if (crownInventory.Contains(PickupType.CROWN_GREEN) && gems_green < crownDropThreshold) {
                 GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
                 crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
                 crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_GREEN);
 
                 crownInventory.Remove(PickupType.CROWN_GREEN);
                 crownInventoryManager.Display(crownInventory);
+                TryDisableCrown(PickupType.CROWN_GREEN);
         }
 
         if (crownInventory.Contains(PickupType.CROWN_BLUE) && gems_blue < crownDropThreshold) {
@@ -376,6 +406,7 @@ public class PlayerController : MonoBehaviour
 
                 crownInventory.Remove(PickupType.CROWN_BLUE);
                 crownInventoryManager.Display(crownInventory);
+                TryDisableCrown(PickupType.CROWN_BLUE);
         }
 
 
@@ -423,6 +454,7 @@ public class PlayerController : MonoBehaviour
                         return false;
                     crownInventory.Add(type);
                     crownInventoryManager.Display(crownInventory);
+                    TryEnableCrown(type);
                     return true;
         } else {
             if (inventory.Count >= InventoryManager.INVENTORY_SIZE)
