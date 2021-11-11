@@ -62,8 +62,9 @@ public class PlayerController : MonoBehaviour
     private List<PickupType> crownInventory = new List<PickupType>();
     private int battleCrownHits = 3;
 
-//Gems
-    [SerializeField] private GameObject gem;
+//Drops
+    [SerializeField] private GameObject gPickupPrefab;
+    [SerializeField] private GameObject fPickupPrefab;
     private int gems_blue, gems_green, gems_red;
 
 //Attacks
@@ -317,49 +318,43 @@ public class PlayerController : MonoBehaviour
     private void TryDropGems() {
         if (gems_red != 0) {
             int drop = gems_red / 2 + gems_red % 2;
-            for (int i = 0; i < drop / 10; i++) {
-                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
-                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_RED_LARGE);
-            }
-                for (int i = 0; i < drop % 10; i++) {
-                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
-                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_RED);
-            }
+            for (int i = 0; i < drop / 10; i++)
+                DropGravPickup(PickupType.GEM_RED_LARGE);
+            for (int i = 0; i < drop % 10; i++)
+                DropGravPickup(PickupType.GEM_RED);
             gems_red -= drop;
             infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
         }
         if (gems_blue != 0) {
             int drop = gems_blue / 2 + gems_blue % 2;
-            for (int i = 0; i < drop / 10; i++) {
-                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
-                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_BLUE_LARGE);
-            }
-                for (int i = 0; i < drop % 10; i++) {
-                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
-                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_BLUE);
-            }
+            for (int i = 0; i < drop / 10; i++)
+                DropGravPickup(PickupType.GEM_BLUE_LARGE);
+            for (int i = 0; i < drop % 10; i++)
+                DropGravPickup(PickupType.GEM_BLUE);
             gems_blue -= drop;
             infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
         }
         if (gems_green != 0) {
             int drop = gems_green / 2 + gems_green % 2;
-            for (int i = 0; i < drop / 10; i++) {
-                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
-                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_GREEN_LARGE);
-            }
-                for (int i = 0; i < drop % 10; i++) {
-                GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
-                newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                newGem.GetComponent<ItemPickup>().SetType(PickupType.GEM_GREEN);
-            }
+            for (int i = 0; i < drop / 10; i++)
+                DropGravPickup(PickupType.GEM_GREEN_LARGE);
+            for (int i = 0; i < drop % 10; i++)
+                DropGravPickup(PickupType.GEM_GREEN);
             gems_green -= drop;
             infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
         }
+    }
+
+    private void DropGravPickup(PickupType type) {
+        GameObject newGem = Instantiate(gPickupPrefab, transform.position, gPickupPrefab.transform.rotation);
+        newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+        newGem.GetComponent<ItemPickup>().SetType(type);
+    }
+
+    private void DropFloatPickup(PickupType type) {
+        GameObject crown = Instantiate(fPickupPrefab, transform.position, fPickupPrefab.transform.rotation);
+        crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
+        crown.GetComponent<ItemPickup>().SetType(type);
     }
 
     private void TryDropCrowns() {
@@ -368,9 +363,7 @@ public class PlayerController : MonoBehaviour
             if (battleCrownHits == 0) {
                 battleCrownHits = 3;
                 
-                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
-                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_BATTLE);
+                DropFloatPickup(PickupType.CROWN_BATTLE);
                 
                 crownInventory.Remove(PickupType.CROWN_BATTLE);
                 crownInventoryManager.Display(crownInventory);
@@ -379,9 +372,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (crownInventory.Contains(PickupType.CROWN_RED) && gems_red < crownDropThreshold) {
-                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
-                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_RED);
+                DropFloatPickup(PickupType.CROWN_RED);
 
                 crownInventory.Remove(PickupType.CROWN_RED);
                 crownInventoryManager.Display(crownInventory);
@@ -389,9 +380,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (crownInventory.Contains(PickupType.CROWN_GREEN) && gems_green < crownDropThreshold) {
-                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
-                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_GREEN);
+                DropFloatPickup(PickupType.CROWN_GREEN);
 
                 crownInventory.Remove(PickupType.CROWN_GREEN);
                 crownInventoryManager.Display(crownInventory);
@@ -399,16 +388,12 @@ public class PlayerController : MonoBehaviour
         }
 
         if (crownInventory.Contains(PickupType.CROWN_BLUE) && gems_blue < crownDropThreshold) {
-                GameObject crown = Instantiate(gem, transform.position, gem.transform.rotation);
-                crown.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(20f, 40f)), ForceMode2D.Impulse);
-                crown.GetComponent<ItemPickup>().SetType(PickupType.CROWN_BLUE);
+                DropFloatPickup(PickupType.CROWN_BLUE);
 
                 crownInventory.Remove(PickupType.CROWN_BLUE);
                 crownInventoryManager.Display(crownInventory);
                 TryDisableCrown(PickupType.CROWN_BLUE);
         }
-
-
     }
 
 

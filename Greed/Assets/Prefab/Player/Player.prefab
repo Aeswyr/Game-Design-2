@@ -192,8 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rbody: {fileID: 1334132685708576628}
   animator: {fileID: 8573805891363180013}
-  animationAtlas: {fileID: 11400000, guid: 6c8056a5be05783468690274e566e5b9, type: 2}
-  portraitAtlas: {fileID: 11400000, guid: 862bab8967f562246b41ed9fc7427be0, type: 2}
   infoCardPrefab: {fileID: 4170243787068517128, guid: ef5601442fa79684da2b9e2941358f77, type: 3}
   speed: 10
   jumpVelocity: 40
@@ -216,7 +214,8 @@ MonoBehaviour:
   inventoryManager: {fileID: 2709725142892486814}
   crownInventoryManager: {fileID: 8399554005564271543}
   crownDropThreshold: 50
-  gem: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
+  gPickupPrefab: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
+  fPickupPrefab: {fileID: 8570342339239053084, guid: 600138f2c68db174093fe049ec787df6, type: 3}
   crystalDart: {fileID: 5406201513829590667, guid: dbb5dfd570c5a5e40ba87254eb819ea5, type: 3}
   stunTimer: {fileID: 905305120166137709}
   hurtbox: {fileID: 687836928852901765}
