@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject crystalDart;
 
 //Stamina
+    [SerializeField] private StaminaHintController staminaHint;
     public readonly static int STAMINA_COST = 100;
     public readonly static int MAX_STAMINA = 200;
     private int stamina = MAX_STAMINA;
@@ -143,7 +144,8 @@ public class PlayerController : MonoBehaviour
 
         if (grounded && stamina <= MAX_STAMINA)
             stamina += 2;
-        infoCard.PushStamina(stamina);
+        
+        AdjustStamina();
         input.NextInputFrame();
     }
 
@@ -179,12 +181,10 @@ public class PlayerController : MonoBehaviour
             if (wallHangTime > Time.time) {
                 regrab = Time.time + regrabTime;
                 stamina -= STAMINA_COST;
-                infoCard.PushStamina(stamina);
             }
         }
         if (input.X && !attacking) {
             animator.SetTrigger("attack");
-            infoCard.PushStamina(stamina);
         }
         if (input.Y) {
             TryUseItem();
@@ -192,7 +192,6 @@ public class PlayerController : MonoBehaviour
         if (input.B && !sliding && grounded && stamina >= MAX_STAMINA) {
             animator.SetTrigger("slide");
             stamina -= MAX_STAMINA;
-            infoCard.PushStamina(stamina);
         }
     }
 
@@ -263,7 +262,7 @@ public class PlayerController : MonoBehaviour
             inventoryManager.transform.localPosition = new Vector3(inventoryManager.transform.localPosition.x * -1, inventoryManager.transform.localPosition.y, 0);
             crownInventoryManager.transform.localScale = newScale;
             crownInventoryManager.transform.localPosition = new Vector3(crownInventoryManager.transform.localPosition.x * -1, crownInventoryManager.transform.localPosition.y, 0);
-
+            staminaHint.transform.localScale = newScale;
         }
     }
 
@@ -451,6 +450,11 @@ public class PlayerController : MonoBehaviour
             inventoryManager.Display(inventory);
             return true;
         }
+    }
+
+    private void AdjustStamina() {
+        infoCard.PushStamina(stamina);
+        staminaHint.PushStamina(stamina);
     }
 
     public void ColliderLockout(float duration) {
