@@ -7,11 +7,9 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D rbody;
-    [SerializeField] private InputManager input;
-
+    private InputManager input;
     [SerializeField] private Animator animator;
-    [SerializeField] private PlayerAnimationAtlas animationAtlas;
-    [SerializeField] private SpriteAtlas portraitAtlas;
+    private CharacterData characterData;
     
 // Info Card  
     [SerializeField] private GameObject infoCardPrefab;
@@ -108,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
         pmanager.RegisterPlayer(gameObject);
 
-        animator.runtimeAnimatorController = animationAtlas.GetAnimator(id);
+        animator.runtimeAnimatorController = characterData.animator;
         inventoryManager.Display(inventory);
         crownInventoryManager.Display(crownInventory);
 
@@ -119,7 +117,7 @@ public class PlayerController : MonoBehaviour
         infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
         infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
 
-        infoCard.PushPortraitSprite(portraitAtlas.GetSprite(id));
+        infoCard.PushPortraitSprite(characterData.sprite);
     }
 
     // Update is called once per frame
@@ -145,6 +143,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && stamina <= MAX_STAMINA)
             stamina += 2;
         infoCard.PushStamina(stamina);
+        input.NextInputFrame();
     }
 
     public void ManageInputs() {
@@ -486,7 +485,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void BindInputs(InputManager inputs) {
+        input = inputs;
+    }
 
+    public void SetCharacterData(CharacterData data) {
+        characterData = data;
+    }
 
-
+    public void RemoveUI() {
+        Destroy(infoCard.gameObject);
+    }
 }

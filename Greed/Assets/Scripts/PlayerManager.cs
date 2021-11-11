@@ -7,6 +7,11 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private GameObject infoCardHolder;
 
+    void Start() {
+        foreach (ControllerManager player in FindObjectsOfType<ControllerManager>())
+            player.SpawnPlayer();
+    }
+
     private List<GameObject> players = new List<GameObject>();
     public void RegisterPlayer(GameObject obj) {
         players.Add(obj);

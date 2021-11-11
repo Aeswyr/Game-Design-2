@@ -75,9 +75,7 @@ GameObject:
   - component: {fileID: 1615997269127142317}
   - component: {fileID: 6874474851435177483}
   - component: {fileID: 1334132685708576628}
-  - component: {fileID: 1007479435235177509}
   - component: {fileID: 5701760484987003813}
-  - component: {fileID: 6726847065005748498}
   - component: {fileID: 5668875503306398112}
   - component: {fileID: 8573805891363180013}
   m_Layer: 0
@@ -180,160 +178,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1007479435235177509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544621340179171624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 49dafd290b808fc4aa6e5f6024d84551, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6726847065005748498}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: PressMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3d4bf954-8a0f-4a26-a7f8-5c4b8ae752d9
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6726847065005748498}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: PressX
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e9a8b170-651d-42c9-bb76-382150f3b8da
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 53e59114-63c7-4f9c-acef-5d9da3ff38b2
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e4aa6523-f9c5-46a2-a9b1-dee7fbfa32b0
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7eefd129-0340-4eb7-9739-f0eca729ac81
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5dc0b1c4-e8d9-492b-ba74-174fe52c3d24
-    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fe9744f9-78ca-454d-be86-e842793a674f
-    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 20bfe6a6-ff34-4e15-80d6-7b2db251f0e8
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 64ec4445-0492-4336-b057-550cfeb623eb
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e8442382-e6ec-42a1-9c21-0a46a644a0e6
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3cd0af72-5dd5-4b93-baf2-bbeec7584b11
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 80bbb913-6b90-4973-aed1-834c1e2fb18a
-    m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6726847065005748498}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: PressA
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cc5d9895-29ab-4e95-9a23-d7136e3a98dd
-    m_ActionName: Player/A
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6726847065005748498}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: PressB
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 8196a1e0-a1e7-489c-b801-3b0af7ab1102
-    m_ActionName: Player/B
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6726847065005748498}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: PressY
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 915183bb-3dfb-4dbb-a06f-34bf73f400ae
-    m_ActionName: Player/Y
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c6ac3031-2516-40e4-881c-3805a99f1d9a
-    m_ActionName: UI/Back[/Keyboard/backspace]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &5701760484987003813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbody: {fileID: 1334132685708576628}
-  input: {fileID: 6726847065005748498}
   animator: {fileID: 8573805891363180013}
   animationAtlas: {fileID: 11400000, guid: 6c8056a5be05783468690274e566e5b9, type: 2}
   portraitAtlas: {fileID: 11400000, guid: 862bab8967f562246b41ed9fc7427be0, type: 2}
@@ -372,25 +215,13 @@ MonoBehaviour:
   slideSpeed: 30
   inventoryManager: {fileID: 2709725142892486814}
   crownInventoryManager: {fileID: 8399554005564271543}
-  crownDropThreshold: 5
+  crownDropThreshold: 50
   gem: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
   crystalDart: {fileID: 5406201513829590667, guid: dbb5dfd570c5a5e40ba87254eb819ea5, type: 3}
   stunTimer: {fileID: 905305120166137709}
   hurtbox: {fileID: 687836928852901765}
   pickupbox: {fileID: 4132038318596445793}
   crown: {fileID: 6200232711667924414}
---- !u!114 &6726847065005748498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544621340179171624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6701ddd25834b9d47b2c03c3decd7856, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5668875503306398112
 MonoBehaviour:
   m_ObjectHideFlags: 0
