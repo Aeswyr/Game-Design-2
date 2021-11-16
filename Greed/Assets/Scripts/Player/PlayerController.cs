@@ -485,4 +485,51 @@ public class PlayerController : MonoBehaviour
     public void RemoveUI() {
         Destroy(infoCard.gameObject);
     }
+
+    public int GetItem(PickupType type) {
+        switch(type) {
+            case PickupType.GEM_BLUE:
+            case PickupType.GEM_BLUE_LARGE:
+                return gems_blue;
+            case PickupType.GEM_RED:
+            case PickupType.GEM_RED_LARGE:
+                return gems_red;
+            case PickupType.GEM_GREEN:
+            case PickupType.GEM_GREEN_LARGE:
+                return gems_green;
+            default:
+                return -1;
+        }
+    }
+
+    public bool RemoveItem(PickupType type, int amount) {
+        switch(type) {
+            case PickupType.GEM_BLUE:
+            case PickupType.GEM_BLUE_LARGE:
+                if (gems_blue >= amount) {
+                    gems_blue -= amount;
+                    infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+                    return true;
+                }
+                return false;
+            case PickupType.GEM_RED:
+            case PickupType.GEM_RED_LARGE:
+                if (gems_red >= amount) {
+                    gems_red -= amount;
+                    infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+                    return true;
+                }
+                return false;
+            case PickupType.GEM_GREEN:
+            case PickupType.GEM_GREEN_LARGE:
+                if (gems_green >= amount) {
+                    gems_green -= amount;
+                    infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
+    }
 }
