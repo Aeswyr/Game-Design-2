@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
         
         CheckBuffs();
 
-        if (groundPoundEnabled && grounded) {
+        if (groundPoundEnabled && (grounded || clinging)) {
             GemBurst(17);
             ColliderLockout(0.25f);
             PushBack();
