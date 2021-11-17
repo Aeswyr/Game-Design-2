@@ -68,7 +68,10 @@ public class PlayerController : MonoBehaviour
     private int gems_blue, gems_green, gems_red;
 
 //Attacks
-    [SerializeField] private GameObject crystalDart;
+    [SerializeField] private GameObject drill;
+    [SerializeField] private GameObject bomb;
+    [SerializeField] private GameObject dartStorm;
+    [SerializeField] private GameObject turret;
 
 //Stamina
     [SerializeField] private StaminaHintController staminaHint;
@@ -198,10 +201,25 @@ public class PlayerController : MonoBehaviour
     private void TryUseItem() {
         if (inventory.Count > 0) {
                 switch (inventory[0]) {
+                    case PickupType.DRILL:
+                        GameObject dart1 = Instantiate(drill);
+                        dart1.GetComponent<Projectile>().Init(input.Dir, hurtbox);
+                        dart1.transform.position = transform.position;
+                        break;
+                    case PickupType.BOMB:
+                        GameObject dart2 = Instantiate(bomb);
+                        dart2.GetComponent<Projectile>().Init(input.Dir, hurtbox);
+                        dart2.transform.position = transform.position;
+                        break;
                     case PickupType.DART:
-                        GameObject dart = Instantiate(crystalDart);
-                        dart.GetComponent<CrystalDart>().Init(facingModifier, hurtbox);
-                        dart.transform.position = transform.position;
+                        GameObject dart3 = Instantiate(dartStorm);
+                        dart3.GetComponent<DartStorm>().Init(input.Dir, hurtbox);
+                        dart3.transform.position = transform.position;
+                        break;
+                    case PickupType.TURRET:
+                        GameObject dart4 = Instantiate(turret);
+                        dart4.GetComponent<Turret>().Init(hurtbox);
+                        dart4.transform.position = transform.position;
                         break;
                     default:
                         break;
@@ -502,6 +520,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool IsHurtboxOwner(Collider2D other) {
+        return other == hurtbox;
+    }
     public bool RemoveItem(PickupType type, int amount) {
         switch(type) {
             case PickupType.GEM_BLUE:

@@ -27,4 +27,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject GetInfoHolder() {
         return infoCardHolder;
     }
+
+    public List<GameObject> GetPlayers() {
+        return players;
+    }
 }
