@@ -67,11 +67,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject fPickupPrefab;
     private int gems_blue, gems_green, gems_red;
 
-//Attacks
+//Items
     [SerializeField] private GameObject drill;
     [SerializeField] private GameObject bomb;
     [SerializeField] private GameObject dartStorm;
     [SerializeField] private GameObject turret;
+
+    [SerializeField] private float speedDuration;
+    [SerializeField] private float fastSpeed;
+    private float speedTime;
+    private bool speedActive = false;
+    [SerializeField] private float magnetDuration;
+    [SerializeField] private Vector2 magnetSize;
+    [SerializeField] private Vector2 pickupSize;
+    private bool magnetActive = false;
+    private float magnetTime;
+    [SerializeField] private float juiceDuration;
+    private float juiceTime;
+    private bool juiceActive;
+    [SerializeField] private int armorHits;
+    private int armor;
 
 //Stamina
     [SerializeField] private StaminaHintController staminaHint;
@@ -148,13 +163,17 @@ public class PlayerController : MonoBehaviour
         if (grounded && stamina <= MAX_STAMINA)
             stamina += 2;
         
+        CheckBuffs();
+
         AdjustStamina();
         input.NextInputFrame();
     }
 
     public void ManageInputs() {
-        
-        rbody.velocity = new Vector3(input.Dir.x * speed, rbody.velocity.y, 0);
+        float speedMod = speed;
+        if (speedActive)
+            speedMod = fastSpeed;
+        rbody.velocity = new Vector3(input.Dir.x * speedMod, rbody.velocity.y, 0);
 
         animator.SetBool("running", grounded && Mathf.Abs(input.Dir.x) > 0);
 
@@ -162,9 +181,9 @@ public class PlayerController : MonoBehaviour
 
         if (clinging && Time.time >= regrab) {
             rbody.gravityScale = 0;
-            if (input.Dir.y > 0)
+            if (input.Dir.y > 0 && !juiceActive)
                 stamina--;
-            float climbSpeed = input.Dir.y * speed;
+            float climbSpeed = input.Dir.y * speedMod;
             if (input.Dir.y < 0)
                 climbSpeed *= wallSlideMod;
             if (Time.time < regrab)
@@ -177,13 +196,14 @@ public class PlayerController : MonoBehaviour
         if (grounded || clinging) {
             jumps = JUMPS_MAX;
         }
-        if (input.A && (grounded || (wallHangTime > Time.time  && stamina >= STAMINA_COST) || jumps > 0)) {
+        if (input.A && (grounded || (wallHangTime > Time.time  && (stamina >= STAMINA_COST || juiceActive)) || jumps > 0)) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             if (!grounded || wallHangTime <= Time.time)
                 jumps--;
             if (wallHangTime > Time.time) {
                 regrab = Time.time + regrabTime;
-                stamina -= STAMINA_COST;
+                if (!juiceActive)
+                    stamina -= STAMINA_COST;
             }
         }
         if (input.X && !attacking) {
@@ -192,12 +212,57 @@ public class PlayerController : MonoBehaviour
         if (input.Y) {
             TryUseItem();
         }
-        if (input.B && !sliding && grounded && stamina >= MAX_STAMINA) {
+        if (input.B && !sliding && grounded && (stamina >= MAX_STAMINA || juiceActive)) {
             animator.SetTrigger("slide");
-            stamina -= MAX_STAMINA;
+            if (!juiceActive)
+                stamina -= MAX_STAMINA;
         }
     }
 
+    private void CheckBuffs() {
+        if (magnetActive && Time.time > magnetTime) {
+            EndMagnet();
+        }
+        if (juiceActive && Time.time > juiceTime) {
+            EndJuice();
+        }
+        if (speedActive && Time.time > speedTime) {
+            EndSpeed();
+        }
+    }
+
+    private void StartMagnet() {
+        ((BoxCollider2D)pickupbox).size = magnetSize;
+        magnetActive = true;
+        magnetTime = Time.time + magnetDuration;
+    }
+
+    private void EndMagnet() {
+        ((BoxCollider2D)pickupbox).size = pickupSize;
+        magnetActive = false;
+    }
+
+    private void StartSpeed() {
+        speedActive = true;
+        speedTime = Time.time + speedDuration;
+    }
+
+    private void EndSpeed() {
+        speedActive = false;
+    }
+
+    private void StartJuice() {
+        juiceActive = true;
+        juiceTime = Time.time + juiceDuration;
+    }
+
+    private void EndJuice() {
+        juiceActive = false;
+    }
+
+    private void SetArmor() {
+        armor = armorHits;
+    }
     private void TryUseItem() {
         if (inventory.Count > 0) {
                 switch (inventory[0]) {
@@ -220,6 +285,18 @@ public class PlayerController : MonoBehaviour
                         GameObject dart4 = Instantiate(turret);
                         dart4.GetComponent<Turret>().Init(hurtbox);
                         dart4.transform.position = transform.position;
+                        break;
+                    case PickupType.ARMOR:
+                        SetArmor();
+                        break;
+                    case PickupType.JUICE:
+                        StartJuice();
+                        break;
+                    case PickupType.MAGNET:
+                        StartMagnet();
+                        break;
+                    case PickupType.SPEED:
+                        StartSpeed();
                         break;
                     default:
                         break;
@@ -297,7 +374,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnHit() {
-        Debug.Log("Yeouch!");
+        if (armor > 0) {
+            armor--;
+            return;
+        }
+
         rbody.velocity = Vector3.zero;
         InputLockout(2);
         stunTimer.StartTimer(2);

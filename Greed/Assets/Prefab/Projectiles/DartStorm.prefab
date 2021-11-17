@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -4876021792452236994}
   - component: {fileID: 8497208293114326545}
   - component: {fileID: -1875210423228813093}
+  - component: {fileID: 8582122988058014525}
   m_Layer: 0
   m_Name: DartStorm
   m_TagString: Untagged
@@ -133,3 +134,15 @@ MonoBehaviour:
   dart: {fileID: 5406201513829590667, guid: 917e092a46f153d4f916046b0554d194, type: 3}
   dartDelay: 0.05
   ammo: 10
+--- !u!114 &8582122988058014525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590796331766881123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8899df3aa3c1d9341b78c8a7d1824671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
