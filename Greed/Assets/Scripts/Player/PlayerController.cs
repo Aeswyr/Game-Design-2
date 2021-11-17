@@ -326,6 +326,7 @@ public class PlayerController : MonoBehaviour
                         groundPoundEnabled = true;
                         break;
                     case PickupType.DASH:
+                        StartBlink();
                         ColliderLockout(0.25f);
                         GemBurst(18);
                         PushBack();
@@ -341,6 +342,12 @@ public class PlayerController : MonoBehaviour
             inventory.RemoveAt(0);
             inventoryManager.Display(inventory);
         }
+    }
+
+    private void StartBlink() { 
+        Vector2 dir = input.Dir;
+        dir.Normalize();
+        transform.Translate(10 * dir);
     }
 
     private void StartAttack() {
