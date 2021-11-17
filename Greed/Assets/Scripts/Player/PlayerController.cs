@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int armorHits;
     [SerializeField] private Animator armorAnimator;
     private int armor;
+    [SerializeField] private GameObject pushBoxPrefab;
+    private bool groundPoundEnabled = false;
 
 //Stamina
     [SerializeField] private StaminaHintController staminaHint;
@@ -166,6 +168,13 @@ public class PlayerController : MonoBehaviour
             stamina += 2;
         
         CheckBuffs();
+
+        if (groundPoundEnabled && grounded) {
+            GemBurst(17);
+            ColliderLockout(0.25f);
+            PushBack();
+            groundPoundEnabled = false;
+        }
 
         AdjustStamina();
         input.NextInputFrame();
@@ -303,6 +312,28 @@ public class PlayerController : MonoBehaviour
                         break;
                     case PickupType.SPEED:
                         StartSpeed();
+                        break;
+                    case PickupType.JUMP:
+                        rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity * 1.3f, 0);
+                        ColliderLockout(0.25f);
+                        GemBurst(18);
+                        PushBack();
+                        break;
+                    case PickupType.GROUND:
+                        rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity * -1.5f, 0);
+                        ColliderLockout(0.25f);
+                        GemBurst(6);
+                        groundPoundEnabled = true;
+                        break;
+                    case PickupType.DASH:
+                        ColliderLockout(0.25f);
+                        GemBurst(18);
+                        PushBack();
+                        break;
+                    case PickupType.TREASURE:
+                        ColliderLockout(0.25f);
+                        GemBurst(59);
+                        PushBack();
                         break;
                     default:
                         break;
@@ -592,6 +623,28 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveUI() {
         Destroy(infoCard.gameObject);
+    }
+
+    public void GemBurst(int drop) {
+        for (int i = 0; i < drop / 10; i++)
+            DropGravPickup(PickupType.GEM_GREEN_LARGE);
+        for (int i = 0; i < drop % 10; i++)
+            DropGravPickup(PickupType.GEM_GREEN);
+    }
+
+    public void PushBack() {
+        Instantiate(pushBoxPrefab, transform);
+    }
+
+    public void ClearVelocity() {
+        rbody.velocity = Vector2.zero;
+    }
+
+    public void Knockback(Vector2 dir, float magnitude) {
+        InputLockout(0.25f);
+        dir.Normalize();
+
+        rbody.AddForce(magnitude * dir, ForceMode2D.Impulse);
     }
 
     public int GetItem(PickupType type) {

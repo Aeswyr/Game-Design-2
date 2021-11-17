@@ -14,6 +14,15 @@ public class HurtboxController : MonoBehaviour
             else
                 Destroy(proj.gameObject);
         }
+
+        if (other.gameObject.TryGetComponent(out ForceBox force)) {
+            if (force.transform.parent == transform.parent)
+                return;
+            Vector2 dir = new Vector2(transform.position.x - other.transform.position.x, transform.position.y - other.transform.position.y);
+            player.Knockback(dir, 30f);
+            return;
+        }
+
         player.OnHit();
     }
 }

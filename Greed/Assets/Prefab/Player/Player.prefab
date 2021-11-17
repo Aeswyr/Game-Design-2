@@ -315,6 +315,8 @@ MonoBehaviour:
   juiceDuration: 10
   armorHits: 3
   armorAnimator: {fileID: 1798056443128980471}
+  pushBoxPrefab: {fileID: 9003738338520712135, guid: 77dfc4ab7a9a6134a882646cdaf8d35e, type: 3}
+  groundPound: {fileID: 0}
   staminaHint: {fileID: 3932067590758626303}
   stunTimer: {fileID: 905305120166137709}
   hurtbox: {fileID: 687836928852901765}
