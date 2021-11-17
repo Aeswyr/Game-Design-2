@@ -44,13 +44,13 @@ MonoBehaviour:
   - type: 15
     sprite: {fileID: 21300000, guid: c7d1dd7b57bba65478c63d6b45c1e2cb, type: 3}
   - type: 16
-    sprite: {fileID: 21300000, guid: ee718b63fe0679e419d54b4e454f123c, type: 3}
+    sprite: {fileID: 21300000, guid: 4c1cb736254f0624f866c6a013a91b69, type: 3}
   - type: 17
-    sprite: {fileID: 21300000, guid: ee718b63fe0679e419d54b4e454f123c, type: 3}
+    sprite: {fileID: 21300000, guid: 804f02e434b12e149807796906eacd56, type: 3}
   - type: 18
-    sprite: {fileID: 21300000, guid: ee718b63fe0679e419d54b4e454f123c, type: 3}
+    sprite: {fileID: 21300000, guid: 47b44fe27f419cb4db8ee3ea7fabafdb, type: 3}
   - type: 19
-    sprite: {fileID: 21300000, guid: ee718b63fe0679e419d54b4e454f123c, type: 3}
+    sprite: {fileID: 21300000, guid: 359bb4be7fba14d4db41494d138cd260, type: 3}
   - type: 20
     sprite: {fileID: 21300000, guid: ee718b63fe0679e419d54b4e454f123c, type: 3}
   - type: 21

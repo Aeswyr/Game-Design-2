@@ -78,14 +78,16 @@ public class PlayerController : MonoBehaviour
     private float speedTime;
     private bool speedActive = false;
     [SerializeField] private float magnetDuration;
-    [SerializeField] private Vector2 magnetSize;
-    [SerializeField] private Vector2 pickupSize;
+    [SerializeField] private float magnetSize;
+    [SerializeField] private float pickupSize;
+    [SerializeField] private GameObject magnetRender;
     private bool magnetActive = false;
     private float magnetTime;
     [SerializeField] private float juiceDuration;
     private float juiceTime;
     private bool juiceActive;
     [SerializeField] private int armorHits;
+    [SerializeField] private Animator armorAnimator;
     private int armor;
 
 //Stamina
@@ -232,14 +234,16 @@ public class PlayerController : MonoBehaviour
     }
 
     private void StartMagnet() {
-        ((BoxCollider2D)pickupbox).size = magnetSize;
+        ((CircleCollider2D)pickupbox).radius = magnetSize;
         magnetActive = true;
         magnetTime = Time.time + magnetDuration;
+        magnetRender.SetActive(true);
     }
 
     private void EndMagnet() {
-        ((BoxCollider2D)pickupbox).size = pickupSize;
+        ((CircleCollider2D)pickupbox).radius = pickupSize;
         magnetActive = false;
+        magnetRender.SetActive(false);
     }
 
     private void StartSpeed() {
@@ -261,6 +265,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void SetArmor() {
+        armorAnimator.gameObject.SetActive(true);
+        armorAnimator.SetTrigger("start");
         armor = armorHits;
     }
     private void TryUseItem() {
@@ -375,7 +381,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnHit() {
         if (armor > 0) {
+            armorAnimator.SetTrigger("hit");
             armor--;
+            if (armor == 0)
+                armorAnimator.gameObject.SetActive(false);
             return;
         }
 
