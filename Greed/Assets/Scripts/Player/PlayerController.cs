@@ -357,6 +357,9 @@ public class PlayerController : MonoBehaviour
                 break;
             transform.Translate(-0.5f * dir);
         }
+
+        if (rbody.velocity.y < 10)
+            rbody.velocity = new Vector2(rbody.velocity.x, 10);
             
     }
 
