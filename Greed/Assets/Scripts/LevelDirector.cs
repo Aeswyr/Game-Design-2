@@ -9,6 +9,9 @@ public class LevelDirector : MonoBehaviour
     [SerializeField] private int maxLevel = 20;
     private int level = 0;
     private LevelType currentLevelType = LevelType.DEFAULT;
+
+    private float gameEndTime;
+    bool gameEnding = false;
     public void NextLevel() {
         level++;
         foreach (var rm in FindObjectsOfType<DisposeOnLevelTransition>())
@@ -32,7 +35,23 @@ public class LevelDirector : MonoBehaviour
         playerManager.SpawnPlayers();
     }
 
+    private void FixedUpdate() {
+        if (gameEnding && Time.time > gameEndTime) {
+            gameEnding = false;
+            GameEndSequence();
+        }
+    }
+
     public LevelType GetCurrentLevelType() {
         return currentLevelType;
+    }
+
+    public void StartGameEndSequence() {
+        gameEndTime = Time.time + 20;
+        gameEnding = true;
+    }
+
+    public void GameEndSequence() {
+
     }
 }
