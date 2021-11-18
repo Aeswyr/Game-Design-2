@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
     private int armor;
     [SerializeField] private GameObject pushBoxPrefab;
     private bool groundPoundEnabled = false;
+    [SerializeField] private LayerMask blinkMask;
 
 //Stamina
     [SerializeField] private StaminaHintController staminaHint;
@@ -175,6 +176,8 @@ public class PlayerController : MonoBehaviour
             PushBack();
             groundPoundEnabled = false;
         }
+
+        CornerCheck();
 
         AdjustStamina();
         input.NextInputFrame();
@@ -347,7 +350,25 @@ public class PlayerController : MonoBehaviour
     private void StartBlink() { 
         Vector2 dir = input.Dir;
         dir.Normalize();
-        transform.Translate(10 * dir);
+        transform.Translate(10f * dir);
+
+        for (int i = 0; i < 20; i++) {
+            if (CornerCheck())
+                break;
+            transform.Translate(-0.5f * dir);
+        }
+
+        if (rbody.velocity.y < 10)
+            rbody.velocity = new Vector2(rbody.velocity.x, 10);
+            
+    }
+
+    private bool CornerCheck() {
+        RaycastHit2D tr = Utils.Raycast(transform.position, new Vector2(1f, 1.5f), 1f, blinkMask);
+        RaycastHit2D tl = Utils.Raycast(transform.position, new Vector2(-1f, 1.5f), 1f, blinkMask);
+        RaycastHit2D br = Utils.Raycast(transform.position, new Vector2(1f, -1.5f), 1f, blinkMask);
+        RaycastHit2D bl = Utils.Raycast(transform.position, new Vector2(-1f, -1.5f), 1f, blinkMask);
+        return !(tr || tl || br || bl);
     }
 
     private void StartAttack() {
