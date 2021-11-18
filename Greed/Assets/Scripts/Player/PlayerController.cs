@@ -68,8 +68,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject fPickupPrefab;
     private int gems_blue, gems_green, gems_red;
 
-//Attacks
-    [SerializeField] private GameObject crystalDart;
+//Items
+    [SerializeField] private GameObject drill;
+    [SerializeField] private GameObject bomb;
+    [SerializeField] private GameObject dartStorm;
+    [SerializeField] private GameObject turret;
+
+    [SerializeField] private float speedDuration;
+    [SerializeField] private float fastSpeed;
+    private float speedTime;
+    private bool speedActive = false;
+    [SerializeField] private float magnetDuration;
+    [SerializeField] private float magnetSize;
+    [SerializeField] private float pickupSize;
+    [SerializeField] private GameObject magnetRender;
+    private bool magnetActive = false;
+    private float magnetTime;
+    [SerializeField] private float juiceDuration;
+    private float juiceTime;
+    private bool juiceActive;
+    [SerializeField] private int armorHits;
+    [SerializeField] private Animator armorAnimator;
+    private int armor;
+    [SerializeField] private GameObject pushBoxPrefab;
+    private bool groundPoundEnabled = false;
+    [SerializeField] private LayerMask blinkMask;
 
 //Stamina
     [SerializeField] private StaminaHintController staminaHint;
@@ -146,13 +169,26 @@ public class PlayerController : MonoBehaviour
         if (grounded && stamina <= MAX_STAMINA)
             stamina += 2;
         
+        CheckBuffs();
+
+        if (groundPoundEnabled && (grounded || clinging)) {
+            GemBurst(17);
+            ColliderLockout(0.25f);
+            PushBack();
+            groundPoundEnabled = false;
+        }
+
+        CornerCheck();
+
         AdjustStamina();
         input.NextInputFrame();
     }
 
     public void ManageInputs() {
-        
-        rbody.velocity = new Vector3(input.Dir.x * speed, rbody.velocity.y, 0);
+        float speedMod = speed;
+        if (speedActive)
+            speedMod = fastSpeed;
+        rbody.velocity = new Vector3(input.Dir.x * speedMod, rbody.velocity.y, 0);
 
         animator.SetBool("running", grounded && Mathf.Abs(input.Dir.x) > 0);
 
@@ -160,9 +196,9 @@ public class PlayerController : MonoBehaviour
 
         if (clinging && Time.time >= regrab) {
             rbody.gravityScale = 0;
-            if (input.Dir.y > 0)
+            if (input.Dir.y > 0 && !juiceActive)
                 stamina--;
-            float climbSpeed = input.Dir.y * speed;
+            float climbSpeed = input.Dir.y * speedMod;
             if (input.Dir.y < 0)
                 climbSpeed *= wallSlideMod;
             if (Time.time < regrab)
@@ -175,13 +211,14 @@ public class PlayerController : MonoBehaviour
         if (grounded || clinging) {
             jumps = JUMPS_MAX;
         }
-        if (input.A && (grounded || (wallHangTime > Time.time  && stamina >= STAMINA_COST) || jumps > 0)) {
+        if (input.A && (grounded || (wallHangTime > Time.time  && (stamina >= STAMINA_COST || juiceActive)) || jumps > 0)) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             if (!grounded || wallHangTime <= Time.time)
                 jumps--;
             if (wallHangTime > Time.time) {
                 regrab = Time.time + regrabTime;
-                stamina -= STAMINA_COST;
+                if (!juiceActive)
+                    stamina -= STAMINA_COST;
             }
         }
         if (input.X && !attacking) {
@@ -190,11 +227,25 @@ public class PlayerController : MonoBehaviour
         if (input.Y) {
             TryUseItem();
         }
-        if (input.B && !sliding && grounded && stamina >= MAX_STAMINA) {
+        if (input.B && !sliding && grounded && (stamina >= MAX_STAMINA || juiceActive)) {
             animator.SetTrigger("slide");
-            stamina -= MAX_STAMINA;
+            if (!juiceActive)
+                stamina -= MAX_STAMINA;
         }
     }
+
+    private void CheckBuffs() {
+        if (magnetActive && Time.time > magnetTime) {
+            EndMagnet();
+        }
+        if (juiceActive && Time.time > juiceTime) {
+            EndJuice();
+        }
+        if (speedActive && Time.time > speedTime) {
+            EndSpeed();
+        }
+    }
+
 
     public int[] getGems(){
         int [] gems = {gems_blue, gems_green, gems_red};
@@ -205,13 +256,100 @@ public class PlayerController : MonoBehaviour
         return crowns;
     }
 
+
+    private void StartMagnet() {
+        ((CircleCollider2D)pickupbox).radius = magnetSize;
+        magnetActive = true;
+        magnetTime = Time.time + magnetDuration;
+        magnetRender.SetActive(true);
+    }
+
+    private void EndMagnet() {
+        ((CircleCollider2D)pickupbox).radius = pickupSize;
+        magnetActive = false;
+        magnetRender.SetActive(false);
+    }
+
+    private void StartSpeed() {
+        speedActive = true;
+        speedTime = Time.time + speedDuration;
+    }
+
+    private void EndSpeed() {
+        speedActive = false;
+    }
+
+    private void StartJuice() {
+        juiceActive = true;
+        juiceTime = Time.time + juiceDuration;
+    }
+
+    private void EndJuice() {
+        juiceActive = false;
+    }
+
+    private void SetArmor() {
+        armorAnimator.gameObject.SetActive(true);
+        armorAnimator.SetTrigger("start");
+        armor = armorHits;
+    }
     private void TryUseItem() {
         if (inventory.Count > 0) {
                 switch (inventory[0]) {
+                    case PickupType.DRILL:
+                        GameObject dart1 = Instantiate(drill);
+                        dart1.GetComponent<Projectile>().Init(input.Dir, hurtbox);
+                        dart1.transform.position = transform.position;
+                        break;
+                    case PickupType.BOMB:
+                        GameObject dart2 = Instantiate(bomb);
+                        dart2.GetComponent<Projectile>().Init(input.Dir, hurtbox);
+                        dart2.transform.position = transform.position;
+                        break;
                     case PickupType.DART:
-                        GameObject dart = Instantiate(crystalDart);
-                        dart.GetComponent<CrystalDart>().Init(facingModifier, hurtbox);
-                        dart.transform.position = transform.position;
+                        GameObject dart3 = Instantiate(dartStorm);
+                        dart3.GetComponent<DartStorm>().Init(input.Dir, hurtbox);
+                        dart3.transform.position = transform.position;
+                        break;
+                    case PickupType.TURRET:
+                        GameObject dart4 = Instantiate(turret);
+                        dart4.GetComponent<Turret>().Init(hurtbox);
+                        dart4.transform.position = transform.position;
+                        break;
+                    case PickupType.ARMOR:
+                        SetArmor();
+                        break;
+                    case PickupType.JUICE:
+                        StartJuice();
+                        break;
+                    case PickupType.MAGNET:
+                        StartMagnet();
+                        break;
+                    case PickupType.SPEED:
+                        StartSpeed();
+                        break;
+                    case PickupType.JUMP:
+                        rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity * 1.3f, 0);
+                        ColliderLockout(0.25f);
+                        GemBurst(18);
+                        PushBack();
+                        break;
+                    case PickupType.GROUND:
+                        rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity * -1.5f, 0);
+                        ColliderLockout(0.25f);
+                        GemBurst(6);
+                        groundPoundEnabled = true;
+                        break;
+                    case PickupType.DASH:
+                        StartBlink();
+                        ColliderLockout(0.25f);
+                        GemBurst(18);
+                        PushBack();
+                        break;
+                    case PickupType.TREASURE:
+                        ColliderLockout(0.25f);
+                        GemBurst(59);
+                        PushBack();
                         break;
                     default:
                         break;
@@ -219,6 +357,30 @@ public class PlayerController : MonoBehaviour
             inventory.RemoveAt(0);
             inventoryManager.Display(inventory);
         }
+    }
+
+    private void StartBlink() { 
+        Vector2 dir = input.Dir;
+        dir.Normalize();
+        transform.Translate(10f * dir);
+
+        for (int i = 0; i < 20; i++) {
+            if (CornerCheck())
+                break;
+            transform.Translate(-0.5f * dir);
+        }
+
+        if (rbody.velocity.y < 10)
+            rbody.velocity = new Vector2(rbody.velocity.x, 10);
+            
+    }
+
+    private bool CornerCheck() {
+        RaycastHit2D tr = Utils.Raycast(transform.position, new Vector2(1f, 1.5f), 1f, blinkMask);
+        RaycastHit2D tl = Utils.Raycast(transform.position, new Vector2(-1f, 1.5f), 1f, blinkMask);
+        RaycastHit2D br = Utils.Raycast(transform.position, new Vector2(1f, -1.5f), 1f, blinkMask);
+        RaycastHit2D bl = Utils.Raycast(transform.position, new Vector2(-1f, -1.5f), 1f, blinkMask);
+        return !(tr || tl || br || bl);
     }
 
     private void StartAttack() {
@@ -289,7 +451,14 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnHit() {
-        Debug.Log("Yeouch!");
+        if (armor > 0) {
+            armorAnimator.SetTrigger("hit");
+            armor--;
+            if (armor == 0)
+                armorAnimator.gameObject.SetActive(false);
+            return;
+        }
+
         rbody.velocity = Vector3.zero;
         InputLockout(2);
         stunTimer.StartTimer(2);
@@ -494,5 +663,81 @@ public class PlayerController : MonoBehaviour
 
     public void RemoveUI() {
         Destroy(infoCard.gameObject);
+    }
+
+    public void GemBurst(int drop) {
+        for (int i = 0; i < drop / 10; i++)
+            DropGravPickup((PickupType)Random.Range(4, 7));
+        for (int i = 0; i < drop % 10; i++)
+            DropGravPickup((PickupType)Random.Range(1, 4));
+    }
+
+    public void PushBack() {
+        Instantiate(pushBoxPrefab, transform);
+    }
+
+    public void ClearVelocity() {
+        rbody.velocity = Vector2.zero;
+    }
+
+    public void Knockback(Vector2 dir, float magnitude) {
+        InputLockout(0.25f);
+        dir.Normalize();
+
+        rbody.AddForce(magnitude * dir, ForceMode2D.Impulse);
+    }
+
+    public int GetItem(PickupType type) {
+        switch(type) {
+            case PickupType.GEM_BLUE:
+            case PickupType.GEM_BLUE_LARGE:
+                return gems_blue;
+            case PickupType.GEM_RED:
+            case PickupType.GEM_RED_LARGE:
+                return gems_red;
+            case PickupType.GEM_GREEN:
+            case PickupType.GEM_GREEN_LARGE:
+                return gems_green;
+            default:
+                return -1;
+        }
+    }
+
+    public List<PickupType> GetCrowns() {
+        return crownInventory;
+    }
+
+    public bool IsHurtboxOwner(Collider2D other) {
+        return other == hurtbox;
+    }
+    public bool RemoveItem(PickupType type, int amount) {
+        switch(type) {
+            case PickupType.GEM_BLUE:
+            case PickupType.GEM_BLUE_LARGE:
+                if (gems_blue >= amount) {
+                    gems_blue -= amount;
+                    infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+                    return true;
+                }
+                return false;
+            case PickupType.GEM_RED:
+            case PickupType.GEM_RED_LARGE:
+                if (gems_red >= amount) {
+                    gems_red -= amount;
+                    infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+                    return true;
+                }
+                return false;
+            case PickupType.GEM_GREEN:
+            case PickupType.GEM_GREEN_LARGE:
+                if (gems_green >= amount) {
+                    gems_green -= amount;
+                    infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
     }
 }

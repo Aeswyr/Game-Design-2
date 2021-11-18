@@ -89279,7 +89279,13 @@ MonoBehaviour:
   - {fileID: 7217664711341115450}
   - {fileID: 8018351183687130369}
   - {fileID: 7478522780480449263}
+<<<<<<< HEAD
   index: 0
+=======
+  pickups:
+  - {fileID: 1182526025169355469}
+  levelType: 0
+>>>>>>> 662fdb7d80fbf5fc9005cb325be3b7bf0b309693
 --- !u!1 &6959776316445310007
 GameObject:
   m_ObjectHideFlags: 0
@@ -89682,6 +89688,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6567660708110537491, guid: 1d268421fd86d634185e4469e454297a, type: 3}
   m_PrefabInstance: {fileID: 3603207662127324483}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1182526025169355469 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6744132330357563506, guid: 1d268421fd86d634185e4469e454297a, type: 3}
+  m_PrefabInstance: {fileID: 3603207662127324483}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba853fe5eab5d14381ae73a02dc7f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6172656332360320530
 PrefabInstance:
   m_ObjectHideFlags: 0
