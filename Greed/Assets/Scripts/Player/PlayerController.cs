@@ -716,7 +716,7 @@ public class PlayerController : MonoBehaviour
             case PickupType.GEM_BLUE_LARGE:
                 if (gems_blue >= amount) {
                     gems_blue -= amount;
-                    infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+                    infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
                     return true;
                 }
                 return false;
@@ -724,7 +724,7 @@ public class PlayerController : MonoBehaviour
             case PickupType.GEM_RED_LARGE:
                 if (gems_red >= amount) {
                     gems_red -= amount;
-                    infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+                    infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
                     return true;
                 }
                 return false;
@@ -732,7 +732,7 @@ public class PlayerController : MonoBehaviour
             case PickupType.GEM_GREEN_LARGE:
                 if (gems_green >= amount) {
                     gems_green -= amount;
-                    infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+                    infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
                     return true;
                 }
                 return false;

@@ -5,15 +5,11 @@ using UnityEngine;
 public class LevelData : MonoBehaviour
 {
     [SerializeField] private List<GameObject> spawnPoints;
-<<<<<<< HEAD
-    public int index = 0;
-=======
+
 
     [SerializeField] private List<ItemPickup> pickups;
     [SerializeField] private LevelType levelType = LevelType.DEFAULT;
     private int index = 0;
->>>>>>> 662fdb7d80fbf5fc9005cb325be3b7bf0b309693
-
     [SerializeField] private List<ShopController> shops;
 
 
