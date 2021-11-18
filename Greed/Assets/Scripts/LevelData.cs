@@ -105,7 +105,12 @@ public class LevelData : MonoBehaviour
         }
     }
 
+    public LevelType GetLevelType() {
+        return levelType;
+    }
 }
+
+
 
 public enum LevelType {
     DEFAULT, RED, BLUE, GREEN, CROWN, SHOP,

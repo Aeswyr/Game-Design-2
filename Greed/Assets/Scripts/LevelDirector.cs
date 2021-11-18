@@ -8,6 +8,7 @@ public class LevelDirector : MonoBehaviour
     [SerializeField] private LevelAtlas levelAtlas;
     [SerializeField] private int maxLevel = 20;
     private int level = 0;
+    private LevelType currentLevelType = LevelType.DEFAULT;
     public void NextLevel() {
         level++;
         foreach (var rm in FindObjectsOfType<DisposeOnLevelTransition>())
@@ -26,6 +27,12 @@ public class LevelDirector : MonoBehaviour
             lvl = Instantiate(levelAtlas.GetRandom());
         lvl.GetComponent<LevelData>().LevelSetup(level, playerManager.GetCrownsInPlay());
 
+        currentLevelType = lvl.GetComponent<LevelData>().GetLevelType();
+
         playerManager.SpawnPlayers();
+    }
+
+    public LevelType GetCurrentLevelType() {
+        return currentLevelType;
     }
 }
