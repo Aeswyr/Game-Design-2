@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelData : MonoBehaviour
 {
     [SerializeField] private List<GameObject> spawnPoints;
-    private int index = 0;
+    public int index = 0;
 
 
     public Vector3 NextSpawn() {

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PickupController : MonoBehaviour
 {
     [SerializeField] private LayerMask mask;

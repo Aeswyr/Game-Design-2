@@ -15,5 +15,9 @@ public class LevelAtlas : ScriptableObject {
         index = newIndex;
         return levels[index];
     }
+
+    public GameObject Get0(){
+        return levels[0];   
+    }
 }
 

@@ -6,6 +6,12 @@ using TMPro;
 
 public class PlayerInfoManager : MonoBehaviour
 {
+//CrownCount
+    [SerializeField] private TextMeshProUGUI blueCrown;
+    [SerializeField] private TextMeshProUGUI greenCrown;
+    [SerializeField] private TextMeshProUGUI redCrown;
+    [SerializeField] private TextMeshProUGUI battleCrown;
+
 //GemCount
     [SerializeField] private TextMeshProUGUI blueText;
     [SerializeField] private TextMeshProUGUI greenText;
@@ -21,7 +27,7 @@ public class PlayerInfoManager : MonoBehaviour
 
     
 
-    public void PushGemCount(int count, PickupType type) {
+    public void PushPickUpCount(int count, PickupType type) {
         switch (type) {
             case PickupType.GEM_BLUE:
                 blueText.text = count.ToString();
@@ -32,10 +38,24 @@ public class PlayerInfoManager : MonoBehaviour
             case PickupType.GEM_GREEN:
                 greenText.text = count.ToString();
                 break;
+            case PickupType.CROWN_BLUE:
+                blueCrown.text = count.ToString();
+                break;
+             case PickupType.CROWN_GREEN:
+                greenCrown.text = count.ToString();
+                break;
+             case PickupType.CROWN_RED:
+                redCrown.text = count.ToString();
+                break;
+             case PickupType.CROWN_BATTLE:
+                battleCrown.text = count.ToString();
+                break;
             default:
                 break;
         }
     }
+    
+
 
     public void PushPortraitSprite(Sprite sprite) {
         Portrait.sprite = sprite;

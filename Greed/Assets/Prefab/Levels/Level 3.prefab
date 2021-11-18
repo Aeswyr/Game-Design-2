@@ -90889,6 +90889,7 @@ MonoBehaviour:
   - {fileID: 8597428357864609379}
   - {fileID: 351906881235989363}
   - {fileID: 6884585224657807299}
+  index: 0
 --- !u!1 &6959776316445310007
 GameObject:
   m_ObjectHideFlags: 0
@@ -91156,11 +91157,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08cb9b408cbb57449bf9af760127ddcf, type: 3}
+--- !u!1 &811692953093888457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1314447720401724123, guid: 08cb9b408cbb57449bf9af760127ddcf, type: 3}
+  m_PrefabInstance: {fileID: 1837025873304533778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4381715891626145023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2715835704558735341, guid: 08cb9b408cbb57449bf9af760127ddcf, type: 3}
   m_PrefabInstance: {fileID: 1837025873304533778}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3027853626503984334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811692953093888457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e644a5e6b8775924cb067a50e67be4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueGems: {fileID: 0}
+  greenGems: {fileID: 0}
+  redGems: {fileID: 0}
+  blueCrown: {fileID: 0}
+  redCrown: {fileID: 0}
+  greenCrown: {fileID: 0}
+  battleCrown: {fileID: 0}
+  PlayerImage: {fileID: 0}
 --- !u!1001 &2102203545189117501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91409,14 +91435,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 582773e01aee1a74db0ab1c9bf0ba72e, type: 3}
---- !u!1 &6411208034988203589 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1859634309242445134, guid: 582773e01aee1a74db0ab1c9bf0ba72e, type: 3}
-  m_PrefabInstance: {fileID: 4699383273294152459}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3249506943564459975 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7795451032469728460, guid: 582773e01aee1a74db0ab1c9bf0ba72e, type: 3}
+  m_PrefabInstance: {fileID: 4699383273294152459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6411208034988203589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1859634309242445134, guid: 582773e01aee1a74db0ab1c9bf0ba72e, type: 3}
   m_PrefabInstance: {fileID: 4699383273294152459}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5063253537176681101

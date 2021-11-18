@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     private List<PickupType> crownInventory = new List<PickupType>();
     private int battleCrownHits = 3;
 
+
 //Drops
     [SerializeField] private GameObject gPickupPrefab;
     [SerializeField] private GameObject fPickupPrefab;
@@ -115,9 +116,9 @@ public class PlayerController : MonoBehaviour
         GameObject ic = Instantiate(infoCardPrefab, pmanager.GetInfoHolder().transform);
         infoCard = ic.GetComponent<PlayerInfoManager>();
 
-        infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
-        infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
-        infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+        infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
+        infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
+        infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
 
         infoCard.PushPortraitSprite(characterData.sprite);
     }
@@ -193,6 +194,15 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("slide");
             stamina -= MAX_STAMINA;
         }
+    }
+
+    public int[] getGems(){
+        int [] gems = {gems_blue, gems_green, gems_red};
+        return gems;
+    }
+    public bool[] getCrowns(){
+        bool [] crowns = {true, false, true, false};
+        return crowns;
     }
 
     private void TryUseItem() {
@@ -322,7 +332,7 @@ public class PlayerController : MonoBehaviour
             for (int i = 0; i < drop % 10; i++)
                 DropGravPickup(PickupType.GEM_RED);
             gems_red -= drop;
-            infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+            infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
         }
         if (gems_blue != 0) {
             int drop = gems_blue / 2 + gems_blue % 2;
@@ -331,7 +341,7 @@ public class PlayerController : MonoBehaviour
             for (int i = 0; i < drop % 10; i++)
                 DropGravPickup(PickupType.GEM_BLUE);
             gems_blue -= drop;
-            infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+            infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
         }
         if (gems_green != 0) {
             int drop = gems_green / 2 + gems_green % 2;
@@ -340,7 +350,7 @@ public class PlayerController : MonoBehaviour
             for (int i = 0; i < drop % 10; i++)
                 DropGravPickup(PickupType.GEM_GREEN);
             gems_green -= drop;
-            infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+            infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
         }
     }
 
@@ -415,17 +425,17 @@ public class PlayerController : MonoBehaviour
                 case PickupType.GEM_RED:
                 case PickupType.GEM_RED_LARGE:
                     gems_red += amount;
-                    infoCard.PushGemCount(gems_red, PickupType.GEM_RED);
+                    infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
                     break;
                 case PickupType.GEM_BLUE:
                 case PickupType.GEM_BLUE_LARGE:
                     gems_blue += amount;
-                    infoCard.PushGemCount(gems_blue, PickupType.GEM_BLUE);
+                    infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
                     break;
                 case PickupType.GEM_GREEN:
                 case PickupType.GEM_GREEN_LARGE:
                     gems_green += amount;
-                    infoCard.PushGemCount(gems_green, PickupType.GEM_GREEN);
+                    infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
                     break;
                 default:
                 break;
@@ -434,7 +444,7 @@ public class PlayerController : MonoBehaviour
         } else if (type == PickupType.CROWN_BLUE || type == PickupType.CROWN_GREEN || type == PickupType.CROWN_BATTLE
                 || type == PickupType.CROWN_RED) {
                     if (crownInventory.Count >= CrownInventoryManager.INVENTORY_SIZE)
-                        return false;
+                       return false;
                     crownInventory.Add(type);
                     crownInventoryManager.Display(crownInventory);
                     TryEnableCrown(type);
