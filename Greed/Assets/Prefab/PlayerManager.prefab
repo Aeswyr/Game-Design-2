@@ -59,3 +59,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: -5018320367341153907}
   levelAtlas: {fileID: 11400000, guid: 7661c9ce3cf3c42468a838a5d0c205ff, type: 2}
+  maxLevel: 20
+  statPrefab: {fileID: 7633447278172748062, guid: a953dcdad6683c64498e01d6594bbf48, type: 3}

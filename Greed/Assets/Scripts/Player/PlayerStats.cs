@@ -89,7 +89,7 @@ public class PlayerStats : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    public void PushStats() {
         try{
             
             int [] P1 = new int[8];
@@ -150,13 +150,12 @@ public class PlayerStats : MonoBehaviour
             playersStats[3] = P4;
             }
             
-            Debug.Log(P1[0].ToString()+" "+P1[1].ToString()/*+" "+P1[2].ToString()+" "+P1[3].ToString()+" "+P1[4].ToString()+" "+P1[5].ToString()+" "+P1[6].ToString()+" "+P1[7].ToString()*/);
         }catch( NullReferenceException e){
             Debug.Log(e.ToString());
         }
     }
     void Start(){
-        
+        DontDestroyOnLoad(this.gameObject);
         if(greenGemsP1!=null)
             updateCount(playersStats);
     }

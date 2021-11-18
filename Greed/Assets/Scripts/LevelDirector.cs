@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelDirector : MonoBehaviour
 {
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private LevelAtlas levelAtlas;
     [SerializeField] private int maxLevel = 20;
+    [SerializeField] private GameObject statPrefab;
     private int level = 0;
     private LevelType currentLevelType = LevelType.DEFAULT;
 
@@ -52,6 +54,8 @@ public class LevelDirector : MonoBehaviour
     }
 
     public void GameEndSequence() {
-
+        GameObject obj = Instantiate(statPrefab);
+        obj.GetComponent<PlayerStats>().PushStats();
+        SceneManager.LoadScene(3);
     }
 }
