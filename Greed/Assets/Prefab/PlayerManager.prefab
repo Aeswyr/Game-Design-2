@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7018089925263113137}
   - component: {fileID: -5018320367341153907}
+  - component: {fileID: 667977702949454917}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -43,3 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76af2758d304e041963d7c299cb12f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoCardHolder: {fileID: 0}
+--- !u!114 &667977702949454917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502559676570832430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220d081a3ae037c4895db5db3388e81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: -5018320367341153907}
+  levelAtlas: {fileID: 11400000, guid: 7661c9ce3cf3c42468a838a5d0c205ff, type: 2}

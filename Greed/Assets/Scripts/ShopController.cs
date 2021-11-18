@@ -15,6 +15,8 @@ public class ShopController : MonoBehaviour
     [SerializeField] private PickupType costType;
     [SerializeField] private PickupType item;
 
+    [SerializeField] private bool singleUse = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +36,11 @@ public class ShopController : MonoBehaviour
 
     public void Purchase(PlayerController player) {
         if (player.RemoveItem(costType, cost)) {
-            if (!player.AddItem(item)) {
+            if (!player.AddItem(item))
                 player.AddItem(costType, cost);
-            }
+            else
+                if (singleUse)
+                    Destroy(gameObject);
         }
     }
 }

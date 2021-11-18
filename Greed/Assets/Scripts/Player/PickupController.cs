@@ -20,7 +20,6 @@ public class PickupController : MonoBehaviour
             int amount = 1;
             if (other.transform.parent.gameObject.TryGetComponent(out ItemPickup pickup)) {
                 if (!pickup.CanPickup()){
-                    Debug.Log("Simply too slippery");
                     return;
                 } 
                 type = pickup.GetPickup();

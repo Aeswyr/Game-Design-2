@@ -231,6 +231,7 @@ MonoBehaviour:
   cost: 10
   costType: 6
   item: 12
+  singleUse: 0
 --- !u!1 &7308063460156960739
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,3 +18,7 @@ MonoBehaviour:
   - {fileID: 4635548937276640887, guid: 2f54879181e59cb49b33ed30cbe17f67, type: 3}
   - {fileID: 4635548937276640887, guid: f4155e767e91bb44b9ece6690ed5f809, type: 3}
   - {fileID: 4635548937276640887, guid: e87fc7ce6d5211e47b0dfe13daaef5c7, type: 3}
+  shopLevels: []
+  crownLevels: []
+  bossLevels:
+  - {fileID: 4635548937276640887, guid: 7522640a9ce98634fa56e86b0a192512, type: 3}

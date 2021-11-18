@@ -655,9 +655,9 @@ public class PlayerController : MonoBehaviour
 
     public void GemBurst(int drop) {
         for (int i = 0; i < drop / 10; i++)
-            DropGravPickup(PickupType.GEM_GREEN_LARGE);
+            DropGravPickup((PickupType)Random.Range(4, 7));
         for (int i = 0; i < drop % 10; i++)
-            DropGravPickup(PickupType.GEM_GREEN);
+            DropGravPickup((PickupType)Random.Range(1, 4));
     }
 
     public void PushBack() {
@@ -689,6 +689,10 @@ public class PlayerController : MonoBehaviour
             default:
                 return -1;
         }
+    }
+
+    public List<PickupType> GetCrowns() {
+        return crownInventory;
     }
 
     public bool IsHurtboxOwner(Collider2D other) {

@@ -31,4 +31,14 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> GetPlayers() {
         return players;
     }
+
+    public List<PickupType> GetCrownsInPlay() {
+        var crowns = new List<PickupType>();
+        foreach (var player in players) {
+            var crown = player.GetComponent<PlayerController>().GetCrowns();
+            foreach (var c in crown)
+                crowns.Add(c);
+        }
+        return crowns;
+    }
 }
