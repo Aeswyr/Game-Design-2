@@ -25,7 +25,8 @@ public class FinalBossHurtBox : MonoBehaviour
         health--;
         if(health <= 0){
             Destroy(transform.parent.gameObject);
-            GemBurst(99); 
+            GemBurst(99);
+            FindObjectsOfType<LevelDirector>()[0].StartGameEndSequence();
         }
         Debug.Log("WOO I HIT THE BOSS"); 
     }

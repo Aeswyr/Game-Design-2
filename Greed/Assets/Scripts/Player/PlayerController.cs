@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private InputManager input;
     [SerializeField] private Animator animator;
     private CharacterData characterData;
+    private LevelDirector director;
     
 // Info Card  
     [SerializeField] private GameObject infoCardPrefab;
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour
         gravity = rbody.gravityScale;
 
         PlayerManager pmanager = FindObjectsOfType<PlayerManager>()[0];
+        director = FindObjectsOfType<LevelDirector>()[0];
 
         pmanager.RegisterPlayer(gameObject);
 
@@ -460,6 +462,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnHit() {
+        if (director.GetCurrentLevelType() == LevelType.SHOP)
+            return;
+            
         if (armor > 0) {
             armorAnimator.SetTrigger("hit");
             armor--;

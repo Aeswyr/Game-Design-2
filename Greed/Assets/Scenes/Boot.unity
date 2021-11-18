@@ -123,63 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &139957876
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 34.353428
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 29.716585
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1450187931147034700, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203644252061093353, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
-      propertyPath: m_Name
-      value: Final Boss
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e0b7367096590a24d99c1d7e4052af40, type: 3}
 --- !u!4 &212623206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7862427264036156504, guid: 9319c3667056dab40bd99fbc6db16791, type: 3}
@@ -257,7 +200,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &433986678
 GameObject:
@@ -288,14 +231,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e644a5e6b8775924cb067a50e67be4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueGems: {fileID: 0}
-  greenGems: {fileID: 0}
-  redGems: {fileID: 0}
-  blueCrown: {fileID: 0}
-  redCrown: {fileID: 0}
-  greenCrown: {fileID: 0}
-  battleCrown: {fileID: 0}
-  PlayerImage: {fileID: 0}
+  blueGemsP1: {fileID: 0}
+  blueGemsP2: {fileID: 0}
+  blueGemsP3: {fileID: 0}
+  blueGemsP4: {fileID: 0}
+  greenGemsP1: {fileID: 0}
+  greenGemsP2: {fileID: 0}
+  greenGemsP3: {fileID: 0}
+  greenGemsP4: {fileID: 0}
+  redGemsP1: {fileID: 0}
+  redGemsP2: {fileID: 0}
+  redGemsP3: {fileID: 0}
+  redGemsP4: {fileID: 0}
+  blueCrownP1: {fileID: 0}
+  blueCrownP2: {fileID: 0}
+  blueCrownP3: {fileID: 0}
+  blueCrownP4: {fileID: 0}
+  redCrownP1: {fileID: 0}
+  redCrownP2: {fileID: 0}
+  redCrownP3: {fileID: 0}
+  redCrownP4: {fileID: 0}
+  greenCrownP1: {fileID: 0}
+  greenCrownP2: {fileID: 0}
+  greenCrownP3: {fileID: 0}
+  greenCrownP4: {fileID: 0}
+  battleCrownP1: {fileID: 0}
+  battleCrownP2: {fileID: 0}
+  battleCrownP3: {fileID: 0}
+  battleCrownP4: {fileID: 0}
+  PlayerImageP1: {fileID: 0}
+  PlayerImageP2: {fileID: 0}
+  PlayerImageP3: {fileID: 0}
+  PlayerImageP4: {fileID: 0}
 --- !u!4 &433986680
 Transform:
   m_ObjectHideFlags: 0
@@ -308,7 +275,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -486,7 +453,7 @@ RectTransform:
   m_Children:
   - {fileID: 1434795306}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -572,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7018089925263113137, guid: 5436ac8d788bdca48b18355a5f516bfb, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7018089925263113137, guid: 5436ac8d788bdca48b18355a5f516bfb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -641,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7862427264036156504, guid: 9319c3667056dab40bd99fbc6db16791, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7862427264036156504, guid: 9319c3667056dab40bd99fbc6db16791, type: 3}
       propertyPath: m_LocalPosition.x
@@ -702,14 +669,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e644a5e6b8775924cb067a50e67be4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueGems: {fileID: 0}
-  greenGems: {fileID: 0}
-  redGems: {fileID: 0}
-  blueCrown: {fileID: 0}
-  redCrown: {fileID: 0}
-  greenCrown: {fileID: 0}
-  battleCrown: {fileID: 0}
-  PlayerImage: {fileID: 0}
+  blueGemsP1: {fileID: 0}
+  blueGemsP2: {fileID: 0}
+  blueGemsP3: {fileID: 0}
+  blueGemsP4: {fileID: 0}
+  greenGemsP1: {fileID: 0}
+  greenGemsP2: {fileID: 0}
+  greenGemsP3: {fileID: 0}
+  greenGemsP4: {fileID: 0}
+  redGemsP1: {fileID: 0}
+  redGemsP2: {fileID: 0}
+  redGemsP3: {fileID: 0}
+  redGemsP4: {fileID: 0}
+  blueCrownP1: {fileID: 0}
+  blueCrownP2: {fileID: 0}
+  blueCrownP3: {fileID: 0}
+  blueCrownP4: {fileID: 0}
+  redCrownP1: {fileID: 0}
+  redCrownP2: {fileID: 0}
+  redCrownP3: {fileID: 0}
+  redCrownP4: {fileID: 0}
+  greenCrownP1: {fileID: 0}
+  greenCrownP2: {fileID: 0}
+  greenCrownP3: {fileID: 0}
+  greenCrownP4: {fileID: 0}
+  battleCrownP1: {fileID: 0}
+  battleCrownP2: {fileID: 0}
+  battleCrownP3: {fileID: 0}
+  battleCrownP4: {fileID: 0}
+  PlayerImageP1: {fileID: 0}
+  PlayerImageP2: {fileID: 0}
+  PlayerImageP3: {fileID: 0}
+  PlayerImageP4: {fileID: 0}
 --- !u!1001 &3251973336787528135
 PrefabInstance:
   m_ObjectHideFlags: 0
