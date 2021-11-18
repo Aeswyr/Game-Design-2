@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSelectManager : MonoBehaviour {
     private List<PlayerSelectController> players = new List<PlayerSelectController>();
+    [SerializeField] private GameObject tutorialPrefab;
 
     public void RegisterPlayer(PlayerSelectController player) {
         players.Add(player);
@@ -22,11 +23,18 @@ public class PlayerSelectManager : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
+    public void ShowTutorial() {
+        foreach (var player in players) {
+            player.Lock();
+            GameObject tutorial = Instantiate(tutorialPrefab, transform.parent);
+            tutorial.GetComponent<TutorialController>().Init(this);
+        }
+    }
     public void CheckReady() {
         foreach (var player in players) {
             if (!player.GetReady())
                 return;
         }
-        StartGame();
+        ShowTutorial();
     }
 }

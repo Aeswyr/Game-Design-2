@@ -17,6 +17,7 @@ public class PlayerSelectController : MonoBehaviour
     [SerializeField] private Image portrait;
     [SerializeField] private GameObject ready;
     private bool isReady = false;
+    private bool locked = false;
 
     private int chindex = 0;
     private int coindex = 0;
@@ -33,6 +34,9 @@ public class PlayerSelectController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (locked)
+            return;
+            
         if (!isReady) {
             if (input.A)
                 SetReady(true);
@@ -98,5 +102,9 @@ public class PlayerSelectController : MonoBehaviour
 
     public ControllerManager GetController() {
         return controller;
+    }
+
+    public void Lock() {
+        locked = true;
     }
 }
