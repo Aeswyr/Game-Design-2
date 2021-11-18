@@ -60,8 +60,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - press x to jump
-  - press a to attack
+  - press a to jump
+  - press x to attack
   - press b to slide or climb walls
   - press y to use your items
   - The player with the most crowns at the end of the game wins!

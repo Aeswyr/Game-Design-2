@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7633447278172748062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7732235256339045149}
+  - component: {fileID: 8689171132387335459}
+  m_Layer: 0
+  m_Name: StatsSaver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7732235256339045149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633447278172748062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8689171132387335459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633447278172748062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e644a5e6b8775924cb067a50e67be4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueGemsP1: {fileID: 0}
+  blueGemsP2: {fileID: 0}
+  blueGemsP3: {fileID: 0}
+  blueGemsP4: {fileID: 0}
+  greenGemsP1: {fileID: 0}
+  greenGemsP2: {fileID: 0}
+  greenGemsP3: {fileID: 0}
+  greenGemsP4: {fileID: 0}
+  redGemsP1: {fileID: 0}
+  redGemsP2: {fileID: 0}
+  redGemsP3: {fileID: 0}
+  redGemsP4: {fileID: 0}
+  blueCrownP1: {fileID: 0}
+  blueCrownP2: {fileID: 0}
+  blueCrownP3: {fileID: 0}
+  blueCrownP4: {fileID: 0}
+  redCrownP1: {fileID: 0}
+  redCrownP2: {fileID: 0}
+  redCrownP3: {fileID: 0}
+  redCrownP4: {fileID: 0}
+  greenCrownP1: {fileID: 0}
+  greenCrownP2: {fileID: 0}
+  greenCrownP3: {fileID: 0}
+  greenCrownP4: {fileID: 0}
+  battleCrownP1: {fileID: 0}
+  battleCrownP2: {fileID: 0}
+  battleCrownP3: {fileID: 0}
+  battleCrownP4: {fileID: 0}
+  PlayerImageP1: {fileID: 0}
+  PlayerImageP2: {fileID: 0}
+  PlayerImageP3: {fileID: 0}
+  PlayerImageP4: {fileID: 0}
