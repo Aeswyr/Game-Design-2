@@ -120,6 +120,10 @@ public class PlayerController : MonoBehaviour
     static int id_source = 0;
     int id;
 
+// Bonus Crowns
+    private int getsHit = 0;
+    private int itemUse = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -251,10 +255,12 @@ public class PlayerController : MonoBehaviour
         int [] gems = {gems_blue, gems_green, gems_red};
         return gems;
     }
-    public bool[] getCrowns(){
-        bool [] crowns = {true, false, true, false};
+
+    public int[] getBonusCrowns(){
+        int [] crowns = {itemUse, getsHit};
         return crowns;
     }
+    
 
 
     private void StartMagnet() {
@@ -356,6 +362,7 @@ public class PlayerController : MonoBehaviour
                 }
             inventory.RemoveAt(0);
             inventoryManager.Display(inventory);
+            itemUse++;
         }
     }
 
@@ -467,6 +474,7 @@ public class PlayerController : MonoBehaviour
 
         TryDropCrowns();
         TryDropGems();
+        getsHit++;
     }
 
     private void TryEnableCrown(PickupType type) {
