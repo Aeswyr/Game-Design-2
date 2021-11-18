@@ -106,6 +106,7 @@ public class PlayerStats : MonoBehaviour
             playersStats[0] = P1;
 
             int [] P2 = new int[8];
+            if(FindObjectsOfType<PlayerController>().Length>1){
             Array.Copy(FindObjectsOfType<PlayerController>()[1].getGems(), P2, 3) ;
             Crowns = FindObjectsOfType<PlayerController>()[1].GetCrowns();
             if (Crowns.Contains(PickupType.CROWN_BATTLE))
@@ -117,7 +118,9 @@ public class PlayerStats : MonoBehaviour
             if (Crowns.Contains(PickupType.CROWN_RED))
                 P2[6] = 1;
             playersStats[1] = P2;
+            }
 
+            if(FindObjectsOfType<PlayerController>().Length>2){
             int [] P3 = new int[8];
             Array.Copy(FindObjectsOfType<PlayerController>()[2].getGems(), P3, 3) ;
             Crowns = FindObjectsOfType<PlayerController>()[2].GetCrowns();
@@ -130,7 +133,9 @@ public class PlayerStats : MonoBehaviour
             if (Crowns.Contains(PickupType.CROWN_RED))
                 P3[6] = 1;
             playersStats[2] = P3;
+            }
 
+            if(FindObjectsOfType<PlayerController>().Length>3){
             int [] P4 = new int[8];
             Array.Copy(FindObjectsOfType<PlayerController>()[3].getGems(), P4, 3) ;
             Crowns = FindObjectsOfType<PlayerController>()[3].GetCrowns();
@@ -143,8 +148,9 @@ public class PlayerStats : MonoBehaviour
             if (Crowns.Contains(PickupType.CROWN_RED))
                 P4[6] = 1;
             playersStats[3] = P4;
+            }
             
-            Debug.Log(P1[0].ToString()+" "+P1[1].ToString()+" "+P1[2].ToString()+" "+P1[3].ToString()+" "+P1[4].ToString()+" "+P1[5].ToString()+" "+P1[6].ToString()+" "+P1[7].ToString());
+            Debug.Log(P1[0].ToString()+" "+P1[1].ToString()/*+" "+P1[2].ToString()+" "+P1[3].ToString()+" "+P1[4].ToString()+" "+P1[5].ToString()+" "+P1[6].ToString()+" "+P1[7].ToString()*/);
         }catch( NullReferenceException e){
             Debug.Log(e.ToString());
         }

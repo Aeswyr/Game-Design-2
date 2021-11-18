@@ -252,7 +252,9 @@ public class PlayerController : MonoBehaviour
 
 
     public int[] getGems(){
+        
         int [] gems = {gems_blue, gems_green, gems_red};
+        Debug.Log(gems_blue.ToString());
         return gems;
     }
 
