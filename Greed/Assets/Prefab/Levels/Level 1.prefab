@@ -89213,13 +89213,9 @@ MonoBehaviour:
   - {fileID: 4720956695791310024}
   - {fileID: 7173859110625491375}
   - {fileID: 7974661853525714152}
-<<<<<<< HEAD
-  index: 0
-=======
   pickups:
   - {fileID: 7163372617989158648}
   levelType: 0
->>>>>>> 662fdb7d80fbf5fc9005cb325be3b7bf0b309693
 --- !u!1 &6959776316445310007
 GameObject:
   m_ObjectHideFlags: 0
