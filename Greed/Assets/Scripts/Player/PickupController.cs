@@ -25,10 +25,10 @@ public class PickupController : MonoBehaviour
             } 
             type = pickup.GetPickup();
             amount = pickup.GetAmount();
-        }
-        if (player.AddItem(type, amount)) {
-            Destroy(other.transform.parent.gameObject);
-            Instantiate(pickupSparkPrefab, transform.parent);
+            if (player.AddItem(type, amount)) {
+                Destroy(other.transform.parent.gameObject);
+                Instantiate(pickupSparkPrefab, transform.parent);
+            }
         }
     }
 }
