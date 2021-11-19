@@ -88346,6 +88346,10 @@ PrefabInstance:
       propertyPath: singleUse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2791757924212808407, guid: cb6a13fe2faa2034bae2228df5423252, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3741880180619939061, guid: cb6a13fe2faa2034bae2228df5423252, type: 3}
       propertyPath: m_Name
       value: Shop

@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     private int gems_blue, gems_green, gems_red;
 
 //Items
+    private Vector2 aim;
     [SerializeField] private GameObject drill;
     [SerializeField] private GameObject bomb;
     [SerializeField] private GameObject dartStorm;
@@ -201,6 +202,9 @@ public class PlayerController : MonoBehaviour
             speedMod = fastSpeed;
         rbody.velocity = new Vector3(input.Dir.x * speedMod, rbody.velocity.y, 0);
 
+        if (input.Dir != Vector2.zero)
+            aim = input.Dir;
+
         animator.SetBool("running", grounded && Mathf.Abs(input.Dir.x) > 0);
 
         SetFacing(input.Dir.x);
@@ -317,17 +321,17 @@ public class PlayerController : MonoBehaviour
                 switch (inventory[0]) {
                     case PickupType.DRILL:
                         GameObject dart1 = Instantiate(drill);
-                        dart1.GetComponent<Projectile>().Init(input.Dir, hurtbox);
+                        dart1.GetComponent<Projectile>().Init(aim, hurtbox);
                         dart1.transform.position = transform.position;
                         break;
                     case PickupType.BOMB:
                         GameObject dart2 = Instantiate(bomb);
-                        dart2.GetComponent<Projectile>().Init(input.Dir, hurtbox);
+                        dart2.GetComponent<Projectile>().Init(aim, hurtbox);
                         dart2.transform.position = transform.position;
                         break;
                     case PickupType.DART:
                         GameObject dart3 = Instantiate(dartStorm);
-                        dart3.GetComponent<DartStorm>().Init(input.Dir, hurtbox);
+                        dart3.GetComponent<DartStorm>().Init(aim, hurtbox);
                         dart3.transform.position = transform.position;
                         break;
                     case PickupType.TURRET:
@@ -380,7 +384,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void StartBlink() { 
-        Vector2 dir = input.Dir;
+        Vector2 dir = aim;
         dir.Normalize();
         transform.Translate(10f * dir);
 
