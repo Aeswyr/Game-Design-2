@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
 
     private int facingModifier = 1;
 
-    [SerializeField] GroundedCheck groundCheck;
+    [SerializeField] private GroundedCheck groundCheck;
+    [SerializeField] private GameObject dustPrefab;
 
 //Wall cling/climb
     [SerializeField] private Vector2 clingCastOffset;
@@ -223,6 +224,7 @@ public class PlayerController : MonoBehaviour
         }
         if (input.A && (grounded || (wallHangTime > Time.time  && (stamina >= STAMINA_COST || juiceActive)) || jumps > 0)) {
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
+            Instantiate(dustPrefab, transform.position + new Vector3(0, -1f, 0), dustPrefab.transform.rotation);
             if (!grounded || wallHangTime <= Time.time)
                 jumps--;
             if (wallHangTime > Time.time) {
@@ -435,6 +437,8 @@ public class PlayerController : MonoBehaviour
         sliding = true;
         hurtbox.enabled = false;
         rbody.velocity = facingModifier * new Vector2(slideSpeed, 0);
+        GameObject dust = Instantiate(dustPrefab, transform);
+        dust.transform.localPosition = new Vector3(0, -1, 0);
         InputLockout(true);
     }
 
