@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviour
     private float inputLockout;
     private bool inputToggle;
 
+//Interact
+    [SerializeField] private GameObject interactBoxPrefab;
+    [SerializeField] private GameObject interactHint;
+
 //Slide
     private bool sliding = false;
     [SerializeField] private float slideSpeed;
@@ -162,7 +166,7 @@ public class PlayerController : MonoBehaviour
                                     new Vector2(facingModifier, 0),
                                     clingCastDistance,
                                     wallDetectMask) &&
-                                    input.B_Held &&
+                                    input.LeftShoulder_Held &&
                                     stamina > 0;
 
         rbody.gravityScale = gravity;
@@ -230,13 +234,16 @@ public class PlayerController : MonoBehaviour
         if (input.X && !attacking) {
             animator.SetTrigger("attack");
         }
-        if (input.Y) {
+        if (input.B) {
             TryUseItem();
         }
-        if (input.B && !sliding && grounded && (stamina >= MAX_STAMINA || juiceActive)) {
+        if (input.RightShoulder && !sliding && grounded && (stamina >= MAX_STAMINA || juiceActive)) {
             animator.SetTrigger("slide");
             if (!juiceActive)
                 stamina -= MAX_STAMINA;
+        }
+        if (input.Y) {
+            TryInteract();
         }
     }
 
@@ -420,6 +427,10 @@ public class PlayerController : MonoBehaviour
         attacking = false;
     }
 
+    private void TryInteract() {
+        attackBox = Instantiate(interactBoxPrefab, transform);
+    }
+
     private void StartSlide() {
         sliding = true;
         hurtbox.enabled = false;
@@ -446,6 +457,8 @@ public class PlayerController : MonoBehaviour
             crownInventoryManager.transform.localScale = newScale;
             crownInventoryManager.transform.localPosition = new Vector3(crownInventoryManager.transform.localPosition.x * -1, crownInventoryManager.transform.localPosition.y, 0);
             staminaHint.transform.localScale = newScale;
+            interactHint.transform.localPosition = new Vector3(interactHint.transform.localPosition.x * -1, interactHint.transform.localPosition.y, 0);
+            interactHint.transform.localScale = newScale;
         }
     }
 
@@ -754,5 +767,9 @@ public class PlayerController : MonoBehaviour
             default:
                 return false;
         }
+    }
+
+    public void Respawn() {
+        interactHint.SetActive(false);
     }
 }

@@ -9,6 +9,6 @@ public class PurchaseController : MonoBehaviour
 
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other) {
-        shop.Purchase(other.transform.parent.parent.GetComponent<PlayerController>());
+        shop.Purchase(other.transform.parent.GetComponent<PlayerController>());
     }
 }

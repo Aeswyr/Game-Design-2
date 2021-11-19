@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1324516526869215185}
   - component: {fileID: 6999938706864969080}
   - component: {fileID: 5424457301049590755}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Drill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

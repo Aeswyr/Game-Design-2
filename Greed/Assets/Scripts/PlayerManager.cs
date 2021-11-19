@@ -20,8 +20,10 @@ public class PlayerManager : MonoBehaviour
 
     public void SpawnPlayers() {
         LevelData level = FindObjectsOfType<LevelData>()[0];
-        foreach (var player in players)
+        foreach (var player in players) {
             player.transform.position = level.NextSpawn();
+            player.GetComponent<PlayerController>().Respawn();
+        }
     }
 
     public GameObject GetInfoHolder() {

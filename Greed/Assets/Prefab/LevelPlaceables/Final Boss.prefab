@@ -204,18 +204,18 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7203644252061093353}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &5743129289698695258
 MonoBehaviour:
@@ -229,11 +229,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429d5bda06c2e2449bb158a4559e97bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 0
-  speedY: 0
-  directionX: 0
-  directionY: 0
-  speed: {x: 500, y: 0}
-  direction: {x: 0, y: 0}
-  movement: {x: 0, y: 0}
-  collided: 1
+  speedX: 10
+  rbody: {fileID: 8429459228163439877}

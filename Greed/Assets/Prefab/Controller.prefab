@@ -194,6 +194,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c6ac3031-2516-40e4-881c-3805a99f1d9a
     m_ActionName: UI/Back[/Keyboard/backspace]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1979471614630188659}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: PressLeftShoulder
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3444fd18-6ca4-4e73-b20d-4646f2a9df63
+    m_ActionName: Player/LeftShoulder[/Logitech Logitech Dual Action/button5,/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1979471614630188659}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: PressRightShoulder
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4da4ce5f-b4a3-4342-8537-f3b238bec340
+    m_ActionName: Player/RightShoulder[/Logitech Logitech Dual Action/button6,/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1642738064674929139}
   - component: {fileID: -5625634032349433696}
   - component: {fileID: 2796727956315842467}
-  m_Layer: 15
+  m_Layer: 12
   m_Name: Dart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

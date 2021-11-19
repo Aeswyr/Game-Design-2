@@ -5,11 +5,12 @@ using UnityEngine;
 public class LevelProgressPoint : MonoBehaviour
 {
     private int hp = 3;
+    [SerializeField] private Animator animator;
 
     private void OnTriggerEnter2D(Collider2D other) {
         hp--;
-
-        if (hp == 0) {
+        animator.SetTrigger("Interact");
+        if (hp < 0) {
             FindObjectsOfType<LevelDirector>()[0].NextLevel();
         }
     }
