@@ -86919,7 +86919,9 @@ MonoBehaviour:
   - {fileID: 8753085571991785005}
   - {fileID: 3924205457190276200}
   - {fileID: 8967543994403472204}
-  index: 0
+  pickups: []
+  levelType: 0
+  shops: []
 --- !u!1 &6959776316445310007
 GameObject:
   m_ObjectHideFlags: 0
@@ -87088,7 +87090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2715835704558735341, guid: 08cb9b408cbb57449bf9af760127ddcf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2715835704558735341, guid: 08cb9b408cbb57449bf9af760127ddcf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -87146,14 +87148,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e644a5e6b8775924cb067a50e67be4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueGems: {fileID: 0}
-  greenGems: {fileID: 0}
-  redGems: {fileID: 0}
-  blueCrown: {fileID: 0}
-  redCrown: {fileID: 0}
-  greenCrown: {fileID: 0}
-  battleCrown: {fileID: 0}
-  PlayerImage: {fileID: 0}
+  blueGemsP1: {fileID: 0}
+  blueGemsP2: {fileID: 0}
+  blueGemsP3: {fileID: 0}
+  blueGemsP4: {fileID: 0}
+  greenGemsP1: {fileID: 0}
+  greenGemsP2: {fileID: 0}
+  greenGemsP3: {fileID: 0}
+  greenGemsP4: {fileID: 0}
+  redGemsP1: {fileID: 0}
+  redGemsP2: {fileID: 0}
+  redGemsP3: {fileID: 0}
+  redGemsP4: {fileID: 0}
+  blueCrownP1: {fileID: 0}
+  blueCrownP2: {fileID: 0}
+  blueCrownP3: {fileID: 0}
+  blueCrownP4: {fileID: 0}
+  redCrownP1: {fileID: 0}
+  redCrownP2: {fileID: 0}
+  redCrownP3: {fileID: 0}
+  redCrownP4: {fileID: 0}
+  greenCrownP1: {fileID: 0}
+  greenCrownP2: {fileID: 0}
+  greenCrownP3: {fileID: 0}
+  greenCrownP4: {fileID: 0}
+  battleCrownP1: {fileID: 0}
+  battleCrownP2: {fileID: 0}
+  battleCrownP3: {fileID: 0}
+  battleCrownP4: {fileID: 0}
+  PlayerImageP1: {fileID: 0}
+  PlayerImageP2: {fileID: 0}
+  PlayerImageP3: {fileID: 0}
+  PlayerImageP4: {fileID: 0}
 --- !u!1001 &6969192323836842851
 PrefabInstance:
   m_ObjectHideFlags: 0

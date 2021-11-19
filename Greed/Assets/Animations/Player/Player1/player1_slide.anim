@@ -79,27 +79,6 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0
-    functionName: SpawnDust
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 38d46f98c2ffdc64dafb9e4e05fe8bdc, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.083333336
-    functionName: SpawnDust
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 38d46f98c2ffdc64dafb9e4e05fe8bdc, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.16666667
-    functionName: SpawnDust
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 38d46f98c2ffdc64dafb9e4e05fe8bdc, type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.25
     functionName: EndSlide
     data: 
