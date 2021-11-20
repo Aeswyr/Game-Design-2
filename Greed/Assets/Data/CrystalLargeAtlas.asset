@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b2c26e876218f4ab996728cee2ef3e, type: 3}
   m_Name: CrystalLargeAtlas
   m_EditorClassIdentifier: 
-  sprites: []
+  sprites:
+  - {fileID: 21300000, guid: 7f068357500a27a4a9a142131b5b8814, type: 3}
+  - {fileID: 21300000, guid: ff3476baab497874eb157b0b03446806, type: 3}
+  - {fileID: 21300000, guid: 677b8d447a3f9734196c1b8b38441cd9, type: 3}
