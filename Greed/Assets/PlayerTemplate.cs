@@ -22,6 +22,10 @@ public class PlayerTemplate : MonoBehaviour
         for(int i = 0; i < 3; i++){
             Gems[i].text = data.gemCount[i].ToString();
         }
+        for(int i = 0; i < 4; i++){
+            Crowns[i].SetActive(data.crowns[i]);
+        }
+        
     }
 
     // Update is called once per frame

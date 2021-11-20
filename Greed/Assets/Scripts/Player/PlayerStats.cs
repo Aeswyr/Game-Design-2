@@ -7,7 +7,7 @@ using TMPro;
 
 public struct PlayerData{
         public int[] gemCount;
-        public int crownCount;
+        public bool[] crowns;
         public int gotHit;
         public Sprite sprite;
 
@@ -102,7 +102,7 @@ public class PlayerStats : MonoBehaviour
         
     }
     public PlayerData GetData(){
-        PlayerData data = Players[index];
+        PlayerData data = Players[index%Players.Count];
         index++;
         return data;
     }
@@ -112,6 +112,7 @@ public class PlayerStats : MonoBehaviour
         foreach(var player in playerObjects){
             PlayerData data = new PlayerData();
             data.gemCount = player.getGems();
+            data.crowns = player.getCrowns();
             data.sprite = player.GetSprite();
             Players.Add(data);
         }

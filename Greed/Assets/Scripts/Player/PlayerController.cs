@@ -272,7 +272,22 @@ public class PlayerController : MonoBehaviour
         Debug.Log(gems_blue.ToString());
         return gems;
     }
-
+    public bool[] getCrowns(){  //battle, red, green, blue
+        bool[] toReturn = new bool[4]{false,false,false,false};
+        if(crownInventory.Contains(PickupType.CROWN_BLUE)){
+            toReturn[0] = true;
+        }
+        if(crownInventory.Contains(PickupType.CROWN_GREEN)){
+            toReturn[1] = true;
+        }
+        if(crownInventory.Contains(PickupType.CROWN_RED)){
+            toReturn[2] = true;
+        }
+        if(crownInventory.Contains(PickupType.CROWN_BATTLE)){
+            toReturn[3] = true;
+        }
+        return toReturn;
+    }
     public int[] getBonusCrowns(){
         int [] crowns = {itemUse, getsHit};
         return crowns;
