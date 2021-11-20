@@ -1,58 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1776259426337979496
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2998057154388931112}
-  - component: {fileID: 3008966403315666193}
-  m_Layer: 10
-  m_Name: PhysicsBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2998057154388931112
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776259426337979496}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3787061739039395210}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &3008966403315666193
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776259426337979496}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -1.5, y: 0}
-  - {x: 1.5, y: 0}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &8146624403167879755
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,10 +11,11 @@ GameObject:
   - component: {fileID: 3787061739039395210}
   - component: {fileID: 5015451039034051140}
   - component: {fileID: 5436397899269929636}
-  - component: {fileID: 6027949083480555740}
-  - component: {fileID: 1076759262732236263}
+  - component: {fileID: 6720207244112968357}
+  - component: {fileID: 5214464874218262580}
+  - component: {fileID: 3591330985235622437}
   m_Layer: 8
-  m_Name: Chest
+  m_Name: Crystal_Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,8 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2998057154388931112}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 64c64fd4b1a621c408af08c1caad4485, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c527815bd82dd44e8da99fc38502dd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -157,37 +104,29 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.24, y: 0.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3, y: 3.3}
+  m_Size: {x: 3.5, y: 3}
   m_EdgeRadius: 0
---- !u!50 &6027949083480555740
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &6720207244112968357
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8146624403167879755}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 10
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!114 &1076759262732236263
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2366424cfd4ee364abad8de4683ebfbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+--- !u!114 &5214464874218262580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,7 +138,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec96430ee265b045b8610460f144ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mask:
-    serializedVersion: 2
-    m_Bits: 64
   gem: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
+  amount: 19
+  type: 0
+--- !u!114 &3591330985235622437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146624403167879755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911ca9ac6c5546b4c83bb5b19e84f777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loot: {fileID: 5214464874218262580}
+  atlas: {fileID: 11400000, guid: fc5b817132aee5e4eaf570173e493a55, type: 2}
+  sprite: {fileID: 5015451039034051140}

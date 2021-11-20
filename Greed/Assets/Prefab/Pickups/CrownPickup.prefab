@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5562996532030373695}
-  - component: {fileID: 5639363775467321594}
+  - component: {fileID: 5689222458282283207}
   m_Layer: 10
   m_Name: PhysicsBox
   m_TagString: Untagged
@@ -31,8 +31,8 @@ Transform:
   m_Father: {fileID: 6567660708110537491}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &5639363775467321594
-EdgeCollider2D:
+--- !u!58 &5689222458282283207
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -44,15 +44,9 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.8}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Offset: {x: 0, y: -0.5}
+  serializedVersion: 2
+  m_Radius: 0.7
 --- !u!1 &8442135656318943178
 GameObject:
   m_ObjectHideFlags: 0

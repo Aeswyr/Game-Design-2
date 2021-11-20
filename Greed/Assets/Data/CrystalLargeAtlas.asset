@@ -10,10 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9b2c26e876218f4ab996728cee2ef3e, type: 3}
-  m_Name: FountainBuffs
+  m_Name: CrystalLargeAtlas
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: dc7e4647b31f4554faaee87c3e5ade27, type: 3}
-  - {fileID: 21300000, guid: 1f8056ceab70d084c91bc2f32ef27d46, type: 3}
-  - {fileID: 21300000, guid: ce8cea948456d454b90b0d558c70eaf8, type: 3}
-  - {fileID: 21300000, guid: efc2100b680c8cc4a8607fc50945b18b, type: 3}
+  sprites: []
