@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int[] getGems(){
         
         int [] gems = {gems_blue, gems_green, gems_red};
@@ -278,7 +278,10 @@ public class PlayerController : MonoBehaviour
         return crowns;
     }
     
-
+    public Sprite GetSprite(){
+        return characterData.sprite;
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void StartMagnet() {
         ((CircleCollider2D)pickupbox).radius = magnetSize;
