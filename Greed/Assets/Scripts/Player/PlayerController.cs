@@ -280,7 +280,7 @@ public class PlayerController : MonoBehaviour
     
 
 
-    private void StartMagnet() {
+    public void StartMagnet() {
         ((CircleCollider2D)pickupbox).radius = magnetSize;
         magnetActive = true;
         magnetTime = Time.time + magnetDuration;
@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
         magnetRender.SetActive(false);
     }
 
-    private void StartSpeed() {
+    public void StartSpeed() {
         speedActive = true;
         speedTime = Time.time + speedDuration;
     }
@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
         speedActive = false;
     }
 
-    private void StartJuice() {
+    public void StartJuice() {
         juiceActive = true;
         juiceTime = Time.time + juiceDuration;
     }
@@ -311,7 +311,7 @@ public class PlayerController : MonoBehaviour
         juiceActive = false;
     }
 
-    private void SetArmor() {
+    public void SetArmor() {
         armorAnimator.gameObject.SetActive(true);
         armorAnimator.SetTrigger("start");
         armor = armorHits;
