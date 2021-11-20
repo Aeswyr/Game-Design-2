@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5214464874218262580}
   - component: {fileID: 3591330985235622437}
   m_Layer: 8
-  m_Name: Crystal_Small
+  m_Name: Crystal_Large
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8c527815bd82dd44e8da99fc38502dd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 677b8d447a3f9734196c1b8b38441cd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 8, y: 8}
     newSize: {x: 0.24, y: 0.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 7, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &6720207244112968357
 MonoBehaviour:
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gem: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
-  amount: 5
+  amount: 49
   type: 0
 --- !u!114 &3591330985235622437
 MonoBehaviour:
@@ -155,5 +155,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loot: {fileID: 5214464874218262580}
-  atlas: {fileID: 11400000, guid: fc5b817132aee5e4eaf570173e493a55, type: 2}
+  atlas: {fileID: 11400000, guid: 183cbeadb7ee1b643838c174574cf4ad, type: 2}
   sprite: {fileID: 5015451039034051140}

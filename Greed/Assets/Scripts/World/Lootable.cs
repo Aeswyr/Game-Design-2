@@ -10,18 +10,18 @@ public class Lootable : MonoBehaviour
     [SerializeField] private LootType type;
 
 
-    private void OnDestroy() {
+    public void Loot() {
         for (int i = 0; i < amount % 10; i++) {
             PickupType pick = GetPickupType(false);
             GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
             newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(0.5f, 20f)), ForceMode2D.Impulse);
-            newGem.GetComponent<ItemPickup>().SetType((PickupType)Random.Range(1, 4));
+            newGem.GetComponent<ItemPickup>().SetType(pick);
         }
         for (int i = 0; i < amount / 10; i++) {
             PickupType pick = GetPickupType(true);
             GameObject newGem = Instantiate(gem, transform.position, gem.transform.rotation);
             newGem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-15f, 15f), Random.Range(0.5f, 20f)), ForceMode2D.Impulse);
-            newGem.GetComponent<ItemPickup>().SetType((PickupType)Random.Range(1, 4));
+            newGem.GetComponent<ItemPickup>().SetType(pick);
         }
     }
 
@@ -53,5 +53,5 @@ public class Lootable : MonoBehaviour
 }
 
 public enum LootType {
-    DEFAULT, RED, GREEN, BLUE,
+    DEFAULT, RED, BLUE, GREEN,
 }
