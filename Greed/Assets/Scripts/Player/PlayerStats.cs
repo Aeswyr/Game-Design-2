@@ -8,7 +8,9 @@ using TMPro;
 public struct PlayerData{
         public int[] gemCount;
         public bool[] crowns;
+        public bool[] bonusCrowns; //gotHit, ItemUsed, gemCount, ???
         public int gotHit;
+        public int itemsUsed;
         public Sprite sprite;
 
          
@@ -106,6 +108,28 @@ public class PlayerStats : MonoBehaviour
         index++;
         return data;
     }
+    public void awardBonusCrowns(){
+        for(int i = 0; i < Players.Capacity; i++){
+            //Player[i]'s total gems
+            int totalGems1 = Players[i].gemCount[0] + Players[i].gemCount[1] + Players[i].gemCount[2];
+            for(int j = 0; j < Players.Capacity; j++){
+                //Player[j]'s total gems
+                int totalGems2 = Players[j].gemCount[0] + Players[j].gemCount[1] + Players[j].gemCount[2];
+                if(i!=j){
+                    if(Players[i].gotHit<Players[j].gotHit){
+                        Players[i].bonusCrowns[0] = false;
+                    }
+                    if(Players[i].itemsUsed<Players[j].itemsUsed){
+                        Players[i].bonusCrowns[1] = false;
+                    }
+                    if(totalGems1<totalGems2){
+                        Players[i].bonusCrowns[2] = false;
+                    }
+
+                }
+            }
+        }
+    }
     public void PushStats() {
 
         PlayerController[] playerObjects = FindObjectsOfType<PlayerController>();
@@ -114,6 +138,9 @@ public class PlayerStats : MonoBehaviour
             data.gemCount = player.getGems();
             data.crowns = player.getCrowns();
             data.sprite = player.GetSprite();
+            data.bonusCrowns = new bool[4] {true, true, true, false};
+            data.itemsUsed = player.getItemsUsed();
+            data.gotHit = player.getDamageSustained();
             Players.Add(data);
         }
        

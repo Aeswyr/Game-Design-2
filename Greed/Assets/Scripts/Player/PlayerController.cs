@@ -266,13 +266,19 @@ public class PlayerController : MonoBehaviour
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int getDamageSustained(){
+        return getsHit;
+    }
+    public int getItemsUsed(){
+        return itemUse;
+    }
     public int[] getGems(){
         
         int [] gems = {gems_blue, gems_green, gems_red};
         Debug.Log(gems_blue.ToString());
         return gems;
     }
-    public bool[] getCrowns(){  //battle, red, green, blue
+    public bool[] getCrowns(){  //blue, green, red, battle
         bool[] toReturn = new bool[4]{false,false,false,false};
         if(crownInventory.Contains(PickupType.CROWN_BLUE)){
             toReturn[0] = true;
@@ -287,10 +293,6 @@ public class PlayerController : MonoBehaviour
             toReturn[3] = true;
         }
         return toReturn;
-    }
-    public int[] getBonusCrowns(){
-        int [] crowns = {itemUse, getsHit};
-        return crowns;
     }
     
     public Sprite GetSprite(){
