@@ -120,7 +120,9 @@ public class PlayerController : MonoBehaviour
 
     private bool collidersLocked = false;
     private float colliderLockout;
-
+    private bool paused = false;
+    private Vector2 pauseVelocity;
+    private float pauseTime;
     private float gravity;
 
 // ID
@@ -171,12 +173,14 @@ public class PlayerController : MonoBehaviour
                                     input.LeftShoulder_Held &&
                                     stamina > 0;
 
-        rbody.gravityScale = gravity;
+        if (!paused)
+            rbody.gravityScale = gravity;
 
         if (!InputLocked())
             ManageInputs();
 
         CheckColliderLockout();
+        CheckPaused();
 
         if (grounded && stamina <= MAX_STAMINA)
             stamina += 2;
@@ -500,16 +504,16 @@ public class PlayerController : MonoBehaviour
         JUMPS_MAX = 0;
     }
 
-    public void OnHit() {
+    public bool OnHit() {
         if (director.GetCurrentLevelType() == LevelType.SHOP)
-            return;
+            return false;
             
         if (armor > 0) {
             armorAnimator.SetTrigger("hit");
             armor--;
             if (armor == 0)
                 armorAnimator.gameObject.SetActive(false);
-            return;
+            return true;
         }
 
         rbody.velocity = Vector3.zero;
@@ -521,6 +525,7 @@ public class PlayerController : MonoBehaviour
         TryDropCrowns();
         TryDropGems();
         getsHit++;
+        return true;
     }
 
     private void TryEnableCrown(PickupType type) {
@@ -630,6 +635,8 @@ public class PlayerController : MonoBehaviour
 
 
     public void InputLockout(float duration) {
+        if (Time.time + duration < inputLockout)
+            return;
         inputLockout = Time.time + duration;
     }
 
@@ -639,6 +646,25 @@ public class PlayerController : MonoBehaviour
 
     private bool InputLocked() {
         return inputToggle || Time.time <= inputLockout;
+    }
+
+    public void Pause(float duration) {
+        InputLockout(duration);
+        pauseTime = Time.time + duration;
+        paused = true;
+        rbody.gravityScale = 0;
+        pauseVelocity = rbody.velocity;
+        rbody.velocity = Vector2.zero;
+        animator.speed = 0;
+    }
+
+    private void CheckPaused() {
+        if (paused && Time.time >= pauseTime) {
+            paused = false;
+            rbody.gravityScale = gravity;
+            rbody.velocity = pauseVelocity;
+            animator.speed = 1;
+        }
     }
 
     public bool AddItem(PickupType type, int amount = 1) {

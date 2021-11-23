@@ -246,9 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b52f9c06341f94bb634396927d314a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mask:
-    serializedVersion: 2
-    m_Bits: 64
+  hitspark: {fileID: 428303252614902901, guid: a46706bddb4789b41be88249bfebde43, type: 3}
   player: {fileID: 5701760484987003813}
 --- !u!1 &1544621340179171624
 GameObject:
