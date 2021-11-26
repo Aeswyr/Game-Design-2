@@ -9,7 +9,8 @@ public class PlayerTemplate : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] Gems; // blue, green, red
     [SerializeField] private GameObject[] Crowns;
     [SerializeField] private Image Player;
-    private float time = 0;
+    private int time;
+    
     
     
     private PlayerStats stats;
@@ -32,10 +33,13 @@ public class PlayerTemplate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time+= Time.deltaTime;
-        if(time>450){
-            Debug.Log("200 seconds or frames?");
-            time = 0;
-        }
+        time++;
+        Debug.Log(time.ToString());
+        if(time>750 && time<900){
+            stats.awardBonusCrowns();
+            for(int i = 3; i < 7; i++){
+                Crowns[i].SetActive(data.crowns[i]);
+            }
+        }    
     }
 }
