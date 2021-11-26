@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         grounded = groundCheck.CheckGrounded();
+        animator.SetBool("grounded", grounded);
 
         clinging = Utils.Raycast(   transform.position + 
                                     new Vector3(facingModifier * clingCastOffset.x, clingCastOffset.y, 0),
@@ -231,6 +232,7 @@ public class PlayerController : MonoBehaviour
             jumps = JUMPS_MAX;
         }
         if (input.A && (grounded || (wallHangTime > Time.time  && (stamina >= STAMINA_COST || juiceActive)) || jumps > 0)) {
+            animator.SetTrigger("jump");
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             Instantiate(dustPrefab, transform.position + new Vector3(0, -1f, 0), dustPrefab.transform.rotation);
             if (!grounded || wallHangTime <= Time.time)
@@ -515,6 +517,8 @@ public class PlayerController : MonoBehaviour
                 armorAnimator.gameObject.SetActive(false);
             return true;
         }
+
+        animator.SetTrigger("hurt");
 
         rbody.velocity = Vector3.zero;
         InputLockout(2);
