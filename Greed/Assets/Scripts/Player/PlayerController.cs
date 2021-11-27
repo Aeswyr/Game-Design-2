@@ -162,10 +162,14 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
+    {   
+        bool gprev = grounded;
         grounded = groundCheck.CheckGrounded();
         animator.SetBool("grounded", grounded);
+        if (gprev == false && gprev != grounded)
+            Instantiate(dustPrefab, transform.position + new Vector3(0, -1.25f, 0), dustPrefab.transform.rotation);
 
+        bool cprev = clinging;
         clinging = Utils.Raycast(   transform.position + 
                                     new Vector3(facingModifier * clingCastOffset.x, clingCastOffset.y, 0),
                                     new Vector2(facingModifier, 0),
@@ -173,6 +177,8 @@ public class PlayerController : MonoBehaviour
                                     wallDetectMask) &&
                                     input.LeftShoulder_Held &&
                                     stamina > 0;
+        if (clinging == true && cprev != clinging)
+            Instantiate(dustPrefab, transform.position + new Vector3(facingModifier * 1f, 0.5f, 0), dustPrefab.transform.rotation);
 
         if (!paused)
             rbody.gravityScale = gravity;
