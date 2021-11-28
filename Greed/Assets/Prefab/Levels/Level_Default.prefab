@@ -46,7 +46,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1266,7 +1266,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -86616,7 +86616,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 8
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -86631,14 +86631,20 @@ Tilemap:
     m_Data: {fileID: -162510877533066031, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
   - m_RefCount: 169
     m_Data: {fileID: -4066160739396440122, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
-  - m_RefCount: 170
+  - m_RefCount: 169
     m_Data: {fileID: 2091074848503190664, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
-  - m_RefCount: 125
+  - m_RefCount: 124
     m_Data: {fileID: -8853814822984502770, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
   - m_RefCount: 8068
     m_Data: {fileID: -5081845278102676314, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
-  - m_RefCount: 125
+  - m_RefCount: 124
     m_Data: {fileID: 8199133031648233267, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 3980212265078426221, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 2815370515188049817, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 7241781113866667219, guid: a9f5d8d7fd7023e4d92403eadddac1df, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 8658
     m_Data:
@@ -86860,7 +86866,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -86922,6 +86928,7 @@ MonoBehaviour:
   pickups: []
   levelType: 0
   shops: []
+  crystals: []
 --- !u!1 &6959776316445310007
 GameObject:
   m_ObjectHideFlags: 0
@@ -87148,38 +87155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e644a5e6b8775924cb067a50e67be4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueGemsP1: {fileID: 0}
-  blueGemsP2: {fileID: 0}
-  blueGemsP3: {fileID: 0}
-  blueGemsP4: {fileID: 0}
-  greenGemsP1: {fileID: 0}
-  greenGemsP2: {fileID: 0}
-  greenGemsP3: {fileID: 0}
-  greenGemsP4: {fileID: 0}
-  redGemsP1: {fileID: 0}
-  redGemsP2: {fileID: 0}
-  redGemsP3: {fileID: 0}
-  redGemsP4: {fileID: 0}
-  blueCrownP1: {fileID: 0}
-  blueCrownP2: {fileID: 0}
-  blueCrownP3: {fileID: 0}
-  blueCrownP4: {fileID: 0}
-  redCrownP1: {fileID: 0}
-  redCrownP2: {fileID: 0}
-  redCrownP3: {fileID: 0}
-  redCrownP4: {fileID: 0}
-  greenCrownP1: {fileID: 0}
-  greenCrownP2: {fileID: 0}
-  greenCrownP3: {fileID: 0}
-  greenCrownP4: {fileID: 0}
-  battleCrownP1: {fileID: 0}
-  battleCrownP2: {fileID: 0}
-  battleCrownP3: {fileID: 0}
-  battleCrownP4: {fileID: 0}
-  PlayerImageP1: {fileID: 0}
-  PlayerImageP2: {fileID: 0}
-  PlayerImageP3: {fileID: 0}
-  PlayerImageP4: {fileID: 0}
 --- !u!1001 &6969192323836842851
 PrefabInstance:
   m_ObjectHideFlags: 0
