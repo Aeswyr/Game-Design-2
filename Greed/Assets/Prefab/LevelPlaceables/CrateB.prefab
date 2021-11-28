@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitsparkPrefab: {fileID: 428303252614902901, guid: a46706bddb4789b41be88249bfebde43, type: 3}
   dustPrefab: {fileID: 8177384170743215384, guid: 99a26f2015fe6e149963dd3412a632db, type: 3}
-  debrisPrefab: {fileID: 8177384170743215384, guid: 32a0be130d81bd94499ff779fc3f59ce, type: 3}
+  debrisPrefab: {fileID: 8177384170743215384, guid: 14f5b3d1d45c86748a50d400fd81dc93, type: 3}
   health: 1
   lootable: {fileID: 0}
 --- !u!61 &-3053621764632184796

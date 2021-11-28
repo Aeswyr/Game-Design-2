@@ -178,6 +178,7 @@ MonoBehaviour:
   costTypeDisp: {fileID: 4077230306270715364}
   costDisp: {fileID: 7713183974521407057}
   glow: {fileID: 7325260979319719662}
+  debrisPrefab: {fileID: 8177384170743215384, guid: 14f5b3d1d45c86748a50d400fd81dc93, type: 3}
   cost: 10
   costType: 6
   item: 12
@@ -691,7 +692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744827509532814469, guid: 2e586524a9873614381c3bbd3e037f09, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8200440792262146028, guid: 2e586524a9873614381c3bbd3e037f09, type: 3}
       propertyPath: m_RootOrder

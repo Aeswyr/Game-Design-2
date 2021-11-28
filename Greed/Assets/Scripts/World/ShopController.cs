@@ -11,6 +11,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private SpriteRenderer costTypeDisp;
     [SerializeField] private TextMeshPro costDisp;
     [SerializeField] private GameObject glow;
+    [SerializeField] private GameObject debrisPrefab;
 
     [SerializeField] private int cost;
     [SerializeField] private PickupType costType;
@@ -56,8 +57,11 @@ public class ShopController : MonoBehaviour
             if (!player.AddItem(item))
                 player.AddItem(costType, cost);
             else
-                if (singleUse)
+                if (singleUse) {
+                    Instantiate(debrisPrefab, transform.position, debrisPrefab.transform.rotation);
+                    EffectsMaster.Instance.ScreenShake(0.5f, 0.2f);
                     Destroy(gameObject);
+                }
         }
     }
 }
