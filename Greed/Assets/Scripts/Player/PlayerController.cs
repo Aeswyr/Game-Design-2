@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int crownDropThreshold;
     private List<PickupType> crownInventory = new List<PickupType>();
     private int battleCrownHits = 3;
+    [SerializeField] private ItemNameAtlas itemNames;
+    [SerializeField] private GameObject floatyTextPrefab;
 
 
 //Drops
@@ -711,6 +713,8 @@ public class PlayerController : MonoBehaviour
                     crownInventory.Add(type);
                     crownInventoryManager.Display(crownInventory);
                     TryEnableCrown(type);
+                    Instantiate(floatyTextPrefab, transform.position + new Vector3(0, 2, 0), floatyTextPrefab.transform.rotation)
+                        .GetComponent<FloatyText>().Set(itemNames.GetString(type));
                     return true;
         } else {
             if (inventory.Count >= InventoryManager.INVENTORY_SIZE)
@@ -721,6 +725,8 @@ public class PlayerController : MonoBehaviour
                         break;
             }
             inventoryManager.Display(inventory);
+            Instantiate(floatyTextPrefab, transform.position + new Vector3(0, 2, 0), floatyTextPrefab.transform.rotation)
+                        .GetComponent<FloatyText>().Set(itemNames.GetString(type));
             return true;
         }
     }

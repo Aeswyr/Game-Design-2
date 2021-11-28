@@ -10,6 +10,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private SpriteRenderer itemDisp;
     [SerializeField] private SpriteRenderer costTypeDisp;
     [SerializeField] private TextMeshPro costDisp;
+    [SerializeField] private GameObject glow;
 
     [SerializeField] private int cost;
     [SerializeField] private PickupType costType;
@@ -32,6 +33,10 @@ public class ShopController : MonoBehaviour
 
         this.costType = costType;
         costTypeDisp.sprite = atlas.GetSprite(costType);
+
+        if (item == PickupType.CROWN_RED || item == PickupType.CROWN_GREEN ||
+            item == PickupType.CROWN_BLUE || item == PickupType.CROWN_BATTLE)
+            glow.SetActive(true);
     }
 
     public void Purchase(PlayerController player) {
