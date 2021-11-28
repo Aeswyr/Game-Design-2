@@ -32,7 +32,19 @@ public class ShopController : MonoBehaviour
         costDisp.text = cost.ToString();
 
         this.costType = costType;
-        costTypeDisp.sprite = atlas.GetSprite(costType);
+        PickupType disp = costType;
+        switch (costType) {
+            case PickupType.GEM_RED:
+                disp = PickupType.GEM_RED_LARGE;
+                break;
+            case PickupType.GEM_GREEN:
+                disp = PickupType.GEM_GREEN_LARGE;
+                break;
+            case PickupType.GEM_BLUE:
+                disp = PickupType.GEM_BLUE_LARGE;
+                break;
+        }
+        costTypeDisp.sprite = atlas.GetSprite(disp);
 
         if (item == PickupType.CROWN_RED || item == PickupType.CROWN_GREEN ||
             item == PickupType.CROWN_BLUE || item == PickupType.CROWN_BATTLE)

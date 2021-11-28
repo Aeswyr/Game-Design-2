@@ -533,6 +533,10 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("hurt");
 
         rbody.velocity = Vector3.zero;
+        
+        EndHit();
+        EndAttack();
+
         InputLockout(2);
         stunTimer.StartTimer(2);
 
@@ -843,5 +847,14 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn() {
         interactHint.SetActive(false);
+    }
+
+    public void ReturnToStanding() {
+        Destroy(attackBox);
+        rbody.drag = 0;
+        InputLockout(false);
+        attacking = false;
+        sliding = false;
+        hurtbox.enabled = true;
     }
 }
