@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     private CharacterData characterData;
     private LevelDirector director;
     
-// Info Card  
+// Info Card
+    [Header("Info Card")]
     [SerializeField] private GameObject infoCardPrefab;
 
     private PlayerInfoManager infoCard;
 
 //movement
+    [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpVelocity;
     [SerializeField] private int jumps = 1;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject dustPrefab;
 
 //Wall cling/climb
+    [Header("Wall Climb/Cling")]
     [SerializeField] private Vector2 clingCastOffset;
     [SerializeField] private float clingCastDistance;
     [SerializeField] private LayerMask wallDetectMask;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     bool clinging;
 
 //Attacking
+    [Header("Attacking")]
     [SerializeField] private GameObject attackBoxPrefab;
     private GameObject attackBox;
     [SerializeField] private float attackDuration;
@@ -51,18 +55,19 @@ public class PlayerController : MonoBehaviour
     private bool inputToggle;
 
 //Interact
+    [Header("Interacting")]
     [SerializeField] private GameObject interactBoxPrefab;
     [SerializeField] private GameObject interactHint;
 
 //Slide
+    [Header("Sliding")]
     private bool sliding = false;
     [SerializeField] private float slideSpeed;
 
 //Inventory
+    [Header("Inventory")]
     [SerializeField] private InventoryManager inventoryManager;
     private List<PickupType> inventory = new List<PickupType>();
-
-//Crown Inventory
     [SerializeField] private CrownInventoryManager crownInventoryManager;
     [SerializeField] private int crownDropThreshold;
     private List<PickupType> crownInventory = new List<PickupType>();
@@ -70,11 +75,13 @@ public class PlayerController : MonoBehaviour
 
 
 //Drops
+    [Header("Drops")]
     [SerializeField] private GameObject gPickupPrefab;
     [SerializeField] private GameObject fPickupPrefab;
     private int gems_blue, gems_green, gems_red;
 
 //Items
+    [Header("Use Items")]
     private Vector2 aim;
     [SerializeField] private GameObject drill;
     [SerializeField] private GameObject bomb;
@@ -102,22 +109,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask blinkMask;
 
 //Stamina
+    [Header("Stamina")]
     [SerializeField] private StaminaHintController staminaHint;
     public readonly static int STAMINA_COST = 100;
     public readonly static int MAX_STAMINA = 200;
     private int stamina = MAX_STAMINA;
 
 //Other
+    [Header("Other")]
     [SerializeField] private BarController stunTimer;
-
-
     bool grounded;
-
     [SerializeField] private Collider2D hurtbox;
     [SerializeField] private Collider2D pickupbox;
-
     [SerializeField] private GameObject crown;
-
     private bool collidersLocked = false;
     private float colliderLockout;
     private bool paused = false;

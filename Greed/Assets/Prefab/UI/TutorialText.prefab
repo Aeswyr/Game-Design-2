@@ -65,7 +65,7 @@ MonoBehaviour:
   - press b to slide or climb walls
   - press y to use your items
   - The player with the most crowns at the end of the game wins!
-  delay: 3.3
+  delay: 0
   text: {fileID: 6299169734003252882}
 --- !u!1 &6839642803220346683
 GameObject:
