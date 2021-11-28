@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2366424cfd4ee364abad8de4683ebfbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitsparkPrefab: {fileID: 428303252614902901, guid: a46706bddb4789b41be88249bfebde43, type: 3}
+  dustPrefab: {fileID: 8177384170743215384, guid: 99a26f2015fe6e149963dd3412a632db, type: 3}
   health: 1
   lootable: {fileID: 5214464874218262580}
 --- !u!114 &5214464874218262580

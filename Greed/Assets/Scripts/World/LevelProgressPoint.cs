@@ -12,6 +12,7 @@ public class LevelProgressPoint : MonoBehaviour
         hp--;
         Instantiate(dustPrefab, transform);
         animator.SetTrigger("Interact");
+        EffectsMaster.Instance.ScreenShake(0.5f, 0.2f);
         if (hp < 0) {
             FindObjectsOfType<LevelDirector>()[0].NextLevel();
         }
