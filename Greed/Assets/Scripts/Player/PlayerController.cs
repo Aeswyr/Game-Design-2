@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     private CharacterData characterData;
     private LevelDirector director;
     
-// Info Card  
+// Info Card
+    [Header("Info Card")]
     [SerializeField] private GameObject infoCardPrefab;
 
     private PlayerInfoManager infoCard;
 
 //movement
+    [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpVelocity;
     [SerializeField] private int jumps = 1;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject dustPrefab;
 
 //Wall cling/climb
+    [Header("Wall Climb/Cling")]
     [SerializeField] private Vector2 clingCastOffset;
     [SerializeField] private float clingCastDistance;
     [SerializeField] private LayerMask wallDetectMask;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     bool clinging;
 
 //Attacking
+    [Header("Attacking")]
     [SerializeField] private GameObject attackBoxPrefab;
     private GameObject attackBox;
     [SerializeField] private float attackDuration;
@@ -51,30 +55,35 @@ public class PlayerController : MonoBehaviour
     private bool inputToggle;
 
 //Interact
+    [Header("Interacting")]
     [SerializeField] private GameObject interactBoxPrefab;
     [SerializeField] private GameObject interactHint;
 
 //Slide
+    [Header("Sliding")]
     private bool sliding = false;
     [SerializeField] private float slideSpeed;
 
 //Inventory
+    [Header("Inventory")]
     [SerializeField] private InventoryManager inventoryManager;
     private List<PickupType> inventory = new List<PickupType>();
-
-//Crown Inventory
     [SerializeField] private CrownInventoryManager crownInventoryManager;
     [SerializeField] private int crownDropThreshold;
     private List<PickupType> crownInventory = new List<PickupType>();
     private int battleCrownHits = 3;
+    [SerializeField] private ItemNameAtlas itemNames;
+    [SerializeField] private GameObject floatyTextPrefab;
 
 
 //Drops
+    [Header("Drops")]
     [SerializeField] private GameObject gPickupPrefab;
     [SerializeField] private GameObject fPickupPrefab;
     private int gems_blue, gems_green, gems_red;
 
 //Items
+    [Header("Use Items")]
     private Vector2 aim;
     [SerializeField] private GameObject drill;
     [SerializeField] private GameObject bomb;
@@ -102,22 +111,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask blinkMask;
 
 //Stamina
+    [Header("Stamina")]
     [SerializeField] private StaminaHintController staminaHint;
     public readonly static int STAMINA_COST = 100;
     public readonly static int MAX_STAMINA = 200;
     private int stamina = MAX_STAMINA;
 
 //Other
+    [Header("Other")]
     [SerializeField] private BarController stunTimer;
-
-
     bool grounded;
-
     [SerializeField] private Collider2D hurtbox;
     [SerializeField] private Collider2D pickupbox;
-
     [SerializeField] private GameObject crown;
-
     private bool collidersLocked = false;
     private float colliderLockout;
     private bool paused = false;
@@ -162,9 +168,14 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
+    {   
+        bool gprev = grounded;
         grounded = groundCheck.CheckGrounded();
+        animator.SetBool("grounded", grounded);
+        if (gprev == false && gprev != grounded)
+            Instantiate(dustPrefab, transform.position + new Vector3(0, -1.25f, 0), dustPrefab.transform.rotation);
 
+        bool cprev = clinging;
         clinging = Utils.Raycast(   transform.position + 
                                     new Vector3(facingModifier * clingCastOffset.x, clingCastOffset.y, 0),
                                     new Vector2(facingModifier, 0),
@@ -172,6 +183,8 @@ public class PlayerController : MonoBehaviour
                                     wallDetectMask) &&
                                     input.LeftShoulder_Held &&
                                     stamina > 0;
+        if (clinging == true && cprev != clinging)
+            Instantiate(dustPrefab, transform.position + new Vector3(facingModifier * 1f, 0.5f, 0), dustPrefab.transform.rotation);
 
         if (!paused)
             rbody.gravityScale = gravity;
@@ -231,6 +244,7 @@ public class PlayerController : MonoBehaviour
             jumps = JUMPS_MAX;
         }
         if (input.A && (grounded || (wallHangTime > Time.time  && (stamina >= STAMINA_COST || juiceActive)) || jumps > 0)) {
+            animator.SetTrigger("jump");
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             Instantiate(dustPrefab, transform.position + new Vector3(0, -1f, 0), dustPrefab.transform.rotation);
             if (!grounded || wallHangTime <= Time.time)
@@ -516,7 +530,13 @@ public class PlayerController : MonoBehaviour
             return true;
         }
 
+        animator.SetTrigger("hurt");
+
         rbody.velocity = Vector3.zero;
+        
+        EndHit();
+        EndAttack();
+
         InputLockout(2);
         stunTimer.StartTimer(2);
 
@@ -697,6 +717,8 @@ public class PlayerController : MonoBehaviour
                     crownInventory.Add(type);
                     crownInventoryManager.Display(crownInventory);
                     TryEnableCrown(type);
+                    Instantiate(floatyTextPrefab, transform.position + new Vector3(0, 2, 0), floatyTextPrefab.transform.rotation)
+                        .GetComponent<FloatyText>().Set(itemNames.GetString(type));
                     return true;
         } else {
             if (inventory.Count >= InventoryManager.INVENTORY_SIZE)
@@ -707,6 +729,8 @@ public class PlayerController : MonoBehaviour
                         break;
             }
             inventoryManager.Display(inventory);
+            Instantiate(floatyTextPrefab, transform.position + new Vector3(0, 2, 0), floatyTextPrefab.transform.rotation)
+                        .GetComponent<FloatyText>().Set(itemNames.GetString(type));
             return true;
         }
     }
@@ -823,5 +847,14 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn() {
         interactHint.SetActive(false);
+    }
+
+    public void ReturnToStanding() {
+        Destroy(attackBox);
+        rbody.drag = 0;
+        InputLockout(false);
+        attacking = false;
+        sliding = false;
+        hurtbox.enabled = true;
     }
 }

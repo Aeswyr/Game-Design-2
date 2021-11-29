@@ -10,6 +10,8 @@ public class ShopController : MonoBehaviour
     [SerializeField] private SpriteRenderer itemDisp;
     [SerializeField] private SpriteRenderer costTypeDisp;
     [SerializeField] private TextMeshPro costDisp;
+    [SerializeField] private GameObject glow;
+    [SerializeField] private GameObject debrisPrefab;
 
     [SerializeField] private int cost;
     [SerializeField] private PickupType costType;
@@ -31,7 +33,23 @@ public class ShopController : MonoBehaviour
         costDisp.text = cost.ToString();
 
         this.costType = costType;
-        costTypeDisp.sprite = atlas.GetSprite(costType);
+        PickupType disp = costType;
+        switch (costType) {
+            case PickupType.GEM_RED:
+                disp = PickupType.GEM_RED_LARGE;
+                break;
+            case PickupType.GEM_GREEN:
+                disp = PickupType.GEM_GREEN_LARGE;
+                break;
+            case PickupType.GEM_BLUE:
+                disp = PickupType.GEM_BLUE_LARGE;
+                break;
+        }
+        costTypeDisp.sprite = atlas.GetSprite(disp);
+
+        if (item == PickupType.CROWN_RED || item == PickupType.CROWN_GREEN ||
+            item == PickupType.CROWN_BLUE || item == PickupType.CROWN_BATTLE)
+            glow.SetActive(true);
     }
 
     public void Purchase(PlayerController player) {
@@ -39,8 +57,11 @@ public class ShopController : MonoBehaviour
             if (!player.AddItem(item))
                 player.AddItem(costType, cost);
             else
-                if (singleUse)
+                if (singleUse) {
+                    Instantiate(debrisPrefab, transform.position, debrisPrefab.transform.rotation);
+                    EffectsMaster.Instance.ScreenShake(0.5f, 0.2f);
                     Destroy(gameObject);
+                }
         }
     }
 }

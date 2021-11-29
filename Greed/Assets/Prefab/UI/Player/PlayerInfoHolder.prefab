@@ -233,6 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a6daffd97cf38458b87272a618a667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blueCrown: {fileID: 0}
+  greenCrown: {fileID: 0}
+  redCrown: {fileID: 0}
+  battleCrown: {fileID: 0}
   blueText: {fileID: 6463642254510975029}
   greenText: {fileID: 96240303650678593}
   redText: {fileID: 947534671619375188}
@@ -358,9 +362,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2340401772531215047}
     m_Modifications:
+    - target: {fileID: 798919009454586896, guid: 58f41bbcd3013614f9bca52999ede159, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 968883011820213770, guid: 58f41bbcd3013614f9bca52999ede159, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1160531277698250486, guid: 58f41bbcd3013614f9bca52999ede159, type: 3}
       propertyPath: m_Name
       value: StamBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576067620989539516, guid: 58f41bbcd3013614f9bca52999ede159, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012781591813187713, guid: 58f41bbcd3013614f9bca52999ede159, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3282525592460402799, guid: 58f41bbcd3013614f9bca52999ede159, type: 3}
       propertyPath: m_Pivot.x
