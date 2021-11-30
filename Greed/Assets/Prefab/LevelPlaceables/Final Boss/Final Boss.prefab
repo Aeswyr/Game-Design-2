@@ -230,4 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedX: 10
+  punchPrefab: {fileID: 2885343136335275969, guid: c0458c135da65f04d97c237846764bf0, type: 3}
+  PunchDelay: 3
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
+  projectilePrefab: {fileID: 2885343136335275969, guid: 5361bafb4976f154cba763ed3fa9c948, type: 3}
+  hurtBox: {fileID: 6522113938439378039}
   rbody: {fileID: 8429459228163439877}
