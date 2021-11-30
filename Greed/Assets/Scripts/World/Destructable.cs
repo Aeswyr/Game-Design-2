@@ -27,6 +27,7 @@ public class Destructable : MonoBehaviour
         if (health == 0) {
             if (lootable != null)
                 lootable.Loot();
+            EffectsMaster.Instance.SFXPlay("break");    
             Destroy(gameObject);
         }
     }

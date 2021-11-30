@@ -28,6 +28,7 @@ public class PickupController : MonoBehaviour
             if (player.AddItem(type, amount)) {
                 Destroy(other.transform.parent.gameObject);
                 Instantiate(pickupSparkPrefab, transform.parent);
+                EffectsMaster.Instance.SFXPlay("pickup");
             }
         }
     }

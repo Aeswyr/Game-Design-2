@@ -247,6 +247,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("jump");
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             Instantiate(dustPrefab, transform.position + new Vector3(0, -1f, 0), dustPrefab.transform.rotation);
+            EffectsMaster.Instance.SFXPlay("jump");
             if (!grounded || wallHangTime <= Time.time)
                 jumps--;
             if (wallHangTime > Time.time) {
@@ -457,6 +458,7 @@ public class PlayerController : MonoBehaviour
     private void StartHit() {
         attackBox = Instantiate(attackBoxPrefab, transform);
         attackBox.transform.localPosition = new Vector3(2, 0.5f, 0);
+        EffectsMaster.Instance.SFXPlay("hit");
     }
 
     private void EndHit() {
@@ -475,6 +477,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartSlide() {
         sliding = true;
+        EffectsMaster.Instance.SFXPlay("slide");
         hurtbox.enabled = false;
         rbody.velocity = facingModifier * new Vector2(slideSpeed, 0);
         GameObject dust = Instantiate(dustPrefab, transform);
@@ -545,6 +548,7 @@ public class PlayerController : MonoBehaviour
         TryDropCrowns();
         TryDropGems();
         getsHit++;
+        EffectsMaster.Instance.SFXPlay("hurt");
         return true;
     }
 

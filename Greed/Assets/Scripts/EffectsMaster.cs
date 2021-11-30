@@ -5,9 +5,14 @@ using UnityEngine;
 public class EffectsMaster : MonoBehaviour
 {
     public static EffectsMaster Instance => FindObjectOfType<EffectsMaster>();
+
+    [SerializeField] private AudioSource source;
+    [SerializeField] private SoundAtlas atlas;
+
     private float startShake, endShake, intensity;
-    bool shaking = true;
-    Vector3 defaultPos;
+    private bool shaking = true;
+    private Vector3 defaultPos;
+
     void Start() {
         defaultPos = transform.position;
     }
@@ -41,6 +46,10 @@ public class EffectsMaster : MonoBehaviour
     }
 
     public void SFXPlay(string name) {
-
+        AudioClip clip = atlas.GetSound(name);
+        if (clip != null) {
+            source.PlayOneShot(clip);
+        }
+            
     }
 }
