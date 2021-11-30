@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dart : MonoBehaviour
+public class DestroyOnImpact : MonoBehaviour
 {
     [SerializeField] private Projectile projectile;
     private void OnTriggerEnter2D(Collider2D other) {
