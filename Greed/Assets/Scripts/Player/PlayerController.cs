@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     private float juiceTime;
     private bool juiceActive;
     [SerializeField] private int armorHits;
-    [SerializeField] private Animator armorAnimator;
+    [SerializeField] private GameObject armorRender;
     private int armor;
     [SerializeField] private GameObject pushBoxPrefab;
     private bool groundPoundEnabled = false;
@@ -349,8 +349,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SetArmor() {
-        armorAnimator.gameObject.SetActive(true);
-        armorAnimator.SetTrigger("start");
+        armorRender.SetActive(true);
         armor = armorHits;
     }
     private void TryUseItem() {
@@ -526,10 +525,9 @@ public class PlayerController : MonoBehaviour
             return false;
             
         if (armor > 0) {
-            armorAnimator.SetTrigger("hit");
             armor--;
             if (armor == 0)
-                armorAnimator.gameObject.SetActive(false);
+                armorRender.SetActive(false);
             return true;
         }
 
@@ -858,7 +856,5 @@ public class PlayerController : MonoBehaviour
         rbody.drag = 0;
         InputLockout(false);
         attacking = false;
-        sliding = false;
-        hurtbox.enabled = true;
     }
 }

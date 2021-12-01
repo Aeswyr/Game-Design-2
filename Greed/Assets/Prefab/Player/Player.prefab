@@ -422,8 +422,8 @@ MonoBehaviour:
   pickupSize: 1
   magnetRender: {fileID: 1284489388422519462}
   juiceDuration: 10
-  armorHits: 3
-  armorAnimator: {fileID: 1798056443128980471}
+  armorHits: 1
+  armorRender: {fileID: 2716124483604341093}
   pushBoxPrefab: {fileID: 9003738338520712135, guid: 77dfc4ab7a9a6134a882646cdaf8d35e, type: 3}
   blinkMask:
     serializedVersion: 2
@@ -480,7 +480,6 @@ GameObject:
   m_Component:
   - component: {fileID: 840164940268208586}
   - component: {fileID: 9042187152835272181}
-  - component: {fileID: 1798056443128980471}
   m_Layer: 0
   m_Name: ArmorBuff
   m_TagString: Untagged
@@ -554,25 +553,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1798056443128980471
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2716124483604341093}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3fe46680408495e41afce2dd0cab381e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2763464506975792920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62525241763c0f645aa440945e41587a, type: 3}
+--- !u!1 &6200232711667924414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3139613718137995326, guid: 62525241763c0f645aa440945e41587a, type: 3}
+  m_PrefabInstance: {fileID: 9050406522092666240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7965353510665569211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1374475395672833595, guid: 62525241763c0f645aa440945e41587a, type: 3}
@@ -1039,8 +1024,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9099b689cbe23c44d818bc0dfc53dbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6200232711667924414 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3139613718137995326, guid: 62525241763c0f645aa440945e41587a, type: 3}
-  m_PrefabInstance: {fileID: 9050406522092666240}
-  m_PrefabAsset: {fileID: 0}
