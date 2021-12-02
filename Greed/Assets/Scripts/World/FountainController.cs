@@ -28,6 +28,7 @@ public class FountainController : MonoBehaviour
         interact.SetActive(false);
 
         if (other.transform.parent != null && other.transform.parent.gameObject.TryGetComponent(out PlayerController player)) {
+            EffectsMaster.Instance.ScreenShake(0.5f, 0.2f);
             switch (buff) {
                 case 0:
                     player.SetArmor();

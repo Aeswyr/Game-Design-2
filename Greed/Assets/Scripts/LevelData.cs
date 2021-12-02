@@ -11,6 +11,7 @@ public class LevelData : MonoBehaviour
     [SerializeField] private LevelType levelType = LevelType.DEFAULT;
     private int index = 0;
     [SerializeField] private List<ShopController> shops;
+    [SerializeField] private List<CrystalController> crystals;
 
 
     public Vector3 NextSpawn() {
@@ -56,6 +57,14 @@ public class LevelData : MonoBehaviour
     }
 
     public void LevelSetup(int lvl, List<PickupType> crownsInPlay) {
+        if (levelType == LevelType.CRYSTAL) {
+            int t = Random.Range(1, 4);
+            levelType = (LevelType)t;
+            foreach (var crystal in crystals) {
+                crystal.SetLootType((LootType)t);
+            }
+        }
+
         if (pickups.Count > 0)
             SetPickups();
         if (shops.Count > 0) {
@@ -113,5 +122,5 @@ public class LevelData : MonoBehaviour
 
 
 public enum LevelType {
-    DEFAULT, RED, BLUE, GREEN, CROWN, SHOP,
+    DEFAULT, RED, BLUE, GREEN, CROWN, SHOP, CRYSTAL,
 }

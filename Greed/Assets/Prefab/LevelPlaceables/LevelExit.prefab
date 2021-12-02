@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8919783468377406731}
+  dustPrefab: {fileID: 8177384170743215384, guid: 90dda85998a2ea04790af496a01cc943, type: 3}
 --- !u!61 &1449023865643676932
 BoxCollider2D:
   m_ObjectHideFlags: 0

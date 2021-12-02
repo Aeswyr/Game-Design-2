@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     private CharacterData characterData;
     private LevelDirector director;
     
-// Info Card  
+// Info Card
+    [Header("Info Card")]
     [SerializeField] private GameObject infoCardPrefab;
 
     private PlayerInfoManager infoCard;
 
 //movement
+    [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpVelocity;
     [SerializeField] private int jumps = 1;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject dustPrefab;
 
 //Wall cling/climb
+    [Header("Wall Climb/Cling")]
     [SerializeField] private Vector2 clingCastOffset;
     [SerializeField] private float clingCastDistance;
     [SerializeField] private LayerMask wallDetectMask;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     bool clinging;
 
 //Attacking
+    [Header("Attacking")]
     [SerializeField] private GameObject attackBoxPrefab;
     private GameObject attackBox;
     [SerializeField] private float attackDuration;
@@ -51,30 +55,35 @@ public class PlayerController : MonoBehaviour
     private bool inputToggle;
 
 //Interact
+    [Header("Interacting")]
     [SerializeField] private GameObject interactBoxPrefab;
     [SerializeField] private GameObject interactHint;
 
 //Slide
+    [Header("Sliding")]
     private bool sliding = false;
     [SerializeField] private float slideSpeed;
 
 //Inventory
+    [Header("Inventory")]
     [SerializeField] private InventoryManager inventoryManager;
     private List<PickupType> inventory = new List<PickupType>();
-
-//Crown Inventory
     [SerializeField] private CrownInventoryManager crownInventoryManager;
     [SerializeField] private int crownDropThreshold;
     private List<PickupType> crownInventory = new List<PickupType>();
     private int battleCrownHits = 3;
+    [SerializeField] private ItemNameAtlas itemNames;
+    [SerializeField] private GameObject floatyTextPrefab;
 
 
 //Drops
+    [Header("Drops")]
     [SerializeField] private GameObject gPickupPrefab;
     [SerializeField] private GameObject fPickupPrefab;
     private int gems_blue, gems_green, gems_red;
 
 //Items
+    [Header("Use Items")]
     private Vector2 aim;
     [SerializeField] private GameObject drill;
     [SerializeField] private GameObject bomb;
@@ -95,32 +104,31 @@ public class PlayerController : MonoBehaviour
     private float juiceTime;
     private bool juiceActive;
     [SerializeField] private int armorHits;
-    [SerializeField] private Animator armorAnimator;
+    [SerializeField] private GameObject armorRender;
     private int armor;
     [SerializeField] private GameObject pushBoxPrefab;
     private bool groundPoundEnabled = false;
     [SerializeField] private LayerMask blinkMask;
 
 //Stamina
+    [Header("Stamina")]
     [SerializeField] private StaminaHintController staminaHint;
     public readonly static int STAMINA_COST = 100;
     public readonly static int MAX_STAMINA = 200;
     private int stamina = MAX_STAMINA;
 
 //Other
+    [Header("Other")]
     [SerializeField] private BarController stunTimer;
-
-
     bool grounded;
-
     [SerializeField] private Collider2D hurtbox;
     [SerializeField] private Collider2D pickupbox;
-
     [SerializeField] private GameObject crown;
-
     private bool collidersLocked = false;
     private float colliderLockout;
-
+    private bool paused = false;
+    private Vector2 pauseVelocity;
+    private float pauseTime;
     private float gravity;
 
 // ID
@@ -160,9 +168,14 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
+    {   
+        bool gprev = grounded;
         grounded = groundCheck.CheckGrounded();
+        animator.SetBool("grounded", grounded);
+        if (gprev == false && gprev != grounded)
+            Instantiate(dustPrefab, transform.position + new Vector3(0, -1.25f, 0), dustPrefab.transform.rotation);
 
+        bool cprev = clinging;
         clinging = Utils.Raycast(   transform.position + 
                                     new Vector3(facingModifier * clingCastOffset.x, clingCastOffset.y, 0),
                                     new Vector2(facingModifier, 0),
@@ -170,13 +183,17 @@ public class PlayerController : MonoBehaviour
                                     wallDetectMask) &&
                                     input.LeftShoulder_Held &&
                                     stamina > 0;
+        if (clinging == true && cprev != clinging)
+            Instantiate(dustPrefab, transform.position + new Vector3(facingModifier * 1f, 0.5f, 0), dustPrefab.transform.rotation);
 
-        rbody.gravityScale = gravity;
+        if (!paused)
+            rbody.gravityScale = gravity;
 
         if (!InputLocked())
             ManageInputs();
 
         CheckColliderLockout();
+        CheckPaused();
 
         if (grounded && stamina <= MAX_STAMINA)
             stamina += 2;
@@ -227,8 +244,10 @@ public class PlayerController : MonoBehaviour
             jumps = JUMPS_MAX;
         }
         if (input.A && (grounded || (wallHangTime > Time.time  && (stamina >= STAMINA_COST || juiceActive)) || jumps > 0)) {
+            animator.SetTrigger("jump");
             rbody.velocity = new Vector3(rbody.velocity.x, jumpVelocity, 0);
             Instantiate(dustPrefab, transform.position + new Vector3(0, -1f, 0), dustPrefab.transform.rotation);
+            EffectsMaster.Instance.SFXPlay("jump");
             if (!grounded || wallHangTime <= Time.time)
                 jumps--;
             if (wallHangTime > Time.time) {
@@ -332,8 +351,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SetArmor() {
-        armorAnimator.gameObject.SetActive(true);
-        armorAnimator.SetTrigger("start");
+        armorRender.SetActive(true);
         armor = armorHits;
     }
     private void TryUseItem() {
@@ -441,6 +459,7 @@ public class PlayerController : MonoBehaviour
     private void StartHit() {
         attackBox = Instantiate(attackBoxPrefab, transform);
         attackBox.transform.localPosition = new Vector3(2, 0.5f, 0);
+        EffectsMaster.Instance.SFXPlay("hit");
     }
 
     private void EndHit() {
@@ -459,6 +478,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartSlide() {
         sliding = true;
+        EffectsMaster.Instance.SFXPlay("slide");
         hurtbox.enabled = false;
         rbody.velocity = facingModifier * new Vector2(slideSpeed, 0);
         GameObject dust = Instantiate(dustPrefab, transform);
@@ -502,19 +522,24 @@ public class PlayerController : MonoBehaviour
         JUMPS_MAX = 0;
     }
 
-    public void OnHit() {
+    public bool OnHit() {
         if (director.GetCurrentLevelType() == LevelType.SHOP)
-            return;
+            return false;
             
         if (armor > 0) {
-            armorAnimator.SetTrigger("hit");
             armor--;
             if (armor == 0)
-                armorAnimator.gameObject.SetActive(false);
-            return;
+                armorRender.SetActive(false);
+            return true;
         }
 
+        animator.SetTrigger("hurt");
+
         rbody.velocity = Vector3.zero;
+        
+        EndHit();
+        EndAttack();
+
         InputLockout(2);
         stunTimer.StartTimer(2);
 
@@ -523,6 +548,8 @@ public class PlayerController : MonoBehaviour
         TryDropCrowns();
         TryDropGems();
         getsHit++;
+        EffectsMaster.Instance.SFXPlay("hurt");
+        return true;
     }
 
     private void TryEnableCrown(PickupType type) {
@@ -632,6 +659,8 @@ public class PlayerController : MonoBehaviour
 
 
     public void InputLockout(float duration) {
+        if (Time.time + duration < inputLockout)
+            return;
         inputLockout = Time.time + duration;
     }
 
@@ -641,6 +670,25 @@ public class PlayerController : MonoBehaviour
 
     private bool InputLocked() {
         return inputToggle || Time.time <= inputLockout;
+    }
+
+    public void Pause(float duration) {
+        InputLockout(duration);
+        pauseTime = Time.time + duration;
+        paused = true;
+        rbody.gravityScale = 0;
+        pauseVelocity = rbody.velocity;
+        rbody.velocity = Vector2.zero;
+        animator.speed = 0;
+    }
+
+    private void CheckPaused() {
+        if (paused && Time.time >= pauseTime) {
+            paused = false;
+            rbody.gravityScale = gravity;
+            rbody.velocity = pauseVelocity;
+            animator.speed = 1;
+        }
     }
 
     public bool AddItem(PickupType type, int amount = 1) {
@@ -673,6 +721,8 @@ public class PlayerController : MonoBehaviour
                     crownInventory.Add(type);
                     crownInventoryManager.Display(crownInventory);
                     TryEnableCrown(type);
+                    Instantiate(floatyTextPrefab, transform.position + new Vector3(0, 2, 0), floatyTextPrefab.transform.rotation)
+                        .GetComponent<FloatyText>().Set(itemNames.GetString(type));
                     return true;
         } else {
             if (inventory.Count >= InventoryManager.INVENTORY_SIZE)
@@ -683,6 +733,8 @@ public class PlayerController : MonoBehaviour
                         break;
             }
             inventoryManager.Display(inventory);
+            Instantiate(floatyTextPrefab, transform.position + new Vector3(0, 2, 0), floatyTextPrefab.transform.rotation)
+                        .GetComponent<FloatyText>().Set(itemNames.GetString(type));
             return true;
         }
     }
@@ -799,5 +851,12 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn() {
         interactHint.SetActive(false);
+    }
+
+    public void ReturnToStanding() {
+        Destroy(attackBox);
+        rbody.drag = 0;
+        InputLockout(false);
+        attacking = false;
     }
 }

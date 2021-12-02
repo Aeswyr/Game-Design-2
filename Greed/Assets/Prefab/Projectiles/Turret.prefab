@@ -122,7 +122,7 @@ MonoBehaviour:
   dart: {fileID: 5406201513829590667, guid: 917e092a46f153d4f916046b0554d194, type: 3}
   dartDelay: 1
   range: 12
-  health: 2
+  health: 1
   hurtbox: {fileID: 6652858551971763551}
 --- !u!58 &6652858551971763551
 CircleCollider2D:
