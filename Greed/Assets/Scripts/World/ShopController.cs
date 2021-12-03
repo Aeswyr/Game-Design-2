@@ -8,7 +8,6 @@ public class ShopController : MonoBehaviour
 
     [SerializeField] private ItemIconAtlas atlas;
     [SerializeField] private SpriteRenderer itemDisp;
-    [SerializeField] private SpriteRenderer costTypeDisp;
     [SerializeField] private TextMeshPro costDisp;
     [SerializeField] private GameObject glow;
     [SerializeField] private GameObject debrisPrefab;
@@ -45,7 +44,6 @@ public class ShopController : MonoBehaviour
                 disp = PickupType.GEM_BLUE_LARGE;
                 break;
         }
-        costTypeDisp.sprite = atlas.GetSprite(disp);
 
         if (item == PickupType.CROWN_RED || item == PickupType.CROWN_GREEN ||
             item == PickupType.CROWN_BLUE || item == PickupType.CROWN_BATTLE)
