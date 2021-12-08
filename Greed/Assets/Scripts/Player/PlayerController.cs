@@ -758,6 +758,11 @@ public class PlayerController : MonoBehaviour
     public bool IsHurtboxOwner(Collider2D other) {
         return other == hurtbox;
     }
+
+    public Collider2D GetHurtbox() {
+        return hurtbox;
+    }
+
     public bool RemoveItem(PickupType type, int amount) {
         switch(type) {
             case PickupType.GEM_BLUE:
