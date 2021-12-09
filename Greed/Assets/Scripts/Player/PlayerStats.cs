@@ -9,6 +9,7 @@ public struct PlayerData{
         public int[] gemCount;
         public bool[] crowns;
         public bool[] bonusCrowns; //gotHit, ItemUsed, gemCount, ???
+        public bool winner;
         public int gotHit;
         public int itemsUsed;
         public Sprite sprite;
@@ -108,16 +109,45 @@ public class PlayerStats : MonoBehaviour
         index++;
         return data;
     }
+    public int totalCrowns(PlayerData player){
+        int crownCount= 0;
+        for(int i = 0; i < player.crowns.Length; i++){
+            if(player.crowns[i] == true){
+                crownCount++;
+            }
+        }
+        for(int j = 0; j < player.bonusCrowns.Length; j++){
+            if(player.bonusCrowns[j] == true){
+                crownCount++;
+            }
+        }
+        return crownCount;
+    }
+    public void setWinner(){
+        for(int i = 0; i< Players.Count; i++){
+            PlayerData pdata = Players[i];
+            pdata.winner = true;
+            for(int j = 0; j < Players.Count; j++){
+                if(i!=j&& totalCrowns(Players[i])< totalCrowns(Players[j])){
+                    pdata.winner = false;
+                    
+                }
+            }
+            Players[i] = pdata;
+            
+        }
+    }
     public void awardBonusCrowns(){
-        for(int i = 0; i < Players.Capacity; i++){
+        for(int i = 0; i < Players.Count; i++){
             //Player[i]'s total gems
             int totalGems1 = Players[i].gemCount[0] + Players[i].gemCount[1] + Players[i].gemCount[2];
-            for(int j = 0; j < Players.Capacity; j++){
+            for(int j = 0; j < Players.Count; j++){
                 //Player[j]'s total gems
                 int totalGems2 = Players[j].gemCount[0] + Players[j].gemCount[1] + Players[j].gemCount[2];
                 if(i!=j){
                     if(Players[i].gotHit<Players[j].gotHit){
                         Players[i].bonusCrowns[0] = false;
+                        
                     }
                     if(Players[i].itemsUsed<Players[j].itemsUsed){
                         Players[i].bonusCrowns[1] = false;
@@ -219,6 +249,7 @@ public class PlayerStats : MonoBehaviour
         //     updateCount(playersStats);
     }
     void FixedUpdate(){
+        
         
         // playersStats = FindObjectsOfType<PlayerController>()[0].getGems();
         // Debug.Log(FindObjectsOfType<PlayerController>().Length);
