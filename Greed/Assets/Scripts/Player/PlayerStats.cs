@@ -172,6 +172,8 @@ public class PlayerStats : MonoBehaviour
             data.itemsUsed = player.getItemsUsed();
             data.gotHit = player.getDamageSustained();
             Players.Add(data);
+            setWinner();
+            awardBonusCrowns();
         }
        
        

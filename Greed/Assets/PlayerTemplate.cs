@@ -25,8 +25,8 @@ public class PlayerTemplate : MonoBehaviour
         callOnce = 0;
         stats = FindObjectOfType<PlayerStats>(); 
         data = stats.GetData();
-        stats.awardBonusCrowns();
-        stats.setWinner();
+        // stats.awardBonusCrowns();
+        // stats.setWinner();
         if(data.winner==true){
             Winner.text = "Winner";
         }else{
