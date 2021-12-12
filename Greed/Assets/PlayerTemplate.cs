@@ -39,7 +39,7 @@ public class PlayerTemplate : MonoBehaviour
         for(int i = 0; i < 4; i++){
             Crowns[i].SetActive(data.crowns[i]);
         }
-        for(int i = 4; i < 7; i++ ){
+        for(int i = 4; i < 8; i++ ){
             Crowns[i].SetActive(data.bonusCrowns[i-4]);
         }
         

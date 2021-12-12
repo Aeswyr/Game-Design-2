@@ -145,16 +145,17 @@ public class PlayerStats : MonoBehaviour
                 //Player[j]'s total gems
                 int totalGems2 = Players[j].gemCount[0] + Players[j].gemCount[1] + Players[j].gemCount[2];
                 if(i!=j){
+                    PlayerData data = Players[i];
                     if(Players[i].gotHit<Players[j].gotHit){
-                        Players[i].bonusCrowns[0] = false;
-                        
+                        data.bonusCrowns[0] = false;
                     }
                     if(Players[i].itemsUsed<Players[j].itemsUsed){
-                        Players[i].bonusCrowns[1] = false;
+                        data.bonusCrowns[1] = false;
                     }
                     if(totalGems1<totalGems2){
-                        Players[i].bonusCrowns[2] = false;
+                        data.bonusCrowns[2] = false;
                     }
+                    Players[i] = data;
 
                 }
             }
