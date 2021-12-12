@@ -9,7 +9,7 @@ public class PlayerTemplate : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] Gems; // blue, green, red
     [SerializeField] private GameObject[] Crowns;
     [SerializeField] private Image Player;
-    [SerializeField] private TextMeshProUGUI[] Winner;
+    [SerializeField] private TextMeshProUGUI Winner;
 
     private int time;
     public int callOnce;
@@ -28,9 +28,9 @@ public class PlayerTemplate : MonoBehaviour
         stats.awardBonusCrowns();
         stats.setWinner();
         if(data.winner==true){
-            Winner[0].text = "Winner";
+            Winner.text = "Winner";
         }else{
-            Winner[0].text = "loser";
+            Winner.text = "loser";
         }
         Player.sprite = data.sprite;
         for(int i = 0; i < 3; i++){

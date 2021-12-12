@@ -11,12 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     private CharacterData characterData;
     private LevelDirector director;
-    
-// Info Card
-    [Header("Info Card")]
-    [SerializeField] private GameObject infoCardPrefab;
-
-    private PlayerInfoManager infoCard;
 
 //movement
     [Header("Movement")]
@@ -71,16 +65,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CrownInventoryManager crownInventoryManager;
     [SerializeField] private int crownDropThreshold;
     private List<PickupType> crownInventory = new List<PickupType>();
-    private int battleCrownHits = 3;
     [SerializeField] private ItemNameAtlas itemNames;
     [SerializeField] private GameObject floatyTextPrefab;
 
 
 //Drops
-    [Header("Drops")]
+    [Header("Currency")]
+    [SerializeField] private CurrencyHintController currencyDisplay;
     [SerializeField] private GameObject gPickupPrefab;
     [SerializeField] private GameObject fPickupPrefab;
-    private int gems_blue, gems_green, gems_red;
+    private int gems;
 
 //Items
     [Header("Use Items")]
@@ -156,14 +150,7 @@ public class PlayerController : MonoBehaviour
         inventoryManager.Display(inventory);
         crownInventoryManager.Display(crownInventory);
 
-        GameObject ic = Instantiate(infoCardPrefab, pmanager.GetInfoHolder().transform);
-        infoCard = ic.GetComponent<PlayerInfoManager>();
-
-        infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
-        infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
-        infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
-
-        infoCard.PushPortraitSprite(characterData.sprite);
+        currencyDisplay.PushGems(gems);
     }
 
     // Update is called once per frame
@@ -293,8 +280,8 @@ public class PlayerController : MonoBehaviour
     }
     public int[] getGems(){
         
-        int [] gems = {gems_blue, gems_green, gems_red};
-        Debug.Log(gems_blue.ToString());
+        int [] gems = {this.gems, this.gems, this.gems};
+        Debug.Log(this.gems.ToString());
         return gems;
     }
     public bool[] getCrowns(){  //blue, green, red, battle
@@ -507,6 +494,7 @@ public class PlayerController : MonoBehaviour
             staminaHint.transform.localScale = newScale;
             interactHint.transform.localPosition = new Vector3(interactHint.transform.localPosition.x * -1, interactHint.transform.localPosition.y, 0);
             interactHint.transform.localScale = newScale;
+            currencyDisplay.transform.localScale = newScale;
         }
     }
 
@@ -577,32 +565,34 @@ public class PlayerController : MonoBehaviour
     }
 
     private void TryDropGems() {
-        if (gems_red != 0) {
-            int drop = gems_red / 2 + gems_red % 2;
+        if (gems != 0) {
+            int drop = gems / 2 + gems % 2;
             for (int i = 0; i < drop / 10; i++)
-                DropGravPickup(PickupType.GEM_RED_LARGE);
+                switch(Random.Range(0, 3)) {
+                    case 0:
+                        DropGravPickup(PickupType.GEM_RED_LARGE);
+                        break;
+                    case 1:
+                        DropGravPickup(PickupType.GEM_GREEN_LARGE);
+                        break;
+                    case 2:
+                        DropGravPickup(PickupType.GEM_BLUE_LARGE);
+                        break;
+                }
             for (int i = 0; i < drop % 10; i++)
-                DropGravPickup(PickupType.GEM_RED);
-            gems_red -= drop;
-            infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
-        }
-        if (gems_blue != 0) {
-            int drop = gems_blue / 2 + gems_blue % 2;
-            for (int i = 0; i < drop / 10; i++)
-                DropGravPickup(PickupType.GEM_BLUE_LARGE);
-            for (int i = 0; i < drop % 10; i++)
-                DropGravPickup(PickupType.GEM_BLUE);
-            gems_blue -= drop;
-            infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
-        }
-        if (gems_green != 0) {
-            int drop = gems_green / 2 + gems_green % 2;
-            for (int i = 0; i < drop / 10; i++)
-                DropGravPickup(PickupType.GEM_GREEN_LARGE);
-            for (int i = 0; i < drop % 10; i++)
-                DropGravPickup(PickupType.GEM_GREEN);
-            gems_green -= drop;
-            infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
+                switch(Random.Range(0, 3)) {
+                    case 0:
+                        DropGravPickup(PickupType.GEM_RED);
+                        break;
+                    case 1:
+                        DropGravPickup(PickupType.GEM_GREEN);
+                        break;
+                    case 2:
+                        DropGravPickup(PickupType.GEM_BLUE);
+                        break;
+                }
+            gems -= drop;
+            currencyDisplay.PushGems(gems);
         }
     }
 
@@ -619,41 +609,13 @@ public class PlayerController : MonoBehaviour
     }
 
     private void TryDropCrowns() {
-        if (crownInventory.Contains(PickupType.CROWN_BATTLE)) {
-            battleCrownHits--;
-            if (battleCrownHits == 0) {
-                battleCrownHits = 3;
-                
-                DropFloatPickup(PickupType.CROWN_BATTLE);
-                
-                crownInventory.Remove(PickupType.CROWN_BATTLE);
-                crownInventoryManager.Display(crownInventory);
-                TryDisableCrown(PickupType.CROWN_BATTLE);
-            }
-        }
+        if (crownInventory.Count > 0) {
+            PickupType crown = crownInventory[0];
+            DropFloatPickup(crown);
 
-        if (crownInventory.Contains(PickupType.CROWN_RED) && gems_red < crownDropThreshold) {
-                DropFloatPickup(PickupType.CROWN_RED);
-
-                crownInventory.Remove(PickupType.CROWN_RED);
-                crownInventoryManager.Display(crownInventory);
-                TryDisableCrown(PickupType.CROWN_RED);
-        }
-
-        if (crownInventory.Contains(PickupType.CROWN_GREEN) && gems_green < crownDropThreshold) {
-                DropFloatPickup(PickupType.CROWN_GREEN);
-
-                crownInventory.Remove(PickupType.CROWN_GREEN);
-                crownInventoryManager.Display(crownInventory);
-                TryDisableCrown(PickupType.CROWN_GREEN);
-        }
-
-        if (crownInventory.Contains(PickupType.CROWN_BLUE) && gems_blue < crownDropThreshold) {
-                DropFloatPickup(PickupType.CROWN_BLUE);
-
-                crownInventory.Remove(PickupType.CROWN_BLUE);
-                crownInventoryManager.Display(crownInventory);
-                TryDisableCrown(PickupType.CROWN_BLUE);
+            crownInventory.RemoveAt(0);
+            crownInventoryManager.Display(crownInventory);
+            TryDisableCrown(crown);
         }
     }
 
@@ -694,25 +656,8 @@ public class PlayerController : MonoBehaviour
     public bool AddItem(PickupType type, int amount = 1) {
         if (type == PickupType.GEM_BLUE || type == PickupType.GEM_RED || type == PickupType.GEM_GREEN
         || type == PickupType.GEM_RED_LARGE || type == PickupType.GEM_BLUE_LARGE || type == PickupType.GEM_GREEN_LARGE) {
-            switch(type) {
-                case PickupType.GEM_RED:
-                case PickupType.GEM_RED_LARGE:
-                    gems_red += amount;
-                    infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
-                    break;
-                case PickupType.GEM_BLUE:
-                case PickupType.GEM_BLUE_LARGE:
-                    gems_blue += amount;
-                    infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
-                    break;
-                case PickupType.GEM_GREEN:
-                case PickupType.GEM_GREEN_LARGE:
-                    gems_green += amount;
-                    infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
-                    break;
-                default:
-                break;
-            }
+            gems += amount;
+            currencyDisplay.PushGems(gems);
             return true;
         } else if (type == PickupType.CROWN_BLUE || type == PickupType.CROWN_GREEN || type == PickupType.CROWN_BATTLE
                 || type == PickupType.CROWN_RED) {
@@ -740,7 +685,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private void AdjustStamina() {
-        infoCard.PushStamina(stamina);
         staminaHint.PushStamina(stamina);
     }
 
@@ -770,7 +714,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void RemoveUI() {
-        Destroy(infoCard.gameObject);
+
     }
 
     public void GemBurst(int drop) {
@@ -799,13 +743,11 @@ public class PlayerController : MonoBehaviour
         switch(type) {
             case PickupType.GEM_BLUE:
             case PickupType.GEM_BLUE_LARGE:
-                return gems_blue;
             case PickupType.GEM_RED:
             case PickupType.GEM_RED_LARGE:
-                return gems_red;
             case PickupType.GEM_GREEN:
             case PickupType.GEM_GREEN_LARGE:
-                return gems_green;
+                return gems;
             default:
                 return -1;
         }
@@ -818,29 +760,22 @@ public class PlayerController : MonoBehaviour
     public bool IsHurtboxOwner(Collider2D other) {
         return other == hurtbox;
     }
+
+    public Collider2D GetHurtbox() {
+        return hurtbox;
+    }
+
     public bool RemoveItem(PickupType type, int amount) {
         switch(type) {
             case PickupType.GEM_BLUE:
             case PickupType.GEM_BLUE_LARGE:
-                if (gems_blue >= amount) {
-                    gems_blue -= amount;
-                    infoCard.PushPickUpCount(gems_blue, PickupType.GEM_BLUE);
-                    return true;
-                }
-                return false;
             case PickupType.GEM_RED:
             case PickupType.GEM_RED_LARGE:
-                if (gems_red >= amount) {
-                    gems_red -= amount;
-                    infoCard.PushPickUpCount(gems_red, PickupType.GEM_RED);
-                    return true;
-                }
-                return false;
             case PickupType.GEM_GREEN:
             case PickupType.GEM_GREEN_LARGE:
-                if (gems_green >= amount) {
-                    gems_green -= amount;
-                    infoCard.PushPickUpCount(gems_green, PickupType.GEM_GREEN);
+                if (gems >= amount) {
+                    gems -= amount;
+                    currencyDisplay.PushGems(gems);
                     return true;
                 }
                 return false;

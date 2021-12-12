@@ -10,6 +10,7 @@ public class FountainController : MonoBehaviour
 
     [SerializeField] private GameObject hint;
     [SerializeField] private GameObject interact;
+    [SerializeField] private GameObject priceTag;
     bool inactive = false;
     int buff = 0;
     // Start is called before the first frame update
@@ -22,12 +23,20 @@ public class FountainController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (inactive)
             return;
+        
 
-        animator.SetTrigger("activate");
-        hint.SetActive(false);
-        interact.SetActive(false);
 
-        if (other.transform.parent != null && other.transform.parent.gameObject.TryGetComponent(out PlayerController player)) {
+
+        if (other.transform.parent != null
+            && other.transform.parent.gameObject.TryGetComponent(out PlayerController player)
+            && player.RemoveItem(PickupType.GEM_RED, 25)) {
+
+            animator.SetTrigger("activate");
+            hint.SetActive(false);
+            interact.SetActive(false);
+            priceTag.SetActive(false);
+            inactive = true;
+
             EffectsMaster.Instance.ScreenShake(0.5f, 0.2f);
             switch (buff) {
                 case 0:

@@ -700,8 +700,7 @@ MonoBehaviour:
   - {fileID: 148703946583455847}
   - {fileID: 5346320246745874270}
   Player: {fileID: 5172291618709039240}
-  Winner:
-  - {fileID: 5408998382388615826}
+  Winner: {fileID: 5408998382388615826}
   callOnce: 0
   WinnerTime: 20
 --- !u!1 &5172291618851700981
@@ -1559,7 +1558,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Winner
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8c3e5efacb56754fa11c3f36e90ab65, type: 2}
   m_sharedMaterial: {fileID: -301467320515577489, guid: b8c3e5efacb56754fa11c3f36e90ab65, type: 2}
@@ -1593,8 +1592,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

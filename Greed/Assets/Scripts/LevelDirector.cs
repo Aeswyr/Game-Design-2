@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelDirector : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LevelDirector : MonoBehaviour
     [SerializeField] private LevelAtlas levelAtlas;
     [SerializeField] private int maxLevel = 20;
     [SerializeField] private GameObject statPrefab;
+    [SerializeField] private Image progressBar;
     private int level = 0;
     private LevelType currentLevelType = LevelType.DEFAULT;
 
@@ -35,6 +37,7 @@ public class LevelDirector : MonoBehaviour
         currentLevelType = lvl.GetComponent<LevelData>().GetLevelType();
 
         playerManager.SpawnPlayers();
+        progressBar.fillAmount = 1f - 1f * level / maxLevel;
     }
 
     private void FixedUpdate() {

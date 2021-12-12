@@ -60,10 +60,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - press a to jump
-  - press x to attack
-  - press b to slide or climb walls
-  - press y to use your items
+  - press a, 2 or space to jump
+  - press x, 1, or left click to attack
+  - press left bumper or shift to slide or climb walls
+  - press b, 3, or right click to use your items
+  - press y, 4, or E to interact with objects
+  - press right bumper or shift to hold on to walls and climb them
   - The player with the most crowns at the end of the game wins!
   delay: 0
   text: {fileID: 6299169734003252882}
