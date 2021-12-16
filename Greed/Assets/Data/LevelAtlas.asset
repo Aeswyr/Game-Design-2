@@ -29,4 +29,4 @@ MonoBehaviour:
   crownLevels:
   - {fileID: 4635548937276640887, guid: 58b2446301915474eb15a35e68cf9df5, type: 3}
   bossLevels:
-  - {fileID: 4635548937276640887, guid: 7522640a9ce98634fa56e86b0a192512, type: 3}
+  - {fileID: 4635548937276640887, guid: 3005914e23fc0eb43a98507e0c8101a3, type: 3}

@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: -5915350040896215610}
   - component: {fileID: 1146229548337221253}
   - component: {fileID: 5507697898234242860}
-  m_Layer: 11
-  m_Name: Projectile
+  - component: {fileID: 2143158198588125273}
+  m_Layer: 12
+  m_Name: Projectile_Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,14 +53,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12, y: 12}
+    oldSize: {x: 8, y: 4}
     newSize: {x: 12, y: 12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12, y: 12}
+  m_Size: {x: 6, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &8365610962419184299
 MonoBehaviour:
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cdf1b682d796c24fbf745687804ef04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 0.2
+  lifetime: 10
 --- !u!212 &-5915350040896215610
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -114,8 +115,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 50
-  m_Sprite: {fileID: 3518609557695975987, guid: 2c105f4c7ab41984e876828c7667b765, type: 3}
+  m_SortingOrder: -2
+  m_Sprite: {fileID: 2329805207676575429, guid: c85797414ff83734fa2680dfa0930c58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bba3522fb06c74eaf4270198c7024d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 50
   rbody: {fileID: 5507697898234242860}
 --- !u!50 &5507697898234242860
 Rigidbody2D:
@@ -161,3 +162,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2143158198588125273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885343136335275969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbdc33cfd9910bd44a071bdced03f3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1146229548337221253}

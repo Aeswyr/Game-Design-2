@@ -109,6 +109,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   gPickupPrefab: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
+  hitspark: {fileID: 428303252614902901, guid: a46706bddb4789b41be88249bfebde43, type: 3}
+  dustPrefab: {fileID: 8177384170743215384, guid: 99a26f2015fe6e149963dd3412a632db, type: 3}
+  boss: {fileID: 5743129289698695258}
 --- !u!1 &7203644252061093353
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +124,7 @@ GameObject:
   - component: {fileID: 6011847341016242983}
   - component: {fileID: 8429459228163439877}
   - component: {fileID: 5743129289698695258}
+  - component: {fileID: 1639200895974561145}
   m_Layer: 0
   m_Name: Final Boss
   m_TagString: Untagged
@@ -185,12 +189,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 020080c899449654695881eb8aa90f24, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49323f7fce958124e8e406d2cb81ff4c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 18.75, y: 18.75}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -231,10 +235,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedX: 10
   punchPrefab: {fileID: 2885343136335275969, guid: c0458c135da65f04d97c237846764bf0, type: 3}
-  PunchDelay: 3
+  attackDelay: 0
   mask:
     serializedVersion: 2
     m_Bits: 8
   projectilePrefab: {fileID: 2885343136335275969, guid: 5361bafb4976f154cba763ed3fa9c948, type: 3}
+  slamPrefab: {fileID: 2885343136335275969, guid: 0d0f03548f6ae26409a4560044a84bb8, type: 3}
   hurtBox: {fileID: 6522113938439378039}
+  animator: {fileID: 1639200895974561145}
   rbody: {fileID: 8429459228163439877}
+--- !u!95 &1639200895974561145
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203644252061093353}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42e3cc1903e9b2947b5b2dfe6a050505, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
