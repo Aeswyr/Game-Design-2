@@ -627,6 +627,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 248
       objectReference: {fileID: 0}
+    - target: {fileID: 2831457910007902664, guid: 428f3da4ced7e4735894c68a96a39956, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831457910007902664, guid: 428f3da4ced7e4735894c68a96a39956, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1918601090}
     - target: {fileID: 2831457910007902665, guid: 428f3da4ced7e4735894c68a96a39956, type: 3}
       propertyPath: m_SizeDelta.x
       value: 300

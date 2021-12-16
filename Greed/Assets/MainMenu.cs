@@ -14,4 +14,7 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Quitting!");
     }
+    public void returnToMenu(){
+        SceneManager.LoadScene(2);
+    }
 }
