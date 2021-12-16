@@ -20,7 +20,7 @@ public class PlayerSelectManager : MonoBehaviour {
         foreach (var controller in controllers) {
             controller.RecordCharacterData();
         }
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void ShowTutorial() {

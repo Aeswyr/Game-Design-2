@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(3);
     }
     public void Quit()
     {
@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quitting!");
     }
     public void returnToMenu(){
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
         foreach (var obj in FindObjectsOfType<PlayerInput>())
             Destroy(obj.gameObject);
     }

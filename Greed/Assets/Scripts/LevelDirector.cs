@@ -59,6 +59,6 @@ public class LevelDirector : MonoBehaviour
     public void GameEndSequence() {
         GameObject obj = Instantiate(statPrefab);
         obj.GetComponent<PlayerStats>().PushStats();
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
 }
