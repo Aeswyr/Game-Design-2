@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dustPrefab: {fileID: 8177384170743215384, guid: 99a26f2015fe6e149963dd3412a632db, type: 3}
   arrowPrefab: {fileID: 5406201513829590667, guid: 13afc1f67ffe1fd4e80aef73c3b24019, type: 3}
+  price: {fileID: 9122038202957960484}
   reload: 1
 --- !u!1001 &6266058293925105949
 PrefabInstance:
@@ -246,6 +247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c60d0a932aa33224e8dddc09b549a5f4, type: 3}
+--- !u!1 &9122038202957960484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2910028752611296313, guid: c60d0a932aa33224e8dddc09b549a5f4, type: 3}
+  m_PrefabInstance: {fileID: 6266058293925105949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9216704012731311044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2962750243156767449, guid: c60d0a932aa33224e8dddc09b549a5f4, type: 3}
