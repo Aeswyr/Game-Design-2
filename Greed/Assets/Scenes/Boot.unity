@@ -645,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 667977702949454917, guid: 5436ac8d788bdca48b18355a5f516bfb, type: 3}
       propertyPath: maxLevel
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 667977702949454917, guid: 5436ac8d788bdca48b18355a5f516bfb, type: 3}
       propertyPath: progressBar
