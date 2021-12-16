@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class MainMenu : MonoBehaviour
 {
@@ -16,5 +17,7 @@ public class MainMenu : MonoBehaviour
     }
     public void returnToMenu(){
         SceneManager.LoadScene(2);
+        foreach (var obj in FindObjectsOfType<PlayerInput>())
+            Destroy(obj.gameObject);
     }
 }

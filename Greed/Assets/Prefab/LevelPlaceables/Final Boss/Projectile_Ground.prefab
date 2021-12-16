@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1146229548337221253}
   - component: {fileID: 5507697898234242860}
   - component: {fileID: 2143158198588125273}
+  - component: {fileID: -7369919519483300329}
   m_Layer: 12
   m_Name: Projectile_Ground
   m_TagString: Untagged
@@ -175,3 +176,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1146229548337221253}
+--- !u!114 &-7369919519483300329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885343136335275969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153e4863e18088042a4b341e352e3fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 8177384170743215384, guid: cf56e3c63c17fcd4388b9cce3e308a07, type: 3}

@@ -9,6 +9,10 @@ public class FinalBossHurtBox : MonoBehaviour
     [SerializeField] private GameObject hitspark;
     [SerializeField] private GameObject dustPrefab;
     [SerializeField] private FinalBossMovement boss;
+
+    void Start() {
+        health = health * FindObjectOfType<PlayerManager>().GetPlayers().Count;
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.TryGetComponent(out Projectile proj)) {
             if (!proj.IsValidTarget(gameObject))

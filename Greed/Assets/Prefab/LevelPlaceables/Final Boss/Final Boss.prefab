@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e65b49751151d4abc093bdea4e0fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 15
   gPickupPrefab: {fileID: 8570342339239053084, guid: c02bb8694c175184d805678082819b03, type: 3}
   hitspark: {fileID: 428303252614902901, guid: a46706bddb4789b41be88249bfebde43, type: 3}
   dustPrefab: {fileID: 8177384170743215384, guid: 99a26f2015fe6e149963dd3412a632db, type: 3}
@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8429459228163439877}
   - component: {fileID: 5743129289698695258}
   - component: {fileID: 1639200895974561145}
+  - component: {fileID: 5734757622121969710}
   m_Layer: 0
   m_Name: Final Boss
   m_TagString: Untagged
@@ -263,3 +264,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5734757622121969710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203644252061093353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153e4863e18088042a4b341e352e3fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 8177384170743215384, guid: a81821f882428da448b1b373ef2911c3, type: 3}

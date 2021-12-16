@@ -45,6 +45,7 @@ public class FinalBossMovement : MonoBehaviour
 
     public void Hurt() {
         Pause(0.2f);
+        EffectsMaster.Instance.ScreenShake(0.5f, 0.2f);
     }
 
     public void Melee() {
@@ -60,6 +61,7 @@ public class FinalBossMovement : MonoBehaviour
     public void Slam() {
         GameObject G = Instantiate(punchPrefab, transform); 
         G.transform.localPosition = new Vector3(0, -3, 0);
+        EffectsMaster.Instance.ScreenShake(1f, 0.2f);
 
         int spikes = Random.Range(3, 6);
         int xoffset = 0;
