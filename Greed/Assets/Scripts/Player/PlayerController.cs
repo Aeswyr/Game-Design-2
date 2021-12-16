@@ -278,11 +278,9 @@ public class PlayerController : MonoBehaviour
     public int getItemsUsed(){
         return itemUse;
     }
-    public int[] getGems(){
+    public int getGems(){
         
-        int [] gems = {this.gems, this.gems, this.gems};
-        Debug.Log(this.gems.ToString());
-        return gems;
+        return this.gems;
     }
     public bool[] getCrowns(){  //blue, green, red, battle
         bool[] toReturn = new bool[4]{false,false,false,false};

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerTemplate : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI[] Gems; // blue, green, red
+    [SerializeField] private TextMeshProUGUI Gems; // blue, green, red
     [SerializeField] private GameObject[] Crowns;
     [SerializeField] private Image Player;
     [SerializeField] private TextMeshProUGUI Winner;
@@ -33,9 +33,9 @@ public class PlayerTemplate : MonoBehaviour
             Winner.text = "loser";
         }
         Player.sprite = data.sprite;
-        for(int i = 0; i < 3; i++){
-            Gems[i].text = data.gemCount[i].ToString();
-        }
+        
+        Gems.text = data.gemCount.ToString();
+        
         for(int i = 0; i < 4; i++){
             Crowns[i].SetActive(data.crowns[i]);
         }

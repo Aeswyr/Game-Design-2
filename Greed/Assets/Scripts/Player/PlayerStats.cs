@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public struct PlayerData{
-        public int[] gemCount;
+        public int gemCount;
         public bool[] crowns;
         public bool[] bonusCrowns; //gotHit, ItemUsed, gemCount, ???
         public bool winner;
@@ -140,10 +140,10 @@ public class PlayerStats : MonoBehaviour
     public void awardBonusCrowns(){
         for(int i = 0; i < Players.Count; i++){
             //Player[i]'s total gems
-            int totalGems1 = Players[i].gemCount[0] + Players[i].gemCount[1] + Players[i].gemCount[2];
+            // int totalGems1 = Players[i].gemCount;
             for(int j = 0; j < Players.Count; j++){
                 //Player[j]'s total gems
-                int totalGems2 = Players[j].gemCount[0] + Players[j].gemCount[1] + Players[j].gemCount[2];
+                // int totalGems2 = Players[j].gemCount;
                 if(i!=j){
                     PlayerData data = Players[i];
                     if(Players[i].gotHit<Players[j].gotHit){
@@ -152,7 +152,7 @@ public class PlayerStats : MonoBehaviour
                     if(Players[i].itemsUsed<Players[j].itemsUsed){
                         data.bonusCrowns[1] = false;
                     }
-                    if(totalGems1<totalGems2){
+                    if( Players[i].gemCount<Players[j].gemCount){
                         data.bonusCrowns[2] = false;
                     }
                     Players[i] = data;
